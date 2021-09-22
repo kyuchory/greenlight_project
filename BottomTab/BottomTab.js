@@ -8,7 +8,7 @@ import Home from "../BottomMenu/Home";
 import MyPage from "../BottomMenu/MyPage";
 import Pick from "../BottomMenu/Pick";
 
-
+//깃 브랜치용 주석
 const BottomTabNavigator = createBottomTabNavigator();
 
 export default function BottomTab() {
