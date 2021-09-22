@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, useWindowDimensions } from "react-native";
+import { StyleSheet, Text, useWindowDimensions, Dimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 
 import Sample1 from "./Sample1";
 import Sample2 from "./Sample2";
 import Sample3 from "./Sample3";
 
+//홈,브랜드,베스트,친환경,이벤트의 메뉴와 SubContents들
+//https://github.com/satya164/react-native-tab-view
+
+let ScreenHeight = Dimensions.get("window").height //subMenu 내용물의 높이를 100%로 맞춰줌
 const renderScene = SceneMap({
   first: Sample1,
   second: Sample2,
@@ -49,6 +53,6 @@ const styles = StyleSheet.create({
   subMenu: {
     flex: 1,
     margin: "3%",
-    height: 500,
+    height: ScreenHeight,
   },
 });

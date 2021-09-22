@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   image:{
     width:'100%',
-    height:500,
+    height:'100%',
   },
   textView:{
     position:'absolute',
