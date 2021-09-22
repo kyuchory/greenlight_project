@@ -8,7 +8,7 @@ export default function Login({ navigation }) {
       <Text>Please Login</Text>
       <TextInput/>
       <TouchableOpacity onPress={() => navigation.navigate("BottomTab",{screen: "Home"})}>
-        <Text>Login</Text>
+        <Text>Loginsssssss</Text>
       </TouchableOpacity>
     </View>
   );

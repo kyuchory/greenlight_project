@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Login from './Login/Login';
 import BottomTab from './BottomTab/BottomTab';
-
+//testtest
 const Stack = createStackNavigator();
 
 export default function App() {
