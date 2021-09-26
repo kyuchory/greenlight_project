@@ -1,8 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import * as Font from 'expo-font';
 
-
+Font.loadAsync({
+  Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
+  'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
+  WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
+  'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
+  HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
+  'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
+});
 
 
 
@@ -28,7 +36,7 @@ const styles = StyleSheet.create({
   },
   image:{
     width:'100%',
-    height:500,
+    height:'100%',
   },
   textView:{
     position:'absolute',
@@ -38,10 +46,12 @@ const styles = StyleSheet.create({
   },
   textStrong:{
     fontSize:40,
+    fontFamily:'HSBombaram3_Regular'
   },
   textSmall:{
     fontSize:20,
     marginTop:10,
+    fontFamily:'Vitro_pride'
   }
 });
 

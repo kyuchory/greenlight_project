@@ -6,6 +6,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Login from './Login/Login';
 import BottomTab from './BottomTab/BottomTab';
+import LogoTitle from './Header/LogoTitle';
+
 
 const Stack = createStackNavigator();
 
@@ -14,6 +16,9 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
       initialRouteName="Login"
+      screenOptions={{
+        headerShown: false,
+      }}
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
@@ -21,6 +26,7 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
