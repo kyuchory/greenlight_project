@@ -16,14 +16,16 @@ const ReviewBox=()=>{
   return(
     <View style={styles.reviewBoxContainer}>
       <View>
-        <Image source={require("../icon+image/reviewTshirt.jpg")} style={{ width:120, height:100 }}/>
+        <Image source={require("../icon+image/reviewTshirt.jpg")} style={{ width:100, height:80 }}/>
       </View>
-      <View style={{ flexDirection:'row', paddingTop:15, paddingBottom:10 }}>
-        <Text style={{ color: "orange" } }>★★★★★</Text>
-        <Text style={{ color: "#848484" } }> - 아주 좋아요</Text>
-      </View>
-      <View>
-        <Text style={{ fontFamily:'Vitro_pride' } }>질도 좋고 친환경적이어서 더욱 애착이 가는 옷이에요!</Text>
+      <View style={{ marginLeft:10 }}>
+        <View style={{ flexDirection:'row', paddingTop:10, paddingBottom:10 }}>
+          <Text style={{ color: "orange" } }>★★★★★</Text>
+          <Text style={{ color: "#848484" } }> - 아주 좋아요</Text>
+        </View>
+        <View>
+          <Text style={{ fontFamily:'Vitro_pride' } }>{`품질이 좋고 친환경적이어서\n더욱 애착이 가는 옷이에요!`}</Text>
+        </View>
       </View>
     </View>
   );
@@ -31,7 +33,7 @@ const ReviewBox=()=>{
 
 
 
-const Review=()=> {
+const ABrandReview=()=> {
   return (
     <View style={styles.container}>
       <ReviewBox/>
@@ -48,11 +50,12 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   reviewBoxContainer:{
+    flexDirection:'row',
     borderBottomColor:'#848484',
     borderBottomWidth:0.5,
     padding:20,
   }
 });
 
-export default Review;
+export default ABrandReview;
 

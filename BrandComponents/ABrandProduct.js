@@ -14,7 +14,7 @@ Font.loadAsync({
 
 
 
-const Product=()=> {
+const ABrandProduct=()=> {
   return (
     <View style={styles.container}>
       <View style={styles.productTitle}>
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     color:"#848484",
     fontSize:10,
     fontFamily:'Vitro_pride',
+    marginTop:10
   },
   productDesc:{
     flex:3,
@@ -93,5 +94,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Product;
+export default ABrandProduct;
 

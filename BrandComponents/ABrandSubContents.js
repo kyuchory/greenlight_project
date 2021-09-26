@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet, Text, useWindowDimensions, Dimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 
-import Product from "./Product";
-import Review from "./Review";
+import Product from "./ABrandProduct";
+import Review from "./ABrandReview";
 import * as Font from 'expo-font';
 
 Font.loadAsync({
@@ -24,7 +24,7 @@ const renderScene = SceneMap({
   second: Review,
 });
 
-export default function BrandSubContents() {
+export default function ABrandSubContents() {
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
   const [routes] = useState([

@@ -5,7 +5,6 @@ import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import Sample1 from "./Sample1";
 import Sample2 from "./Sample2";
 import Sample3 from "./Sample3";
-import ABrand from "../Brands/ABrand";
 
 //홈,브랜드,베스트,친환경,이벤트의 메뉴와 SubContents들
 //https://github.com/satya164/react-native-tab-view
@@ -15,7 +14,7 @@ const renderScene = SceneMap({
   first: Sample1,
   second: Sample2,
   third: Sample3,
-  fourth: ABrand, //Test용
+  fourth: Sample1,
   fifth: Sample2,
 });
 

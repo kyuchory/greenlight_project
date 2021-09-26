@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
-import BrandSubContents from "../BrandComponents/BrandSubContents";
+import BrandSubContents from "../BrandComponents/ABrandSubContents";
 
 
 export default function ABrand() {
