@@ -41,7 +41,7 @@ function LogoTitle() {
         width:'25%'   
     },
     title:{
-        color:"#00FF00",
+        color:"#26D95C",
         fontSize:20,
         fontWeight:"900",
         fontFamily:'WemakepriceBold'
