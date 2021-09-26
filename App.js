@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Login from './Login/Login';
 import BottomTab from './BottomTab/BottomTab';
-import SubPage from "./SubMenu/SubPage";
+import ABrand from './Brands/ABrand';
 
 
 const Stack = createStackNavigator();
@@ -22,7 +22,7 @@ export default function App() {
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
-        <Stack.Screen name="SubPage" component={SubPage}/>
+        <Stack.Screen name="ABrand" component={ABrand}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

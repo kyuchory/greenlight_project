@@ -11,7 +11,7 @@ export default function Home() {
       <ScrollView>
         <SliderBox
           images={[
-            "https://source.unsplash.com/1024x768/?nature",
+            "https://images.unsplash.com/photo-1632337948797-ba161d29532b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80",
             "https://source.unsplash.com/1024x768/?water",
             "https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
           ]}

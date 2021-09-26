@@ -28,8 +28,11 @@ function LogoTitle() {
         />
       </View>
     </View>
-  );
-}
+      
+    );
+  }
+
+
 
 const stytles = StyleSheet.create({
   headerView: {

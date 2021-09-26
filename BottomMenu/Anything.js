@@ -13,7 +13,7 @@ export default function Anything({navigation}) {
   return (
     <View style={styles.container}>
       <Text style={styles.notice}>A브랜드</Text>
-      <Button onPress={() => navigation.navigate("SubPage")}
+      <Button onPress={() => navigation.navigate("ABrand")}
       title="이동하기"
       accessibilityLabel="시각장애인을위한~"
       />
