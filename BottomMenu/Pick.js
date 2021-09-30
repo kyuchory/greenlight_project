@@ -1,10 +1,15 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import PickSubContents from "../PickComponents/PickSubContents";
 
 export default function Pick() {
   return (
     <View style={styles.container}>
-      <Text style={styles.notice}>Pick</Text>
+      <ScrollView>
+        <View style={styles.empty}/>
+        <PickSubContents/>
+      </ScrollView>
     </View>
   );
 }
@@ -16,8 +21,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  notice: {
-    marginBottom: 30,
-    fontSize: 25,
+  empty:{
+    paddingRight:"100%"
   },
+
 });

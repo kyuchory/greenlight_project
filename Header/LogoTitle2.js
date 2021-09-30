@@ -8,7 +8,7 @@ Font.loadAsync({
   "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
 });
 
-function LogoTitle(props) {
+function LogoTitle2(props) {
   return (
     <View style={stytles.headerView}>
       <View style={stytles.titleWrapper}>
@@ -19,7 +19,6 @@ function LogoTitle(props) {
           source={require("../icon+image/magnifyingGlass.png")}
           style={stytles.inputicon}
         />
-        <TextInput style={stytles.input} placeholder="검색어를 입력하세요" />
       </View>
       <View style={stytles.iconWrapper}>
         <Image
@@ -36,47 +35,43 @@ function LogoTitle(props) {
 
 const stytles = StyleSheet.create({
   headerView: {
+    width:"100%",
     position: "relative",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent:"center"
   },
 
   titleWrapper: {
+    
     display: "flex",
     flexDirection: "row",
-    width: "25%",
+    justifyContent:"center",
+    width:"80%",
+    paddingLeft:"20%",
+    // borderColor:"red",
+    // borderWidth:1,
   },
   title: {
-    color: "#00FF00",
+    color: "black",
     fontSize: 20,
     fontWeight: "900",
     fontFamily: "WemakepriceBold",
   },
 
   inputWrapper: {
-    width: "60%",
+    width:"10%",
     flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F2F2F2",
-    borderColor: "#F2F2F2",
-    borderWidth: 1,
-    borderRadius: 12,
+    // justifyContent:"center"
   },
   inputicon: {
-    width: 20,
-    height: 20,
-    marginLeft: "6%",
-    marginRight: "6%",
+    width: 25,
+    height: 25,
   },
-  input: {
-    width: "70%",
-    alignItems: "center",
-  },
+
   iconWrapper: {
-    width: "15%",
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
+    width:"10%",
+    alignItems: "center",
   },
   icon: {
     width: 28,
@@ -84,4 +79,4 @@ const stytles = StyleSheet.create({
   },
 });
 
-export default LogoTitle;
+export default LogoTitle2;

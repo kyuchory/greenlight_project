@@ -46,6 +46,7 @@ export default function ABrandSubContents() {
             <Text style={{ color: "black", margin: 3, fontFamily:'Vitro_pride' }}>{route.title}</Text>
           )}
           style={{ backgroundColor: "#FAFAFA" }}
+          indicatorStyle={{ backgroundColor: '#BEBDBD' }} //탭바밑줄색깔
         />
       )}
     />
