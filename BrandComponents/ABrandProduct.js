@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import * as Font from 'expo-font';
+import { TouchableOpacity } from "react-native-gesture-handler";
+import ProgressBar from '../Components/ProgressBar'; 
+
 
 Font.loadAsync({
   Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
@@ -14,7 +17,15 @@ Font.loadAsync({
 
 
 
-const ABrandProduct=()=> {
+function ABrandProduct(){
+
+  const [point, setPoint] = useState(0); //point관리 state
+  const handlePoint = useCallback(() => { //point+1함수 useCallback최적화
+    setPoint(point + 1);
+  }, [point]);
+
+
+
   return (
     <View style={styles.container}>
       <View style={styles.productTitle}>
@@ -26,19 +37,26 @@ const ABrandProduct=()=> {
         <View style={styles.productDescText}>
           <Text style={styles.strong}>t_shirt</Text>
           <Text style={styles.normal}>1,000개</Text>
+          <ProgressBar count={point*0.01}/>
           <View style={styles.iconandimg}>
             <Image source={require('../icon+image/magnifyingGlass.png')} style={{ width:12, height:12, marginRight:2 }}/>
             <Text style={styles.normal}>제품 상세정보</Text>
           </View>
           <View style={styles.iconandimg}>
             <Image source={require('../icon+image/solidarity.png')} style={{ width:12, height:12, marginRight:2 }}/>
-            <Text style={styles.normal}>후원하기</Text>
+            <TouchableOpacity onPress={() => handlePoint()}>
+              <Text style={styles.normal}>후원하기</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
 
     </View>
   );
+
+
+  
+
 }
 
 const styles = StyleSheet.create({
