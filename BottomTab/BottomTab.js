@@ -48,14 +48,14 @@ const Icon5 = () => {
   );
 };
 
-export default function BottomTab() {
+export default function BottomTab({ point, handlePoint }) {
   return (
     <BottomTabNavigator.Navigator>
       <BottomTabNavigator.Screen
         name="Home"
         component={Home}
         options={{
-          headerTitle: (props) => <LogoTitle {...props} title={"LifeUP"}/>,
+          headerTitle: (props) => <LogoTitle {...props} title={"LifeUP"} />,
           tabBarIcon: (props) => <Icon1 {...props} />,
         }}
       />
@@ -63,15 +63,16 @@ export default function BottomTab() {
         name="Category"
         component={Category}
         options={{
-          headerTitle: (props) => <LogoTitle2 {...props} title={"카테고리"}/>,
+          headerTitle: (props) => <LogoTitle2 {...props} title={"카테고리"} />,
           tabBarIcon: (props) => <Icon2 {...props} />,
         }}
       />
       <BottomTabNavigator.Screen
         name="Anything"
         component={Anything}
+        point={point}
         options={{
-          headerTitle: (props) => <LogoTitle {...props} title={"후원하기"}/>,
+          headerTitle: (props) => <LogoTitle {...props} title={"후원하기"} />,
 
           tabBarIcon: (props) => <Icon3 {...props} />,
         }}
@@ -80,7 +81,7 @@ export default function BottomTab() {
         name="Pick"
         component={Pick}
         options={{
-          headerTitle: (props) => <LogoTitle2 {...props} title={"좋아요"}/>,
+          headerTitle: (props) => <LogoTitle2 {...props} title={"좋아요"} />,
           tabBarIcon: (props) => <Icon4 {...props} />,
         }}
       />
@@ -88,7 +89,9 @@ export default function BottomTab() {
         name="MyPage"
         component={MyPage}
         options={{
-          headerTitle: (props) => <LogoTitle2 {...props} title={"마이페이지"}/>,
+          headerTitle: (props) => (
+            <LogoTitle2 {...props} title={"마이페이지"} />
+          ),
           tabBarIcon: (props) => <Icon5 {...props} />,
         }}
       />

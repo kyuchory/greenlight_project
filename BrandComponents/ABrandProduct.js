@@ -1,116 +1,123 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useCallback, useState } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import * as Font from 'expo-font';
+import { StatusBar } from "expo-status-bar";
+import React, { useCallback, useState } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
+import * as Font from "expo-font";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import ProgressBar from '../Components/ProgressBar'; 
+import ProgressBar from "../Components/ProgressBar";
 
+import { PointConsumer } from "../context/point";
+import { PointProvider } from "../context/point";
 
 Font.loadAsync({
-  Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
-  'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-  WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-  'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
+  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
+  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
+  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
+  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
+  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
 });
 
-
-
-function ABrandProduct(){
-
-  const [point, setPoint] = useState(0); //point관리 state
-  const handlePoint = useCallback(() => { //point+1함수 useCallback최적화
-    setPoint(point + 1);
-  }, [point]);
-
-
+function ABrandProduct() {
 
   return (
-    <View style={styles.container}>
-      <View style={styles.productTitle}>
-        <Text style={styles.strong}>제작 예정 상품</Text>
-        <Text style={styles.small}>업사이클링 제품 특성 상 상품마다 약간의 차이가 있을 수 있습니다.</Text>
-      </View>
-      <View style={styles.productDesc}>
-        <Image source={require("../icon+image/tshirtImg1.jpg")} style={styles.tshirtImg}/>
-        <View style={styles.productDescText}>
-          <Text style={styles.strong}>t_shirt</Text>
-          <Text style={styles.normal}>1,000개</Text>
-          <ProgressBar count={point*0.01}/>
-          <View style={styles.iconandimg}>
-            <Image source={require('../icon+image/magnifyingGlass.png')} style={{ width:12, height:12, marginRight:2 }}/>
-            <Text style={styles.normal}>제품 상세정보</Text>
-          </View>
-          <View style={styles.iconandimg}>
-            <Image source={require('../icon+image/solidarity.png')} style={{ width:12, height:12, marginRight:2 }}/>
-            <TouchableOpacity onPress={() => handlePoint()}>
-              <Text style={styles.normal}>후원하기</Text>
-            </TouchableOpacity>
+    <PointProvider>
+      <View style={styles.container}>
+        <View style={styles.productTitle}>
+          <Text style={styles.strong}>제작 예정 상품</Text>
+          <Text style={styles.small}>
+            업사이클링 제품 특성 상 상품마다 약간의 차이가 있을 수 있습니다.
+          </Text>
+        </View>
+        <View style={styles.productDesc}>
+          <Image
+            source={require("../icon+image/tshirtImg1.jpg")}
+            style={styles.tshirtImg}
+          />
+          <View style={styles.productDescText}>
+            <Text style={styles.strong}>t_shirt</Text>
+            <Text style={styles.normal}>1,000개</Text>
+            <PointConsumer>
+              {(value) => (
+                <View>
+                  <ProgressBar count={value.state.point * 0.01} />
+                  <View style={styles.iconandimg}>
+                    <Image
+                      source={require("../icon+image/magnifyingGlass.png")}
+                      style={{ width: 12, height: 12, marginRight: 2 }}
+                    />
+                    <Text style={styles.normal}>제품 상세정보</Text>
+                  </View>
+                  <View style={styles.iconandimg}>
+                    <Image
+                      source={require("../icon+image/solidarity.png")}
+                      style={{ width: 12, height: 12, marginRight: 2 }}
+                    />
+                    <TouchableOpacity
+                      onPress={() =>
+                        value.actions.setPoint(value.state.point + 1)
+                      }
+                    >
+                      <Text style={styles.normal}>후원하기</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )}
+            </PointConsumer>
           </View>
         </View>
       </View>
-
-    </View>
+    </PointProvider>
   );
-
-
-  
-
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width:"90%",
-    marginLeft:"5%"
-
+    width: "90%",
+    marginLeft: "5%",
   },
-  productTitle:{
-    flex:1,
-    marginTop:10,
-
+  productTitle: {
+    flex: 1,
+    marginTop: 10,
   },
-  strong:{
-    color:"#6E6E6E",
-    fontSize:18,
-    fontFamily:'WemakepriceBold',
+  strong: {
+    color: "#6E6E6E",
+    fontSize: 18,
+    fontFamily: "WemakepriceBold",
   },
-  small:{
-    color:"#848484",
-    fontSize:10,
-    fontFamily:'Vitro_pride',
-    marginTop:10
+  small: {
+    color: "#848484",
+    fontSize: 10,
+    fontFamily: "Vitro_pride",
+    marginTop: 10,
   },
-  productDesc:{
-    flex:3,
-    flexDirection:'row',
+  productDesc: {
+    flex: 3,
+    flexDirection: "row",
   },
-  tshirtImg:{
-    flex:1,
-    width:"100%",
-    height:"100%",
+  tshirtImg: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
     // borderColor:"red",
     // borderWidth:1,
-
   },
-  productDescText:{
-    flex:1,
-    marginLeft:"5%",
+  productDescText: {
+    flex: 1,
+    marginLeft: "5%",
     // borderColor:"blue",
     // borderWidth:1,
     // justifyContent:'space-around'
   },
-  normal:{
-    color:"#848484",
-    fontSize:15,
-    fontFamily:'Vitro_pride',
+  normal: {
+    color: "#848484",
+    fontSize: 15,
+    fontFamily: "Vitro_pride",
   },
-  iconandimg:{
-    flexDirection:'row',
-    alignItems:'center'
-  }
+  iconandimg: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
 });
 
 export default ABrandProduct;
-
