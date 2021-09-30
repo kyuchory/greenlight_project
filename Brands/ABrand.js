@@ -5,7 +5,6 @@ import BrandSubContents from "../BrandComponents/ABrandSubContents";
 
 export default function ABrand() {
     
-  
     return (
         <View style={styles.container}>
 
