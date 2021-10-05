@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./Login/Login";
 import BottomTab from "./BottomTab/BottomTab";
 import ABrand from "./Brands/ABrand";
+import Signup from "./Login/Signup";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="BottomTab" component={BottomTab} point={point}/>
         <Stack.Screen name="ABrand" component={ABrand} />
+        <Stack.Screen name="Signup" component={Signup} />
       </Stack.Navigator>
     </NavigationContainer>
   );
