@@ -9,6 +9,9 @@ import BottomTab from "./BottomTab/BottomTab";
 import ABrand from "./Brands/ABrand";
 import Signup from "./Login/Signup";
 
+import { ThemeProvider } from 'styled-components/native';
+import { theme } from './theme';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -19,6 +22,7 @@ export default function App() {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Login"
@@ -32,6 +36,7 @@ export default function App() {
         <Stack.Screen name="Signup" component={Signup} />
       </Stack.Navigator>
     </NavigationContainer>
+    </ThemeProvider>
   );
 }
 

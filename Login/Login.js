@@ -1,5 +1,5 @@
 // import * as React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
+// import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import {ProgressContext, UserContext} from '../contexts';
 import styled from 'styled-components/native';
@@ -8,7 +8,6 @@ import { images } from '../utils/images';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validateEmail, removeWhitespace } from '../utils/common';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
 //파이어베이스 로그인
 import { Alert } from 'react-native';
 import { login } from '../utils/firebase';
@@ -17,7 +16,7 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-
+  background-color: ${({theme}) => theme.background};
   padding: 0 20px;
   padding-top: ${({ insets: { top } }) => top}px;
   padding-bottom: ${({ insets: { bottom } }) => bottom}px;
@@ -28,6 +27,7 @@ const ErrorText = styled.Text`
   height: 20px;
   margin-bottom: 10px;
   line-height: 20px;
+  color: ${({ theme }) => theme.errorText};
 `;
 
 //useRef -> Input 컴포넌트에서 next 누를시 포커스가 이동됨 -> PasswordRef
@@ -36,7 +36,6 @@ const ErrorText = styled.Text`
 
 const Login = ({ navigation }) => {
   const { dispatch } = useContext(UserContext);
-
   const { spinner } = useContext(ProgressContext);
 
   const insets = useSafeAreaInsets();

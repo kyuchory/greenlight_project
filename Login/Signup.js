@@ -14,7 +14,7 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-
+  background-color: ${({ theme }) => theme.background};
   padding: 300px 20px;
 `;
 const ErrorText = styled.Text`
@@ -23,7 +23,7 @@ const ErrorText = styled.Text`
   height: 20px;
   margin-bottom: 10px;
   line-height: 20px;
-
+  color: ${({ theme }) => theme.errorText};
 `;
 
 const Signup = () => {
