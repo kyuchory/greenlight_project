@@ -12,6 +12,8 @@ import Signup from "./Login/Signup";
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 
+import { PointProvider } from "./context/point";
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -22,6 +24,7 @@ export default function App() {
   };
 
   return (
+    <PointProvider>
     <ThemeProvider theme={theme}>
     <NavigationContainer>
       <Stack.Navigator
@@ -37,6 +40,7 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
     </ThemeProvider>
+    </PointProvider>
   );
 }
 
