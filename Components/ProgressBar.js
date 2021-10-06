@@ -21,7 +21,7 @@ export default function ProgressBar(props) {
   
     return (
         <View>
-            <Progress.Bar progress={props.count} width={150} height={30} color={"green"} />
+            <Progress.Bar progress={props.count} width={170} height={30} color={"#B7F0B1"} />
         </View>
 
     );
