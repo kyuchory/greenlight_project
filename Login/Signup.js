@@ -26,7 +26,7 @@ const ErrorText = styled.Text`
   color: ${({ theme }) => theme.errorText};
 `;
 
-const Signup = () => {
+const Signup = ({ navigation }) => {
   const [photoUrl, setPhotoUrl] = useState(images.default_profile);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -75,9 +75,10 @@ const Signup = () => {
     try{
       const user = await signup({email, password});
       console.log(user);
-      Alert.alert('로그인 성공', user.email);
+      Alert.alert('회원가입 성공', user.email);
+      navigation.reset({routes: [{name: "Login"}]})//회원가입 마치면 자동으로 로그인페이지로 이동
     } catch (e) {
-      Alert.alert('로그인 실패', e.message);
+      Alert.alert('회원가입 실패', e.message);
     }
   };
 

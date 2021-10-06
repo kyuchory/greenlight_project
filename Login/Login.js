@@ -73,8 +73,7 @@ const Login = ({ navigation }) => {
       const user = await login({ email, password });
       Alert.alert('로그인 성공', user.email);
       dispatch(user);
-      // navigation.navigate("BottomTab",{screen: "Home"});
-      navigation.reset({routes: [{name: "BottomTab", params: { email, password }}]})
+      navigation.reset({routes: [{name: "BottomTab", params: { email, password }}]})//stack 초기화->뒤로가기 눌러도 로그인페이지로 다시 이동하지 않게 함
     } 
     catch (e) {
       Alert.alert('로그인 살패', e.message);
