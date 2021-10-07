@@ -21,6 +21,6 @@ const PointProvider = ({ children }) => {
 
 const PointConsumer = PointContext.Consumer;
 
-export { PointProvider, PointConsumer };
+export { PointProvider, PointConsumer, PointContext };
 
 export default PointContext;
