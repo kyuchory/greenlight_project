@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { ImageBackground, StyleSheet, Text, View, Image, useWindowDimensions, Dimensions } from "react-native";
-
 import { PointConsumer } from "../context/point";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import ProgressBar from "../Components/ProgressBar";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
-
+import { useNavigation } from '@react-navigation/native';
 
 import * as Font from 'expo-font';
 Font.loadAsync({
@@ -21,7 +20,7 @@ Font.loadAsync({
 
 
   function ABrandProduct() {
-
+    const navigation = useNavigation(); 
     return (
         <View style={styles.containerProduct}>
           <View style={styles.productTitle}>
@@ -47,7 +46,10 @@ Font.loadAsync({
                         source={require("../icon+image/magnifyingGlass.png")}
                         style={{ width: 12, height: 12, marginRight: 2 }}
                       />
+                      <TouchableOpacity
+                      onPress={() => navigation.navigate("ChatBot")}>
                       <Text style={styles.normal}>제품 상세정보</Text>
+                      </TouchableOpacity>
                     </View>
                     <View style={styles.iconandimg}>
                       <Image
