@@ -1,8 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { StyleSheet, Text, View, Image, TextInput, Button} from "react-native";
+import { StyleSheet, Text, View, ImageBackground, TextInput, Button, Image} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import styled from 'styled-components/native';
-import { GiftedChat } from 'react-native-gifted-chat'
+import { ScrollView } from "react-native-gesture-handler";
 
 
 
@@ -24,10 +23,7 @@ Font.loadAsync({
     const [start, setStart] = useState(); 
     const [material, setMaterial] = useState();
     const [said, setSaid] = useState(false);
-    const [sizes, setSizes] = useState({
-      width:'0px',
-      height:'0px'
-    });
+
 
 
     const handleReady = () => {
@@ -55,28 +51,47 @@ Font.loadAsync({
       setSaid(true);
       setDisplay2(true);
     }
-    const Detail = styled.View`
-      width : ${({props}) => props.sizes.width};
-      height : ${({props}) => props.sizes.height};
-    `;
-    const changeView = () => {
-      setSizes({
-        width:'100%',
-        height:'100px'
-      })
-    }
+    // const Detail = styled.View`
+    //   width : ${({props}) => props.sizes.width};
+    //   height : ${({props}) => props.sizes.height};
+    // `;
+    // const changeView = () => {
+    //   setSizes({
+    //     width:'100%',
+    //     height:'100px'
+    //   })
+    // }
 
     return (
         <View style={styles.container}>
+          <ScrollView>
           <View style={styles.chatContainer}>
-            <Text style={styles.chatManager}>안녕하세요!{"\n"}만나서 반갑습니다.{"\n"}'사용설명서' 혹은 '후원시작'을 클릭해주세요.</Text>
+            <View style={styles.chatManager}>
+              <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
+              <ImageBackground
+              source={require("../icon+image/chatImageLeft.png")}
+              resizeMode="stretch"
+              style={styles.chatImage}
+              >
+              <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>
+                안녕하세요!{"\n"}만나서 반갑습니다.{"\n"}'사용설명서' 혹은 '후원시작'을 클릭해주세요.
+              </Text>
+              </ImageBackground>
+            </View>
+        
             <View style={styles.chatUser}>
+              <ImageBackground
+              source={require("../icon+image/chatImageRight.png")}
+              resizeMode="stretch"
+              style={styles.chatImage}
+              >
             <TouchableOpacity onPress={handleReady}>
-                <Text>사용설명서</Text>
+                <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"10%", paddingLeft:"5%"}}>사용설명서</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleStart}>
-                <Text>후원시작</Text>
+                <Text style={{paddingTop:"2%", paddingBottom:"4%", paddingRight:"0%", paddingLeft:"15%"}}>후원시작</Text>
             </TouchableOpacity>
+            </ImageBackground>
             </View>
 
 
@@ -91,40 +106,73 @@ Font.loadAsync({
             <View>
               {start ? (
             <View>
-                <Text style={styles.chatManager}>후원하실 상품 재질을 모두 선택해 주세요.</Text>
-
+                <View style={styles.chatManager}>
+                  <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageLeft.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                    <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>후원하실 상품 재질을 모두 선택해 주세요.</Text>
+                  </ImageBackground>
+                </View>
+                
                 <View style={styles.chatUser}>
-                <TouchableOpacity onPress={choiceFiber}>
-                   <Text>폐섬유</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={choiceSpecial}>
-                  <Text>특수소재</Text>
-                </TouchableOpacity>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageRight.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                    <TouchableOpacity onPress={choiceFiber}>
+                      <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"5%"}}>폐섬유</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={choiceSpecial}>
+                      <Text style={{paddingTop:"2%", paddingBottom:"4%", paddingRight:"5%", paddingLeft:"11%"}}>특수소재</Text>
+                    </TouchableOpacity>
+                  </ImageBackground>
                 </View>
 
                 {display1 ? (
                 <View>
                   <View style={styles.chatManager}>
-                    <Text>후원하실 상품의 개수를 입력해주세요.</Text>
+                  <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageLeft.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                    <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>후원하실 상품의 개수를 입력해주세요.</Text>
+                    </ImageBackground>
                   </View>
+
                   <View style={styles.chatUser}>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageRight.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
                     {material ? (
                       <View>
-                        <Text>특수소재</Text>
-                        <TextInput placeholder="입력"/><Text>벌</Text>
+                        <View style={{flexDirection:"row",justifyContent:"space-around", paddingTop:"10%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"15%"}}>
+                          <Text>특수소재</Text>
+                          <TextInput placeholder="입력"/><Text>벌</Text>
+                        </View>
                         <TouchableOpacity onPress={saidYes}>
-                          <Text>확인</Text>
+                          <Text style={{paddingTop:"2%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"30%"}}>확인</Text>
                         </TouchableOpacity>
                       </View>
                       ):(
                       <View>
-                        <Text>폐섬유</Text>
-                        <TextInput placeholder="입력"/><Text>벌</Text>
+                        <View style={{flexDirection:"row",justifyContent:"space-around", paddingTop:"10%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"15%"}}>
+                          <Text>폐섬유</Text>
+                          <TextInput placeholder="입력"/><Text>벌</Text>
+                        </View>
                         <TouchableOpacity onPress={saidYes}>
-                          <Text>확인</Text>
+                          <Text style={{paddingTop:"2%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"30%"}}>확인</Text>
                         </TouchableOpacity>
                       </View>
                       )}
+                      </ImageBackground>
                   </View>
                 </View>
                 ):(
@@ -135,14 +183,25 @@ Font.loadAsync({
               {display2 ? (
               <View>
                 <View style={styles.chatManager}>
+                  <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageLeft.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
                   {said ? (
-                  <Text>앨범에서 후원하실 상품 이미지를{"\n"}선택하여 업로드해 주세요.{"\n"}(정확한 확인을 위해 프레임 내에서{"\n"}또렷하게 촬영된 사진을 업로드해 주세요.)</Text>
+                  <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>
+                    앨범에서 후원하실 상품 이미지를{"\n"}선택하여 업로드해 주세요.{"\n"}
+                    (정확한 확인을 위해 프레임 내에서{"\n"}또렷하게 촬영된 사진을 업로드해 주세요.)
+                    </Text>
                   ) : (
                   <Text>nononononoo</Text>
                   )}
+                  </ImageBackground>
                 </View>
 
                 <View style={styles.chatUser}>
+                  
                   <Button
                   title="사진 업로드"
                   />
@@ -165,10 +224,9 @@ Font.loadAsync({
 
 
 
-
-
-
               </View>
+
+            </ScrollView>
         </View>
 
     );
@@ -178,19 +236,35 @@ Font.loadAsync({
   const styles = StyleSheet.create({
     container:{
         flex:1,
-        padding:"5%",
+        padding:"2%",
         backgroundColor:"white"
     },
     chatContainer:{
       flex:1,
-      margin:"10%",
+      marginTop:"10%",
     },
     chatManager:{
-      backgroundColor:"yellow",
-      alignItems:"flex-start",
+      // backgroundColor:"yellow",
+      alignItems:"center",
+      marginTop:"10%",
+      flexDirection:"row"
+      
     },
     chatUser:{
-      backgroundColor:"blue",
+      // backgroundColor:"pink",
+      justifyContent:"center",
       alignItems:"flex-end",
+      marginTop:"10%"
     },
+    chatImage:{
+      justifyContent:"flex-end",
+    },
+    avatarImage:{
+      width:30,
+      height:30,
+      marginBottom:"15%",
+      borderRadius:40,
+      borderWidth:1,
+      borderColor:"gray",
+    }
 })
