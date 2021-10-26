@@ -1,9 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { StyleSheet, Text, View, ImageBackground, TextInput, Button, Image} from "react-native";
+import { StyleSheet, Text, View, ImageBackground, TextInput, Button, Image, Platform} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
-
-
+import * as ImagePicker from 'expo-image-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+//$ expo install expo-image-picker
+//$ expo install @react-native-community/datetimepicker
 
 import * as Font from 'expo-font';
 Font.loadAsync({
@@ -20,9 +22,22 @@ Font.loadAsync({
     const [display0, setDisplay0] = useState(false);
     const [display1, setDisplay1] = useState(false);
     const [display2, setDisplay2] = useState(false);
+    const [display3, setDisplay3] = useState(false);
+    const [display4, setDisplay4] = useState(false);
+    const [viewCondition0, setViewCondition0] = useState(false);
+    const [viewCondition1, setViewCondition1] = useState(false);
+    const [viewCondition2, setViewCondition2] = useState(false);
+    const [viewCondition3, setViewCondition3] = useState(false);
     const [start, setStart] = useState(); 
     const [material, setMaterial] = useState();
     const [said, setSaid] = useState(false);
+    const [image, setImage] = useState(null);//사진업로드
+
+    
+    //캘린더
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
 
 
 
@@ -34,33 +49,79 @@ Font.loadAsync({
     const handleStart = () => {
       setStart(true);
       setDisplay0(true);
+      setViewCondition0(true);
     }
 
     const choiceFiber = () =>{
       setMaterial(false);
       setDisplay1(true);
-
+      setViewCondition1(true);
     }
     const choiceSpecial = () =>{
       setMaterial(true);
       setDisplay1(true);
-
+      setViewCondition1(true);
     }
 
     const saidYes = () =>{
       setSaid(true);
       setDisplay2(true);
+      setViewCondition2(true);
     }
-    // const Detail = styled.View`
-    //   width : ${({props}) => props.sizes.width};
-    //   height : ${({props}) => props.sizes.height};
-    // `;
-    // const changeView = () => {
-    //   setSizes({
-    //     width:'100%',
-    //     height:'100px'
-    //   })
-    // }
+
+    const pickCalendarYes = () =>{
+      setDisplay4(true);
+      setViewCondition3(true);
+    }
+
+
+    //사진업로드 함수들
+    useEffect(() => {
+      (async () => {
+        if (Platform.OS !== 'web') {
+          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
+          }
+        }
+      })();
+    }, []);
+
+    const pickImage = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });  
+      // console.log(result);
+      if (!result.cancelled) {
+        setImage(result.uri);
+
+        setDisplay3(true);
+      }      
+    };
+
+    //캘린더 함수들
+    const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      setShow(Platform.OS === 'ios');
+      setDate(currentDate);
+    };
+
+    const showMode = (currentMode) => {
+      setShow(true);
+      setMode(currentMode);
+    };
+  
+    const showDatepicker = () => {
+      showMode('date');
+    };
+  
+    const showTimepicker = () => {
+      showMode('time');
+    };
+
 
     return (
         <View style={styles.container}>
@@ -79,7 +140,7 @@ Font.loadAsync({
               </ImageBackground>
             </View>
         
-            <View style={styles.chatUser}>
+            <View style={styles.chatUser} pointerEvents={viewCondition0 ? 'none' : 'auto'}>
               <ImageBackground
               source={require("../icon+image/chatImageRight.png")}
               resizeMode="stretch"
@@ -93,11 +154,6 @@ Font.loadAsync({
             </TouchableOpacity>
             </ImageBackground>
             </View>
-
-
-
-
-
 
 
 
@@ -117,7 +173,7 @@ Font.loadAsync({
                   </ImageBackground>
                 </View>
                 
-                <View style={styles.chatUser}>
+                <View style={styles.chatUser} pointerEvents={viewCondition1 ? 'none' : 'auto'}>
                   <ImageBackground
                   source={require("../icon+image/chatImageRight.png")}
                   resizeMode="stretch"
@@ -152,20 +208,28 @@ Font.loadAsync({
                   style={styles.chatImage}
                   >
                     {material ? (
-                      <View>
+                      <View pointerEvents={viewCondition2 ? 'none' : 'auto'}>
                         <View style={{flexDirection:"row",justifyContent:"space-around", paddingTop:"10%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"15%"}}>
                           <Text>특수소재</Text>
-                          <TextInput placeholder="입력"/><Text>벌</Text>
+                          <View style={{ backgroundColor: "#F2F2F2"}}>
+                          <TextInput
+                          onSubmitEditing={() => console.log("onSubmitEditing")}
+                          placeholder="입력"/>
+                          </View>
+                          <Text>벌</Text>
                         </View>
                         <TouchableOpacity onPress={saidYes}>
                           <Text style={{paddingTop:"2%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"30%"}}>확인</Text>
                         </TouchableOpacity>
                       </View>
                       ):(
-                      <View>
+                      <View pointerEvents={viewCondition2 ? 'none' : 'auto'}>
                         <View style={{flexDirection:"row",justifyContent:"space-around", paddingTop:"10%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"15%"}}>
                           <Text>폐섬유</Text>
-                          <TextInput placeholder="입력"/><Text>벌</Text>
+                          <View style={{ backgroundColor: "#F2F2F2"}}>
+                          <TextInput placeholder="입력"/>
+                          </View>
+                          <Text>벌</Text>
                         </View>
                         <TouchableOpacity onPress={saidYes}>
                           <Text style={{paddingTop:"2%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"30%"}}>확인</Text>
@@ -201,15 +265,107 @@ Font.loadAsync({
                 </View>
 
                 <View style={styles.chatUser}>
-                  
+                <ImageBackground
+                  source={require("../icon+image/chatImageRight.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                  {image && <Image source={{ uri: image }} style={styles.imageInChat} />}                 
+                  </ImageBackground>
                   <Button
                   title="사진 업로드"
+                  onPress={pickImage}
                   />
                 </View>
               </View>) : (<View></View>)}
+
+            {display3 ? (
+              <View>
+                <View style={styles.chatManager}>
+                  <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageLeft.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                    <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>
+                      업로드 되었습니다!{"\n"}심사과정은 약 1~2일이 소요되며,{"\n"}
+                      이후 승인 여부는 '마이페이지-후원 내역'에서{"\n"}보실 수 있습니다.
+                    </Text>
+                  </ImageBackground>
+                </View>
                 
+                <View style={styles.chatManager}>
+                  <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageLeft.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                    <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>
+                      승인되었습니다!{"\n"}택배 방문 희망일을 선택해주세요.{"\n"}
+                      배송비 입금 확인 후, 택배 방문 희망일에{"\n"}수거할 예정입니다.
+                    </Text>
+                  </ImageBackground>
+                </View>
+
+                <View style={styles.chatUser} pointerEvents={viewCondition3 ? 'none' : 'auto'}>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageRight.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                    <TouchableOpacity onPress={showDatepicker}>
+                      <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"10%", paddingLeft:"5%"}}>
+                        !!날짜 선택!!{"\n"}{date.getFullYear()}-{date.getMonth()+1}-{date.getDate()}
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={pickCalendarYes}>
+                      <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"10%", paddingLeft:"5%"}}>확인</Text>
+                    </TouchableOpacity>
+                  </ImageBackground>
+                  {show && (
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      value={date}
+                      mode={mode}
+                      is24Hour={true}
+                      display="default"
+                      onChange={onChange}
+                    />
+                  )}
+                  
+                </View>
+              </View>
+              ):(
+              <View></View>
+              )}
+
+              {display4 ? (
+              <View>
+                  <View style={styles.chatManager}>
+                  <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageLeft.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                    <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>
+                      모든 과정이 마무리 되었습니다!{"\n"}포인트는 수거 완료 후 적립됩니다.
+                      {"\n"}라이프업을 통해 업사이클링 브랜드들을{"\n"}지지해 주셔서 감사합니다.
+                    </Text>
+                    </ImageBackground>
+                  </View>
+
+              </View>
+              ):(
+              <View></View>
+              )}
 
 
+
+
+                
 
             </View>
 
@@ -266,5 +422,13 @@ Font.loadAsync({
       borderRadius:40,
       borderWidth:1,
       borderColor:"gray",
-    }
+    },
+    imageInChat:{
+      width: 100,
+      height: 100,
+      marginTop:"5%",
+      marginBottom:"5%",
+      marginLeft:"5%",
+      marginRight:"10%"
+    },
 })
