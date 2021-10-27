@@ -1,11 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { StyleSheet, Text, View, ImageBackground, TextInput, Button, Image, Platform} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
-import * as ImagePicker from 'expo-image-picker';
-import DateTimePicker from '@react-native-community/datetimepicker';
-//$ expo install expo-image-picker
-//$ expo install @react-native-community/datetimepicker
+import * as ImagePicker from 'expo-image-picker'; //$ expo install expo-image-picker
+import DateTimePicker from '@react-native-community/datetimepicker';  //$ expo install @react-native-community/datetimepicker
+
 
 import * as Font from 'expo-font';
 Font.loadAsync({
@@ -28,11 +27,12 @@ Font.loadAsync({
     const [viewCondition1, setViewCondition1] = useState(false);
     const [viewCondition2, setViewCondition2] = useState(false);
     const [viewCondition3, setViewCondition3] = useState(false);
+    const [viewCondition4, setViewCondition4] = useState(false);
     const [start, setStart] = useState(); 
     const [material, setMaterial] = useState();
     const [said, setSaid] = useState(false);
     const [image, setImage] = useState(null);//사진업로드
-
+    const scrollViewRef = useRef(); //챗봇 스크롤 자동으로 내리기 위해 필요
     
     //캘린더
     const [date, setDate] = useState(new Date());
@@ -68,10 +68,14 @@ Font.loadAsync({
       setDisplay2(true);
       setViewCondition2(true);
     }
+    const pickPictureYes = () =>{
+      setDisplay3(true);
+      setViewCondition3(true);
+    }
 
     const pickCalendarYes = () =>{
       setDisplay4(true);
-      setViewCondition3(true);
+      setViewCondition4(true);
     }
 
 
@@ -97,8 +101,6 @@ Font.loadAsync({
       // console.log(result);
       if (!result.cancelled) {
         setImage(result.uri);
-
-        setDisplay3(true);
       }      
     };
 
@@ -125,7 +127,10 @@ Font.loadAsync({
 
     return (
         <View style={styles.container}>
-          <ScrollView>
+          <ScrollView
+          ref={scrollViewRef}
+          onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })} //스크롤 하단 유지
+          >
           <View style={styles.chatContainer}>
             <View style={styles.chatManager}>
               <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
@@ -264,18 +269,20 @@ Font.loadAsync({
                   </ImageBackground>
                 </View>
 
-                <View style={styles.chatUser}>
+                <View style={styles.chatUser} pointerEvents={viewCondition3 ? 'none' : 'auto'}>
+                  <Button
+                    title="사진 업로드"
+                    onPress={pickImage}/>
+                  <TouchableOpacity onPress={pickPictureYes}>
+                    <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"10%", paddingLeft:"5%"}}>확인</Text>
+                  </TouchableOpacity>
                 <ImageBackground
                   source={require("../icon+image/chatImageRight.png")}
                   resizeMode="stretch"
                   style={styles.chatImage}
                   >
-                  {image && <Image source={{ uri: image }} style={styles.imageInChat} />}                 
+                  {image && <Image source={{ uri: image }} style={styles.imageInChat} />}          
                   </ImageBackground>
-                  <Button
-                  title="사진 업로드"
-                  onPress={pickImage}
-                  />
                 </View>
               </View>) : (<View></View>)}
 
@@ -309,7 +316,7 @@ Font.loadAsync({
                   </ImageBackground>
                 </View>
 
-                <View style={styles.chatUser} pointerEvents={viewCondition3 ? 'none' : 'auto'}>
+                <View style={styles.chatUser} pointerEvents={viewCondition4 ? 'none' : 'auto'}>
                   <ImageBackground
                   source={require("../icon+image/chatImageRight.png")}
                   resizeMode="stretch"
@@ -333,8 +340,7 @@ Font.loadAsync({
                       display="default"
                       onChange={onChange}
                     />
-                  )}
-                  
+                  )}                  
                 </View>
               </View>
               ):(
@@ -357,6 +363,17 @@ Font.loadAsync({
                     </ImageBackground>
                   </View>
 
+                  <View style={styles.chatUser}>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageRight.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                  <TouchableOpacity>
+                    <Text style={{paddingTop:"5%", paddingBottom:"5%", paddingRight:"10%", paddingLeft:"5%"}}>후원 종료</Text>
+                  </TouchableOpacity>
+                  </ImageBackground>                
+                </View>
               </View>
               ):(
               <View></View>
@@ -364,11 +381,7 @@ Font.loadAsync({
 
 
 
-
-                
-
             </View>
-
             ) : (
             <View>
                 <Text>사용설명서 modal</Text>
@@ -381,7 +394,6 @@ Font.loadAsync({
 
 
               </View>
-
             </ScrollView>
         </View>
 

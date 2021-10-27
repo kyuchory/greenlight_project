@@ -8,19 +8,18 @@ import * as Progress from 'react-native-progress';
 //expo install react-native-svg
 
 
-export default function ProgressBar(props) {
+export default function ProgressBar2(props) {
 
   
     return (
         <View>
             <Progress.Bar
             progress={props.count}
-            width={220}
-            height={30}
-            color={"#BCFCC2"}
-            borderColor={"#E7FCE0"}
-            backgroundColor={"white"}
-            borderRadius={14}/>
+            width={150}
+            height={40}
+            color={"#D9D9D9"}
+            backgroundColor={"#EDEDED"}
+            borderRadius={17}/>
         </View>
 
     );
