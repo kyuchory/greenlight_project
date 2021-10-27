@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ImageBackground, StyleSheet, Text, View, Image, useWindowDimensions, Dimensions } from "react-native";
 import { PointConsumer } from "../context/point";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import ProgressBar from "../Components/ProgressBar";
+import ProgressBar from "../Components/ProgressBar2";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { useNavigation } from '@react-navigation/native';
 
@@ -40,7 +40,7 @@ Font.loadAsync({
               <PointConsumer>
                 {(value) => (
                   <View>
-                    <ProgressBar count={value.state.point * 0.01}/>
+                    <ProgressBar count={value.state.point * 0.01} width={100}/>
                     <View style={styles.iconandimg}>
                       <Image
                         source={require("../icon+image/magnifyingGlass.png")}

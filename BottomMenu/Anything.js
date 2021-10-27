@@ -34,11 +34,11 @@ export default function Anything({ navigation }) {
                 {(value) => (
                   <View style={styles.progressBar}>
                     <ProgressBar count={value.state.point * 0.01} />
-                    <Text style={{marginLeft:"5%"}}>면</Text>
-                    <Text style={{marginLeft:"5%", fontSize:20}}>{value.state.point}%</Text>
+                    <Text style={{marginLeft:"4%", fontSize:14}}>{value.state.point}%</Text>
                   </View>
                 )}
               </PointConsumer>
+              <Text style={{marginLeft:"1%"}}>폐섬유, 특수소재</Text>
             </View>
           </TouchableOpacity>
 
@@ -53,31 +53,17 @@ export default function Anything({ navigation }) {
                 {(value) => (
                   <View style={styles.progressBar}>
                     <ProgressBar count={value.state.point * 0.01} />
-                    <Text style={{marginLeft:"5%"}}>니트</Text>
-                    <Text style={{marginLeft:"5%", fontSize:20}}>{value.state.point}%</Text>
+                    <Text style={{marginLeft:"3%", fontSize:14}}>{value.state.point}%</Text>
                   </View>
                 )}
               </PointConsumer>
+              <Text style={{marginLeft:"1%"}}>폐섬유</Text>
             </View>
           </TouchableOpacity>
 
 
         </View>
 
-       
-        {/* <PointConsumer>
-          {(value) => (
-            <View>
-              <ProgressBar count={value.state.point * 0.01} />
-              <Text>{value.state.point}</Text>
-              <TouchableOpacity
-                onPress={() => value.actions.setPoint(value.state.point + 1)}
-              >
-                <Text>후원하기</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </PointConsumer> */}
       </View>
   );
 }
@@ -104,11 +90,15 @@ const styles = StyleSheet.create({
 
   },
   brandWrapper:{
-    // borderColor:'blue',
-    // borderWidth:1,
+    borderColor:'#E7FCE0',
+    backgroundColor:'#E7FCE0',
+    borderWidth:1,
+    borderRadius:10,
     flexDirection:"row",
     alignItems:"center",
-    marginTop:"7%"
+    marginTop:"7%",
+    width:325,
+    height:100
   },
   circle:{
     marginTop:"20%",
