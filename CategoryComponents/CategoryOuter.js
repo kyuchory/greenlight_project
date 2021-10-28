@@ -22,17 +22,17 @@ Font.loadAsync({
 
 
 
-export default function PickProduct() {
+export default function CategoryOuter() {
 
 
- const Section = () => {
+const Section = () => {
   return (
     <View style = {styles.section}>
     </View>
   )
 } 
 
-  const Box = () => {
+const Box = () => {
     return(
       <View style = {styles.box}>
       <Image source= {require("../icon+image/homeImage.jpg")} 
@@ -41,55 +41,25 @@ export default function PickProduct() {
       <Text style = {styles.textSmall}> 가격이 어쩌구</Text>
       </View>
     )
-  }
+  } 
 
-  const FetchData = () => {
-    //받아온 데이터를 저장할 배열
-    //let product = [];
 
-    firestore
-        .collection('product') //product 컬렉션 반환
-        .get()
-        .then((docs) => {
-          //forEach 함수로 각각의 다큐먼트에 함수 실행
-          docs.forEach((doc) => {
-            console.log(doc.data())
 
-            const Box = () => {
        
               return(
                 <View style = {styles.box}>
                 <Image source= {require("../icon+image/homeImage.jpg")} 
                     style={styles.image} />
-                <Text style = {styles.textSmall}> ${doc.data().name} </Text>
-                <Text style = {styles.textSmall}> ${doc.data().price} </Text>
+                <Text style = {styles.textSmall}> ddd</Text>
+                <Text style = {styles.textSmall}> dds </Text>
                 </View>
 
               )
-            }
+              }
+           // }
             
             
-          });
-
-        });
-      
-        return (
-       <View>
-         <Box/>
-       </View>
-        );
-  
-        }
-
-   return (
-    <View style={styles.container}>
-      <View style={styles.section}>
-        <FetchData/>
-      </View>
-    </View>
-
-  ); 
-  };
+   
 
 const styles = StyleSheet.create({
   container: {
@@ -125,3 +95,5 @@ const styles = StyleSheet.create({
     marginLeft:10,
     },
 });
+
+//박스를 가로로 정렬하듯 UI 설정/ 상품사진, 브랜드명가격, 장바구니 표시와 찜 모두,,,
