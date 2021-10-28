@@ -1,74 +1,78 @@
 import React, { useState } from "react";
-import { ImageBackground, StyleSheet, Text, View, Image, useWindowDimensions, Dimensions } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  useWindowDimensions,
+  Dimensions,
+} from "react-native";
 import { PointConsumer } from "../context/point";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import ProgressBar from "../Components/ProgressBar";
+import ProgressBar from "../Components/ProgressBar2";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-import * as Font from 'expo-font';
+import * as Font from "expo-font";
 Font.loadAsync({
-    Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
-    'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-    WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-    'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
-  });
+  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
+  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
+  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
+  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
+  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+});
 
-
-
-
-  function ABrandProduct() {
-    const navigation = useNavigation(); 
-    return (
-        <View style={styles.containerProduct}>
-          <View style={styles.productTitle}>
-            <Text style={styles.strong}>제작 예정 상품</Text>
-            <Text style={styles.small}>
-              업사이클링 제품 특성 상 상품마다 약간의 차이가 있을 수 있습니다.
-            </Text>
-          </View>
-          <View style={styles.productDesc}>
-            <Image
-              source={require("../icon+image/tshirtImg1.jpg")}
-              style={styles.tshirtImg}
-            />
-            <View style={styles.productDescText}>
-              <Text style={styles.strong}>t_shirt</Text>
-              <Text style={styles.normal}>1,000개</Text>
-              <PointConsumer>
-                {(value) => (
-                  <View>
-                    <ProgressBar count={value.state.point * 0.01}/>
-                    <View style={styles.iconandimg}>
-                      <Image
-                        source={require("../icon+image/magnifyingGlass.png")}
-                        style={{ width: 12, height: 12, marginRight: 2 }}
-                      />
-                      <TouchableOpacity
-                      onPress={() => navigation.navigate("ChatBot")}>
-                      <Text style={styles.normal}>제품 상세정보</Text>
-                      </TouchableOpacity>
-                    </View>
-                    <View style={styles.iconandimg}>
-                      <Image
-                        source={require("../icon+image/solidarity.png")}
-                        style={{ width: 12, height: 12, marginRight: 2 }}
-                      />
-                      <TouchableOpacity
-                        onPress={() =>
-                          value.actions.setPoint(value.state.point + 1)
-                        }
-                      >
-                        <Text style={styles.normal}>후원하기</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                )}
-              </PointConsumer>
-            </View>
-          </View>
+function ABrandProduct() {
+  const navigation = useNavigation();
+  return (
+    <View style={styles.containerProduct}>
+      <View style={styles.productTitle}>
+        <Text style={styles.strong}>제작 예정 상품</Text>
+        <Text style={styles.small}>
+          업사이클링 제품 특성 상 상품마다 약간의 차이가 있을 수 있습니다.
+        </Text>
+      </View>
+      <View style={styles.productDesc}>
+        <Image
+          source={require("../icon+image/tshirtImg1.jpg")}
+          style={styles.tshirtImg}
+        />
+        <View style={styles.productDescText}>
+          <Text style={styles.strong}>t_shirt</Text>
+          <Text style={styles.normal}>1,000개</Text>
+          <PointConsumer>
+            {(value) => (
+              <View>
+                <ProgressBar count={value.state.point * 0.01} width={100} />
+                <View style={styles.iconandimg}>
+                  <Image
+                    source={require("../icon+image/magnifyingGlass.png")}
+                    style={{ width: 12, height: 12, marginRight: 2 }}
+                  />
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("ChatBot")}
+                  >
+                    <Text style={styles.normal}>제품 상세정보</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.iconandimg}>
+                  <Image
+                    source={require("../icon+image/solidarity.png")}
+                    style={{ width: 12, height: 12, marginRight: 2 }}
+                  />
+                  <TouchableOpacity
+                    onPress={() =>
+                      value.actions.setPoint(value.state.point + 1)
+                    }
+                  >
+                    <Text style={styles.normal}>후원하기</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+          </PointConsumer>
         </View>
       </View>
     </View>

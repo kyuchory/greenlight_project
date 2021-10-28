@@ -93,6 +93,7 @@ const Icon5B = () => {
   );
 };
 
+
 export default function BottomTab({ point, handlePoint }) {
   return (
     <BottomTabNavigator.Navigator>
