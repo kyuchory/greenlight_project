@@ -33,7 +33,7 @@ Font.loadAsync({
     const [material, setMaterial] = useState();
     const [said, setSaid] = useState(false);
     const [image, setImage] = useState(null);//사진업로드
-    const [text, setText] = useState(0); // 벌수 입력받을 것 을 저장할 state
+    const [text, setText] = useState(""); // 벌수 입력받을 것 을 저장할 state
     const scrollViewRef = useRef(); //챗봇 스크롤 자동으로 내리기 위해 필요
     
     //캘린더
@@ -43,7 +43,9 @@ Font.loadAsync({
 
     
 
-
+    const onChangeText = (event) =>{
+      setText(event.target.value);
+    }
 
     const handleReady = () => {
       setStart(false);
@@ -60,8 +62,15 @@ Font.loadAsync({
       setMaterial(false);
       setDisplay1(true);
       setViewCondition1(true);
+      {<FabricProvider>
+        <FabricConsumer>
+          {({actions})=>(
+            actions.setFabric("테스트")
+          )}
+        </FabricConsumer>
+      </FabricProvider>}
     }
-    
+
     const choiceSpecial = () =>{
       setMaterial(true);
       setDisplay1(true);
@@ -72,6 +81,13 @@ Font.loadAsync({
       setSaid(true);
       setDisplay2(true);
       setViewCondition2(true);
+      {<FabricProvider>
+        <FabricConsumer>
+          {({actions})=>(
+            actions.setCount(text)
+          )}
+        </FabricConsumer>
+      </FabricProvider>}
     }
     const pickPictureYes = () =>{
       setDisplay3(true);
@@ -229,9 +245,7 @@ Font.loadAsync({
                           onSubmitEditing={() => console.log("onSubmitEditing")}
                           placeholder="입력"
                           value={text}
-                          onChange={(event)=>{
-                            setText(event.target.value)
-                          }}/>
+                          onChange={onChangeText}/>
                           </View>
                           <Text>벌</Text>
                         </View>
@@ -247,9 +261,7 @@ Font.loadAsync({
                           <TextInput 
                           placeholder="입력"
                           value={text}
-                          onChange={(event)=>{
-                            setText(event.target.value)
-                          }}/>
+                          onChange={onChangeText}/>
                           </View>
                           <Text>벌</Text>
                         </View>
