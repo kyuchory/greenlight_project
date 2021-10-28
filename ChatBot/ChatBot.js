@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from 'expo-image-picker'; //$ expo install expo-image-picker
 import DateTimePicker from '@react-native-community/datetimepicker';  //$ expo install @react-native-community/datetimepicker
-import { FabricConsumer, FabricProvider } from './ChatBot_Context';
+import FabricContext, { FabricConsumer, FabricProvider } from './ChatBot_Context';
 
 
 import * as Font from 'expo-font';
@@ -61,6 +61,7 @@ Font.loadAsync({
       setDisplay1(true);
       setViewCondition1(true);
     }
+    
     const choiceSpecial = () =>{
       setMaterial(true);
       setDisplay1(true);
@@ -191,10 +192,10 @@ Font.loadAsync({
                   resizeMode="stretch"
                   style={styles.chatImage}
                   >
-                    <TouchableOpacity onPress={choiceFiber, ()=>actions.setFabric("Fiber")}>
+                    <TouchableOpacity onPress={choiceFiber}>
                       <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"5%"}}>폐섬유</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={choiceSpecial, ()=>actions.setFabric("Special")}>
+                    <TouchableOpacity onPress={choiceSpecial}>
                       <Text style={{paddingTop:"2%", paddingBottom:"4%", paddingRight:"5%", paddingLeft:"11%"}}>특수소재</Text>
                     </TouchableOpacity>
                   </ImageBackground>
@@ -234,7 +235,7 @@ Font.loadAsync({
                           </View>
                           <Text>벌</Text>
                         </View>
-                        <TouchableOpacity onPress={saidYes, ()=>{actions.setCount(text)}}>
+                        <TouchableOpacity onPress={saidYes}>
                           <Text style={{paddingTop:"2%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"30%"}}>확인</Text>
                         </TouchableOpacity>
                       </View>
@@ -252,7 +253,7 @@ Font.loadAsync({
                           </View>
                           <Text>벌</Text>
                         </View>
-                        <TouchableOpacity onPress={saidYes, ()=>{actions.setCount(text)}}>
+                        <TouchableOpacity onPress={saidYes}>
                           <Text style={{paddingTop:"2%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"30%"}}>확인</Text>
                         </TouchableOpacity>
                       </View>
