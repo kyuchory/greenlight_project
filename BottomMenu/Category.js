@@ -1,10 +1,15 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import CategorySubContents from "../CategoryComponents/CategorySubContents";
 
 export default function Category() {
   return (
     <View style={styles.container}>
-      <Text style={styles.notice}>Category</Text>
+      <ScrollView>
+        <View style={styles.empty} />
+        <CategorySubContents />
+      </ScrollView>
     </View>
   );
 }
@@ -12,12 +17,12 @@ export default function Category() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    flexDirection: "column",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
   },
-  notice: {
-    marginBottom: 30,
-    fontSize: 25,
+  empty: {
+    paddingRight: "100%",
   },
 });

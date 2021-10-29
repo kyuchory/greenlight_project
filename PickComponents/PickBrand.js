@@ -3,10 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-
-
-
-const Sample2=()=> {
+const PickBrand=()=> {
   return (
     <View style={styles.container}>
     <Text>Sample2</Text>
@@ -18,11 +15,11 @@ const Sample2=()=> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue',
+    backgroundColor: 'yellow',
     // alignItems: 'center',
     // justifyContent: 'center',
   },
 });
 
-export default Sample2;
+export default PickBrand;
 
