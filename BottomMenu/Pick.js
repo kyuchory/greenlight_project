@@ -7,8 +7,8 @@ export default function Pick() {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <View style={styles.empty}/>
-        <PickSubContents/>
+        <View style={styles.empty} />
+        <PickSubContents />
       </ScrollView>
     </View>
   );
@@ -21,8 +21,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  empty:{
-    paddingRight:"100%"
+  empty: {
+    paddingRight: "100%",
   },
-
 });

@@ -11,8 +11,8 @@ export default function Home() {
       <ScrollView>
         <SliderBox
           images={[
-            "https://images.unsplash.com/photo-1632337948797-ba161d29532b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80",
-            "https://source.unsplash.com/1024x768/?water",
+            require("../icon+image/ecoImg1.png"),
+            require("../icon+image/eventImg3.png"),
             "https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
           ]}
           sliderBoxHeight={400} //슬라이드 이미지 높이
@@ -40,7 +40,7 @@ export default function Home() {
           ImageComponentStyle={{ width: "94%", marginTop: 20 }} //이미지슬라이더 전체적인 위치와 너비 조정
           imageLoadingColor="#2196F3" //이건뭐지
         />
-        <SubContents/>
+        <SubContents />
       </ScrollView>
     </View>
   );

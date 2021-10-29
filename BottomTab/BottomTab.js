@@ -21,9 +21,27 @@ const Icon1 = () => {
   );
 };
 
+const Icon1B = () => {
+  return (
+    <Image
+      source={require("../icon+image/homeBlack.png")}
+      style={styles.icon}
+    />
+  );
+};
+
 const Icon2 = () => {
   return (
     <Image source={require("../icon+image/category.png")} style={styles.icon} />
+  );
+};
+
+const Icon2B = () => {
+  return (
+    <Image
+      source={require("../icon+image/categoryBlack.png")}
+      style={styles.icon}
+    />
   );
 };
 
@@ -36,9 +54,27 @@ const Icon3 = () => {
   );
 };
 
+const Icon3C = () => {
+  return (
+    <Image
+      source={require("../icon+image/solidarityColor.png")}
+      style={styles.middleIcon}
+    />
+  );
+};
+
 const Icon4 = () => {
   return (
     <Image source={require("../icon+image/heart.png")} style={styles.icon} />
+  );
+};
+
+const Icon4B = () => {
+  return (
+    <Image
+      source={require("../icon+image/heartBlack.png")}
+      style={styles.icon}
+    />
   );
 };
 
@@ -48,51 +84,60 @@ const Icon5 = () => {
   );
 };
 
+const Icon5B = () => {
+  return (
+    <Image
+      source={require("../icon+image/userBlack.png")}
+      style={styles.icon}
+    />
+  );
+};
+
+
 export default function BottomTab({ point, handlePoint }) {
   return (
     <BottomTabNavigator.Navigator>
       <BottomTabNavigator.Screen
-        name="Home"
+        name="홈"
         component={Home}
         options={{
           headerTitle: (props) => <LogoTitle {...props} title={"LifeUP"} />,
-          tabBarIcon: (props) => <Icon1 {...props} />,
+          tabBarIcon: ({ focused }) => (focused ? <Icon1B /> : <Icon1 />),
         }}
       />
       <BottomTabNavigator.Screen
-        name="Category"
+        name="카테고리"
         component={Category}
         options={{
           headerTitle: (props) => <LogoTitle2 {...props} title={"카테고리"} />,
-          tabBarIcon: (props) => <Icon2 {...props} />,
+          tabBarIcon: ({ focused }) => (focused ? <Icon2B /> : <Icon2 />),
         }}
       />
       <BottomTabNavigator.Screen
-        name="Anything"
+        name=" "
         component={Anything}
         point={point}
         options={{
           headerTitle: (props) => <LogoTitle {...props} title={"후원하기"} />,
-
-          tabBarIcon: (props) => <Icon3 {...props} />,
+          tabBarIcon: ({ focused }) => (focused ? <Icon3C /> : <Icon3 />),
         }}
       />
       <BottomTabNavigator.Screen
-        name="Pick"
+        name="찜목록"
         component={Pick}
         options={{
           headerTitle: (props) => <LogoTitle2 {...props} title={"좋아요"} />,
-          tabBarIcon: (props) => <Icon4 {...props} />,
+          tabBarIcon: ({ focused }) => (focused ? <Icon4B /> : <Icon4 />),
         }}
       />
       <BottomTabNavigator.Screen
-        name="MyPage"
+        name="마이페이지"
         component={MyPage}
         options={{
           headerTitle: (props) => (
             <LogoTitle2 {...props} title={"마이페이지"} />
           ),
-          tabBarIcon: (props) => <Icon5 {...props} />,
+          tabBarIcon: ({ focused }) => (focused ? <Icon5B /> : <Icon5 />),
         }}
       />
     </BottomTabNavigator.Navigator>
@@ -108,6 +153,7 @@ const styles = StyleSheet.create({
     height: 25,
   },
   middleIcon: {
+    marginTop: 10,
     width: 40,
     height: 40,
   },

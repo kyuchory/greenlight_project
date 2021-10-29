@@ -289,6 +289,183 @@ const styles = StyleSheet.create({
 });
 
 //총 한 5개 박스로 구성, 마이페이지 헤더(10%), 프로필(20), 쇼핑(20), 배송(20), 취소(20), cs관련(20)
-//진심,, 내인생에서 젤 복잡한 UI임 ㅋㅋ,,, 쇼핑 배송 취소에는 각각 박스 4개씩 넣어 진행하겠음, 스타일 시트는 같이쓰지만,,이미지가 죨라 다다름 ㅜ 염~병~이건 너무한거 아니냐고
+/*
 
-//회색 실선으로 퍼센트 줘서 라인 구분하기~ 하ㅓㅓ ㅅ1발~너무한거아니냐고~ㅇ머링리ㅏ
+import * as React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { FabricConsumer } from "../ChatBot/ChatBot_Context";
+
+
+Font.loadAsync({
+    Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
+    'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
+    WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
+    'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
+    HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
+    'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
+  });
+
+
+export default function Mypage() {
+
+  //얇은 섹션 구분선
+  const Line1 = () => {
+    return(
+      <View style = {styles.line1_Container}>
+        
+      </View> 
+    )
+  }
+
+  const Profile = () => {
+    return(
+      <View style = {styles.Profile}>
+      <Image rounded source= {require("../icon+image/default_profile.png")} 
+          style={styles.image} />
+      <Text style = {styles.textName}>
+        아무개님~
+      </Text>
+      </View>
+    )
+  }
+
+//두꺼운 섹션 구분선
+  const Line2 = () => {
+    return(
+      <View style = {styles.line2_Container}>
+
+      </View> 
+    )
+  }
+  
+  //쇼핑포인트, 기부포인트, 쿠폰, 후원내역
+  const Shopping = () => {
+    return(
+      <View style = {styles.Shopping_Container}>
+         <Image source= {require("../icon+image/point.png")} 
+          style={styles.Point_img} />
+
+           <Image source= {require("../icon+image/point_donate.png")} 
+          style={styles.image} />
+
+           <Image source= {require("../icon+image/coupon.png")} 
+          style={styles.image} />
+
+           <Image source= {require("../icon+image/donate.png")} 
+          style={styles.image} />
+
+      </View>
+    )
+  }
+
+  const Delivery = () => {
+    return(
+      <View style = {styles.Delievery_Container}>
+        <Text style = {styles.textDelivery}>
+          주문/배송조회
+        </Text>
+      </View>
+    )
+  }
+
+  const Delivery2 = () => {
+    return(
+      <View style = {styles.Delivery2_Container}>
+
+      </View>
+    )
+  }
+
+  const Delivery3 = () => {
+    return(
+      <View style = {styles.Delivery3_Container}>
+
+      </View>
+    )
+  }
+
+  const Cancle = () => {
+    return(
+      <View style = {styles.Cancle_Container}>
+      <Text style = {styles.textDelivery}>
+          취소/교환/환불
+        </Text>
+      </View>
+    )
+  }
+
+ const Cancle2 = () => {
+    return(
+      <View style = {styles.Cancle2_Container}>
+
+      </View>
+    )
+  }
+
+  const Cancle3 = () => {
+    return(
+      <View style = {styles.Cancle3_Container}>
+      <Text style = {styles.textSmall}>
+        dd
+      </Text>
+      </View>
+    )
+  }
+  const Call = () => {
+    return(
+      <View style = {styles.Call_Container}>
+        <Text style = {styles.textNumber}>
+          0000-0000
+        </Text>
+        <Text style = {styles.textInfo}>
+          cs_help@lifeup.co.kr
+        </Text>
+        <Text style = {styles.textInfo}>
+          운영시간 / 평일 09:00 - 17:00
+        </Text>
+        <Text style = {styles.textInfo}>
+          점심시간 / 12:30 - 13:00
+        </Text>
+      </View>
+    )
+  }
+ 
+  return(
+    <View style={styles.container}>
+      <Text style={styles.notice}>MyPage</Text>
+      <FabricConsumer>
+        {value=>(
+        <Text>
+          후원 현황
+          옷감 정보 : {value.state.fabric} 
+          벌 수 : {value.state.count}
+        </Text>
+        )}
+      </FabricConsumer>
+    </View>
+  );
+};
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor: '#c8c8c8',
+  },
+
+  line1_Container: {
+    width:'100%',
+    height:'0.3%',
+    backgroundColor:'#c8c8c8',
+    justifyContent: 'center', 
+  },
+
+  line2_Container: {
+    width: '100%',
+    height: '1%',
+    backgroundColor: '#c8c8c8', 
+    justifyContent: 'center', 
+  },
+});
+*/

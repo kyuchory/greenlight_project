@@ -25,14 +25,14 @@ Font.loadAsync({
 export default function PickProduct() {
 
 
- const Section = () => {
+/*  const Section = () => {
   return (
     <View style = {styles.section}>
     </View>
   )
-} 
+}  */
 
-  const Box = () => {
+  /* const Box = () => {
     return(
       <View style = {styles.box}>
       <Image source= {require("../icon+image/homeImage.jpg")} 
@@ -41,9 +41,9 @@ export default function PickProduct() {
       <Text style = {styles.textSmall}> 가격이 어쩌구</Text>
       </View>
     )
-  }
+  } */
 
-  const FetchData = () => {
+ // const FetchData = () => {
     //받아온 데이터를 저장할 배열
     //let product = [];
 
@@ -55,7 +55,7 @@ export default function PickProduct() {
           docs.forEach((doc) => {
             console.log(doc.data())
 
-            const Box = () => {
+            //const Box = () => {
        
               return(
                 <View style = {styles.box}>
@@ -66,30 +66,31 @@ export default function PickProduct() {
                 </View>
 
               )
-            }
+           // }
             
             
           });
 
         });
-      
-        return (
-       <View>
+        /* return (
+       <View style = {styles.container}>
          <Box/>
        </View>
-        );
+        ); */
+  }
   
-        }
 
-   return (
+/*   return (
     <View style={styles.container}>
       <View style={styles.section}>
         <FetchData/>
+        <FetchData/>
+        
       </View>
     </View>
 
-  ); 
-  };
+  ); */
+//};
 
 const styles = StyleSheet.create({
   container: {
@@ -125,3 +126,5 @@ const styles = StyleSheet.create({
     marginLeft:10,
     },
 });
+
+//박스를 가로로 정렬하듯 UI 설정/ 상품사진, 브랜드명가격, 장바구니 표시와 찜 모두,,,

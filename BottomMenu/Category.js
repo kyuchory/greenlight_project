@@ -7,8 +7,8 @@ export default function Category() {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <View style={styles.empty}/>
-        <CategorySubContents/>
+        <View style={styles.empty} />
+        <CategorySubContents />
       </ScrollView>
     </View>
   );
@@ -22,8 +22,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  empty:{
-    paddingRight:"100%"
+  empty: {
+    paddingRight: "100%",
   },
-
 });
