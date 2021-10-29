@@ -64,7 +64,7 @@ function ABrandProduct() {
                   />
                   <TouchableOpacity
                     onPress={() =>
-                      value.actions.setPoint(value.state.point + 1)
+                      value.actions.setPoint(value.state.point + 10)
                     }
                   >
                     <Text style={styles.normal}>후원하기</Text>
