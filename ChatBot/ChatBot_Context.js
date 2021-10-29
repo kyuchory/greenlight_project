@@ -23,6 +23,6 @@ const FabricProvider = ({children})=>{
 
 const FabricConsumer = FabricContext.Consumer;
 
-export {FabricProvider, FabricConsumer};
+export {FabricProvider, FabricConsumer, FabricContext};
 
 export default FabricContext;

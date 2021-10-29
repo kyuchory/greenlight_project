@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
   },
   imgContainer:{
     flex:1,
-    borderColor:"red",
-    borderWidth:2,
+    // borderColor:"red",
+    // borderWidth:2,
     width:"100%",
     height:"100%",
     alignItems: 'center',
