@@ -62,13 +62,13 @@ Font.loadAsync({
       setMaterial(false);
       setDisplay1(true);
       setViewCondition1(true);
-      {<FabricProvider>
-        <FabricConsumer>
+      return(
+      <FabricConsumer>
           {({actions})=>(
             actions.setFabric("테스트")
           )}
-        </FabricConsumer>
-      </FabricProvider>}
+      </FabricConsumer>
+      )
     }
 
     const choiceSpecial = () =>{
@@ -81,13 +81,13 @@ Font.loadAsync({
       setSaid(true);
       setDisplay2(true);
       setViewCondition2(true);
-      {<FabricProvider>
-        <FabricConsumer>
+      return(
+      <FabricConsumer>
           {({actions})=>(
             actions.setCount(text)
           )}
-        </FabricConsumer>
-      </FabricProvider>}
+      </FabricConsumer>
+      )
     }
     const pickPictureYes = () =>{
       setDisplay3(true);
@@ -147,9 +147,6 @@ Font.loadAsync({
 
 
     return (
-      <FabricProvider>
-        <FabricConsumer>
-          {({actions})=>(
         <View style={styles.container}>
           <ScrollView
           ref={scrollViewRef}
@@ -425,9 +422,6 @@ Font.loadAsync({
               </View>
             </ScrollView>
         </View>
-        )}
-        </FabricConsumer>
-      </FabricProvider>
     );
 
   }

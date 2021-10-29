@@ -1,12 +1,12 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { FabricConsumer } from "../ChatBot/ChatBot_Context";
+import { FabricConsumer, FabricProvider } from "../ChatBot/ChatBot_Context";
 
 export default function MyPage() {
   return (
     <View style={styles.container}>
       <Text style={styles.notice}>MyPage</Text>
-      <FabricConsumer>
+        <FabricConsumer>
         {value=>(
         <Text>
           후원 현황
@@ -14,7 +14,7 @@ export default function MyPage() {
           벌 수 : {value.state.count}
         </Text>
         )}
-      </FabricConsumer>
+        </FabricConsumer>
     </View>
   );
 }

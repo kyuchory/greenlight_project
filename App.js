@@ -14,6 +14,7 @@ import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 
 import { PointProvider } from "./context/point";
+import { FabricProvider } from "./ChatBot/ChatBot_Context";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
   };
 
   return (
+    <FabricProvider>
     <PointProvider>
     <ThemeProvider theme={theme}>
     <NavigationContainer>
@@ -43,6 +45,7 @@ export default function App() {
     </NavigationContainer>
     </ThemeProvider>
     </PointProvider>
+    </FabricProvider>
   );
 }
 
