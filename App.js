@@ -43,6 +43,7 @@ export default function App() {
         <Stack.Screen name="BottomTab" component={BottomTab} point={point}/>
         <Stack.Screen name="ABrand" component={ABrand} />
         <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="ChatBot" component={ChatBot} />
         <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
 
       </Stack.Navigator>
