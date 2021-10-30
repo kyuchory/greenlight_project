@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react'
-import { StyleSheet, Text, View, ImageBackground, TextInput, Button, Image, Platform} from "react-native";
+import { StyleSheet, Text, View, ImageBackground, TextInput, Animated, Image, Platform} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from 'expo-image-picker'; //$ expo install expo-image-picker
@@ -62,13 +62,6 @@ Font.loadAsync({
       setMaterial(false);
       setDisplay1(true);
       setViewCondition1(true);
-      return(
-      <FabricConsumer>
-          {({actions})=>(
-            actions.setFabric("테스트")
-          )}
-      </FabricConsumer>
-      )
     }
 
     const choiceSpecial = () =>{
@@ -81,13 +74,13 @@ Font.loadAsync({
       setSaid(true);
       setDisplay2(true);
       setViewCondition2(true);
-      return(
-      <FabricConsumer>
+      {
+        <FabricConsumer>
           {({actions})=>(
-            actions.setCount(text)
+            actions.setCount(999)
           )}
-      </FabricConsumer>
-      )
+        </FabricConsumer>
+      }
     }
     const pickPictureYes = () =>{
       setDisplay3(true);
@@ -97,6 +90,19 @@ Font.loadAsync({
     const pickCalendarYes = () =>{
       setDisplay4(true);
       setViewCondition4(true);
+    }
+
+    const finish = () =>{
+      {
+        <FabricConsumer>
+          {({actions})=>(
+            actions.setCount(text),
+            actions.setFabric("ttt")
+          )}
+        </FabricConsumer>
+        // https://velog.io/@kwonh/React-Context-API-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-React.createContext
+      }
+
     }
 
 
@@ -147,6 +153,7 @@ Font.loadAsync({
 
 
     return (
+        
         <View style={styles.container}>
           <ScrollView
           ref={scrollViewRef}
@@ -172,12 +179,14 @@ Font.loadAsync({
               resizeMode="stretch"
               style={styles.chatImage}
               >
+                <View style={styles.iconView}>
             <TouchableOpacity onPress={handleReady}>
-                <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"10%", paddingLeft:"5%"}}>사용설명서</Text>
+                <Image source={require("../icon+image/userGuideIcon.png")} style={{width:100, height:30}}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleStart}>
-                <Text style={{paddingTop:"2%", paddingBottom:"4%", paddingRight:"0%", paddingLeft:"15%"}}>후원시작</Text>
+                <Image source={require("../icon+image/start.png")} style={{width:100, height:30}}/>
             </TouchableOpacity>
+            </View>
             </ImageBackground>
             </View>
 
@@ -205,12 +214,14 @@ Font.loadAsync({
                   resizeMode="stretch"
                   style={styles.chatImage}
                   >
+                    <View style={styles.iconView}>
                     <TouchableOpacity onPress={choiceFiber}>
-                      <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"5%"}}>폐섬유</Text>
+                    <Image source={require("../icon+image/fiberIcon.png")} style={{width:100, height:30}}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={choiceSpecial}>
-                      <Text style={{paddingTop:"2%", paddingBottom:"4%", paddingRight:"5%", paddingLeft:"11%"}}>특수소재</Text>
+                    <Image source={require("../icon+image/specialMaterialIcon.png")} style={{width:100, height:30}}/>
                     </TouchableOpacity>
+                    </View>
                   </ImageBackground>
                 </View>
 
@@ -234,9 +245,9 @@ Font.loadAsync({
                   style={styles.chatImage}
                   >
                     {material ? (
-                      <View pointerEvents={viewCondition2 ? 'none' : 'auto'}>
-                        <View style={{flexDirection:"row",justifyContent:"space-around", paddingTop:"10%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"15%"}}>
-                          <Text>특수소재</Text>
+                      <View pointerEvents={viewCondition2 ? 'none' : 'auto'} style={{alignItems:"center"}}>
+                        <View style={{flexDirection:"row", paddingTop:"10%", paddingBottom:"2%", paddingRight:"20%", paddingLeft:"5%"}}>
+                        <Image source={require("../icon+image/specialMaterialIcon.png")} style={{width:100, height:30}}/>
                           <View style={{ backgroundColor: "#F2F2F2"}}>
                           <TextInput
                           onSubmitEditing={() => console.log("onSubmitEditing")}
@@ -244,26 +255,26 @@ Font.loadAsync({
                           value={text}
                           onChange={onChangeText}/>
                           </View>
-                          <Text>벌</Text>
+                          <Text style={{marginLeft:5, marginTop:4}}>벌</Text>
                         </View>
                         <TouchableOpacity onPress={saidYes}>
-                          <Text style={{paddingTop:"2%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"30%"}}>확인</Text>
+                        <Image source={require("../icon+image/confirmIcon.png")} style={{width:40, height:20}}/>
                         </TouchableOpacity>
                       </View>
                       ):(
-                      <View pointerEvents={viewCondition2 ? 'none' : 'auto'}>
-                        <View style={{flexDirection:"row",justifyContent:"space-around", paddingTop:"10%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"15%"}}>
-                          <Text>폐섬유</Text>
+                      <View pointerEvents={viewCondition2 ? 'none' : 'auto'} style={{alignItems:"center"}}>
+                        <View style={{flexDirection:"row", paddingTop:"10%", paddingBottom:"2%", paddingRight:"20%", paddingLeft:"5%"}}>
+                        <Image source={require("../icon+image/fiberIcon.png")} style={{width:100, height:30}}/>
                           <View style={{ backgroundColor: "#F2F2F2"}}>
                           <TextInput 
                           placeholder="입력"
                           value={text}
                           onChange={onChangeText}/>
                           </View>
-                          <Text>벌</Text>
+                          <Text style={{marginLeft:5, marginTop:4}}>벌</Text>
                         </View>
                         <TouchableOpacity onPress={saidYes}>
-                          <Text style={{paddingTop:"2%", paddingBottom:"2%", paddingRight:"15%", paddingLeft:"30%"}}>확인</Text>
+                        <Image source={require("../icon+image/confirmIcon.png")} style={{width:40, height:20}}/>
                         </TouchableOpacity>
                       </View>
                       )}
@@ -295,13 +306,8 @@ Font.loadAsync({
                   </ImageBackground>
                 </View>
 
-                <View style={styles.chatUser} pointerEvents={viewCondition3 ? 'none' : 'auto'}>
-                  <Button
-                    title="사진 업로드"
-                    onPress={pickImage}/>
-                  <TouchableOpacity onPress={pickPictureYes}>
-                    <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"10%", paddingLeft:"5%"}}>확인</Text>
-                  </TouchableOpacity>
+
+                <View style={styles.chatUser}>
                 <ImageBackground
                   source={require("../icon+image/chatImageRight.png")}
                   resizeMode="stretch"
@@ -309,6 +315,25 @@ Font.loadAsync({
                   >
                   {image && <Image source={{ uri: image }} style={styles.imageInChat} />}          
                   </ImageBackground>
+                  </View>
+                  
+                <View style={styles.chatUser} pointerEvents={viewCondition3 ? 'none' : 'auto'}>
+                <ImageBackground
+                  source={require("../icon+image/chatImageRight.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                    <View style={{alignItems:"center", margin:"5%", paddingRight:"3%"}}>
+                  <TouchableOpacity onPress={pickImage}>
+                    <Image source={require("../icon+image/picUploadIcon.png")} style={{width:100, height:40}}/>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={pickPictureYes}>
+                  <Image source={require("../icon+image/confirmIcon.png")} style={{width:40, height:20}}/>
+                  </TouchableOpacity>
+                  </View>
+                  </ImageBackground>
+
+
                 </View>
               </View>) : (<View></View>)}
 
@@ -327,7 +352,7 @@ Font.loadAsync({
                     </Text>
                   </ImageBackground>
                 </View>
-                
+
                 <View style={styles.chatManager}>
                   <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
                   <ImageBackground
@@ -342,6 +367,8 @@ Font.loadAsync({
                   </ImageBackground>
                 </View>
 
+
+
                 <View style={styles.chatUser} pointerEvents={viewCondition4 ? 'none' : 'auto'}>
                   <ImageBackground
                   source={require("../icon+image/chatImageRight.png")}
@@ -354,7 +381,7 @@ Font.loadAsync({
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={pickCalendarYes}>
-                      <Text style={{paddingTop:"5%", paddingBottom:"2%", paddingRight:"10%", paddingLeft:"5%"}}>확인</Text>
+                    <Image source={require("../icon+image/confirmIcon.png")} style={{width:40, height:20, marginTop:5,marginBottom:5,marginLeft:32}}/>
                     </TouchableOpacity>
                   </ImageBackground>
                   {show && (
@@ -388,19 +415,25 @@ Font.loadAsync({
                     </Text>
                     </ImageBackground>
                   </View>
-
+                  <FabricConsumer>
+                    {({actions})=>(
                   <View style={styles.chatUser}>
                   <ImageBackground
                   source={require("../icon+image/chatImageRight.png")}
                   resizeMode="stretch"
                   style={styles.chatImage}
                   >
-                  <TouchableOpacity>
-                    <Text style={{paddingTop:"5%", paddingBottom:"5%", paddingRight:"10%", paddingLeft:"5%"}}>후원 종료</Text>
+                  <TouchableOpacity
+                  onPress={() =>
+                    actions.setFabric("테스트11")}>
+                    <Image source={require("../icon+image/finishIcon.png")} style={{width:100, height:30, marginTop:"5%",marginLeft:"5%",marginRight:"5%"}}/>
                   </TouchableOpacity>
                   </ImageBackground>                
                 </View>
+                  )}
+                </FabricConsumer>
               </View>
+              
               ):(
               <View></View>
               )}
@@ -449,8 +482,16 @@ Font.loadAsync({
       alignItems:"flex-end",
       marginTop:"10%"
     },
+    iconView:{
+      flexDirection:"row",
+      marginTop:"5%",
+      marginBottom:"5%",
+      marginLeft:"4%",
+      marginRight:"11%"
+    },
     chatImage:{
       justifyContent:"flex-end",
+      
     },
     avatarImage:{
       width:30,

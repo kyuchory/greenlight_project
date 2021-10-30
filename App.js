@@ -9,12 +9,17 @@ import BottomTab from "./BottomTab/BottomTab";
 import ABrand from "./Brands/ABrand";
 import Signup from "./Login/Signup";
 import ChatBot from "./ChatBot/ChatBot";
+import CategoryOuter from "./CategoryComponents/CategoryOuter";
 
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 
 import { PointProvider } from "./context/point";
 import { FabricProvider } from "./ChatBot/ChatBot_Context";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9fadeb552ef655ef07ed3f633ad8ecf32a6c3952
 
 const Stack = createStackNavigator();
 
@@ -41,6 +46,8 @@ export default function App() {
         <Stack.Screen name="ABrand" component={ABrand} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="ChatBot" component={ChatBot} />
+        <Stack.Screen name="CategoryOuter" component={CategoryOuter}/>
+        
       </Stack.Navigator>
     </NavigationContainer>
     </ThemeProvider>
