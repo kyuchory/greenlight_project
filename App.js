@@ -8,6 +8,7 @@ import Login from "./Login/Login";
 import BottomTab from "./BottomTab/BottomTab";
 import ABrand from "./Brands/ABrand";
 import Signup from "./Login/Signup";
+
 import ChatBot from "./ChatBot/ChatBot";
 import CategoryOuter from "./CategoryComponents/CategoryOuter";
 
@@ -46,8 +47,8 @@ export default function App() {
         <Stack.Screen name="ABrand" component={ABrand} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="ChatBot" component={ChatBot} />
-        <Stack.Screen name="CategoryOuter" component={CategoryOuter}/>
-        
+        <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
+
       </Stack.Navigator>
     </NavigationContainer>
     </ThemeProvider>
