@@ -74,6 +74,9 @@ const Signup = ({ navigation }) => {
   const _handleSignupButtonPress = async() => {
     try{
       const user = await signup({email, password});
+      firestore.collection(user.email).add({
+        마일리지: 0,
+      });
       console.log(user);
       Alert.alert('회원가입 성공', user.email);
       navigation.reset({routes: [{name: "Login"}]})//회원가입 마치면 자동으로 로그인페이지로 이동

@@ -49,7 +49,6 @@ const Login = ({ navigation }) => {
 
   const [disabled, setDisabled] = useState(true);
 
-  const userEmail = useContext(UserContext);
 
   useEffect(() => {
     setDisabled(!(email && password && !errorMessage));
@@ -76,7 +75,6 @@ const Login = ({ navigation }) => {
       const user = await login({ email, password });
       Alert.alert("로그인 성공", user.email);
       dispatch(user);
-      console.log(userEmail.user.email);
       navigation.reset({
         routes: [{ name: "BottomTab", params: { email, password } }],
       }); //stack 초기화->뒤로가기 눌러도 로그인페이지로 다시 이동하지 않게 함
@@ -84,9 +82,7 @@ const Login = ({ navigation }) => {
       Alert.alert("로그인 살패", e.message);
     } finally {
       // spinner.stop()
-      firestore.collection(userEmail.user.email).add({
-        마일리지: 0,
-      });
+      
     }
   };
 
