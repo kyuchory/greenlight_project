@@ -65,22 +65,19 @@ export default function ChatBot() {
   const email = userEmail.user.email;
   console.log(email);
 
-  const getMileage= async()=>{
-    const prevMileage = await firestore.collection(email).get();
-    setFbObject(prevMileage.forEach((document)=>document.data()['마일리지']));
-  }
-
-  console.log(getMileage());
-
   const handleMileage = async() => {
     const prevMileage = await firestore.collection(email).get();
-    setMileage(prevMileage.forEach((document)=>document.data()['마일리지']));
+    setMileage(prevMileage.forEach((document)=>console.log(document.data()['마일리지'])));
+
+    console.log("마일리지"+mileage);
     
     const plusMileage = mileage + 5000;
 
+    console.log("플러스마일리지"+plusMileage);
+
     setMileage(plusMileage);
     
-    firestore.collection(email).add({
+    await firestore.collection(email).add({
       ...firestore.collection(email),
       마일리지: mileage,
     });
