@@ -63,9 +63,10 @@ export default function ChatBot() {
 
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
-  
-  const handleMileage = () => {
-    const prevMileage = firestore.collection(email).get(mileage).then();
+
+  const handleMileage =  async () => {
+    const prevMileage = await firestore.collection(email).get();
+    
     console.log(prevMileage);
     const plusMileage = prevMileage + 5000;
     setMileage(plusMileage);
