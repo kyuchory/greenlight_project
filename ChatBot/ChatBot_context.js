@@ -1,7 +1,7 @@
 import React, {createContext, useState} from "react";
 
 const FabricContext = createContext({
-    state: { fabric: "", count:0},
+    state: { fabric: "후원 정보 없음", count:0},
     actions: {
         setFabric: ()=>{},
         setCount: ()=>{}
@@ -9,7 +9,7 @@ const FabricContext = createContext({
 });
 
 const FabricProvider = ({children})=>{
-    const [fabric, setFabric] = useState("");
+    const [fabric, setFabric] = useState("후원 정보 없음");
     const [count, setCount] = useState(0);
 
     const value = {
@@ -23,6 +23,6 @@ const FabricProvider = ({children})=>{
 
 const FabricConsumer = FabricContext.Consumer;
 
-export {FabricProvider, FabricConsumer};
+export {FabricProvider, FabricConsumer, FabricContext};
 
 export default FabricContext;

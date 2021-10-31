@@ -91,8 +91,6 @@
 //   );
 // }
 
-
-
 // const ABrandReview=()=> {
 //   return (
 //     <View style={styles.container}>
@@ -101,12 +99,6 @@
 //     </View>
 //   );
 // }
-
-
-
-
-
-
 
 // //홈,브랜드,베스트,친환경,이벤트의 메뉴와 SubContents들
 // //https://github.com/satya164/react-native-tab-view
@@ -200,16 +192,11 @@
 //     alignItems: "center",
 //   },
 
-
 //   reviewBoxContainer:{
 //     flexDirection:'row',
 //     borderBottomColor:'#848484',
 //     borderBottomWidth:0.5,
 //     padding:20,
 //   },
-
-
-
-
 
 // });

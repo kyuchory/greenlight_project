@@ -40,7 +40,7 @@ export default function Home() {
           ImageComponentStyle={{ width: "94%", marginTop: 20 }} //이미지슬라이더 전체적인 위치와 너비 조정
           imageLoadingColor="#2196F3" //이건뭐지
         />
-        <SubContents/>
+        <SubContents />
       </ScrollView>
     </View>
   );

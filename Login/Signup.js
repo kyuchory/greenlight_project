@@ -97,6 +97,7 @@ const Signup = ({ navigation }) => {
             setName(name.trim());
             emailRef.current.focus();
           }}
+          
           onBlur={() => setName(name.trim())}
           placeholder="이름"
           returnKeyType="next"
