@@ -65,25 +65,26 @@ export default function ChatBot() {
   const email = userEmail.user.email;
   console.log(email);
 
-  const getMileage= async()=>{
-    const prevMileage = await firestore.collection(email).get();
-    setFbObject(prevMileage.forEach((document)=>document.data()['마일리지']));
-  }
+  // const getMileage= async()=>{
+  //   const prevMileage = await firestore.collection(email).get();
+  //   setFbObject(prevMileage.forEach((document)=>document.data()['마일리지']));
+  // }
 
-  console.log(getMileage());
+  // console.log(getMileage());
 
   const handleMileage = async() => {
     const prevMileage = await firestore.collection(email).get();
     setMileage(prevMileage.forEach((document)=>document.data()['마일리지']));
     
     const plusMileage = mileage + 5000;
-
+ 
     setMileage(plusMileage);
-    
-    firestore.collection(email).add({
-      ...firestore.collection(email),
-      마일리지: mileage,
-    });
+
+
+    firestore.collection('User').doc(email).set({'마일리지':plusMileage});
+    // firestore.collection(email).add({
+    //   ...firestore.collection(email).doc('test2').set({'마일리지':plusMileage})
+    // });
   };
 
   const onChangeText = (event) => {
