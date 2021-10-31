@@ -1,5 +1,5 @@
-/* import firebase from 'firebase/app';
-import config from '../firebase.json';
+import firebase from 'firebase/app';
+import firebaseConfig from '../firebase.json';
 import "firebase/auth";
 import "firebase/firestore";
 
@@ -19,11 +19,13 @@ export const signup = async ({ email, password }) => {
 };
 
 const firestore = firebase.firestore();
-export {firestore}; */
+export {firestore};
 
-import firebase from 'firebase/app';
+
+/* import firebase from 'firebase/app';
 import config from '../firebase.json';
 import "firebase/auth";
+import "firebase/firestore";
 
 
 const app = firebase.initializeApp(config);
@@ -40,3 +42,4 @@ export const signup = async ({ email, password }) => {
     const {user} = await Auth.createUserWithEmailAndPassword(email, password);
     return user;
 };
+ */

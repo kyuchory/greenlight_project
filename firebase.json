@@ -1,11 +1,11 @@
 
-  {
-    "apiKey": "AIzaSyA5wo6JKCKDRFeDT3L0ALAy6X10XrBxkH8",
-    "authDomain": "green-light-fc503.firebaseapp.com",
-    "databaseURL": "https://green-light-fc503-default-rtdb.firebaseio.com",
-    "projectId": "green-light-fc503",
-    "storageBucket": "green-light-fc503.appspot.com",
-    "messagingSenderId": "818065639945",
-    "appId": "1:818065639945:web:dba335cd0d254653bd46d8",
-    "measurementId": "G-CE1Y82ZQKX"
-  }
+{
+  "apiKey": "AIzaSyCD6gJaRLAu9MYZiBUcdtM3H5CGH-uHjdA",
+  "authDomain": "green-light-1030.firebaseapp.com",
+  "projectId": "green-light-1030",
+  "storageBucket": "green-light-1030.appspot.com",
+  "messagingSenderId": "897652177743",
+  "appId": "1:897652177743:web:7c63b149555477152d233a",
+  "measurementId": "G-SJWG7ZRZK7"
+}
+

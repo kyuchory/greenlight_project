@@ -2,8 +2,9 @@ import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import { ScrollView } from "react-native-gesture-handler";
-
 import SubContents from "../HomeComponents/SubContents";
+
+
 
 export default function Home() {
   return (
@@ -41,6 +42,7 @@ export default function Home() {
           imageLoadingColor="#2196F3" //이건뭐지
         />
         <SubContents />
+        <Text>hi</Text>
       </ScrollView>
     </View>
   );
