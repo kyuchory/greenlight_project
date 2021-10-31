@@ -63,15 +63,16 @@ export default function ChatBot() {
 
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
+  console.log(email);
 
   const handleMileage = () => {
-    const prevMileage = firestore.collection(email).get(mileage);
-    const plusMileage = prevMileage + 5000;
-    setMileage(plusMileage);
-    firestore.collection(email).add({
-      ...firestore.collection(email),
-      마일리지: plusMileage,
-    });
+    const prevMileage = firestore.collection(email).get();
+    console.log(prevMileage);
+    //const plusMileage = prevMileage + 5000;
+   // setMileage(plusMileage);
+   // firestore.collection(email).add({
+   //   마일리지: plusMileage,
+   // });
 
     console.log(firestore.collection(email).get(mileage));
   };
