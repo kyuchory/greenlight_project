@@ -13,6 +13,8 @@ import Pick from "../BottomMenu/Pick";
 import LogoTitle from "../Header/LogoTitle";
 import LogoTitle2 from "../Header/LogoTitle2";
 
+const visible = false;
+
 const BottomTabNavigator = createBottomTabNavigator();
 
 const Icon1 = () => {
@@ -23,7 +25,10 @@ const Icon1 = () => {
 
 const Icon1B = () => {
   return (
-    <Image source={require("../icon+image/homeBlack.png")} style={styles.icon} />
+    <Image
+      source={require("../icon+image/homeBlack.png")}
+      style={styles.icon}
+    />
   );
 };
 
@@ -35,7 +40,10 @@ const Icon2 = () => {
 
 const Icon2B = () => {
   return (
-    <Image source={require("../icon+image/categoryBlack.png")} style={styles.icon} />
+    <Image
+      source={require("../icon+image/categoryBlack.png")}
+      style={styles.icon}
+    />
   );
 };
 
@@ -65,7 +73,10 @@ const Icon4 = () => {
 
 const Icon4B = () => {
   return (
-    <Image source={require("../icon+image/heartBlack.png")} style={styles.icon} />
+    <Image
+      source={require("../icon+image/heartBlack.png")}
+      style={styles.icon}
+    />
   );
 };
 
@@ -77,10 +88,12 @@ const Icon5 = () => {
 
 const Icon5B = () => {
   return (
-    <Image source={require("../icon+image/userBlack.png")} style={styles.icon} />
+    <Image
+      source={require("../icon+image/userBlack.png")}
+      style={styles.icon}
+    />
   );
 };
-
 
 export default function BottomTab({ point, handlePoint }) {
   return (
@@ -90,9 +103,7 @@ export default function BottomTab({ point, handlePoint }) {
         component={Home}
         options={{
           headerTitle: (props) => <LogoTitle {...props} title={"LifeUP"} />,
-          tabBarIcon: ({focused})=>(
-            focused ? (<Icon1B/>):(<Icon1/>)
-          ),
+          tabBarIcon: ({ focused }) => (focused ? <Icon1B /> : <Icon1 />),
         }}
       />
       <BottomTabNavigator.Screen
@@ -100,9 +111,7 @@ export default function BottomTab({ point, handlePoint }) {
         component={Category}
         options={{
           headerTitle: (props) => <LogoTitle2 {...props} title={"카테고리"} />,
-          tabBarIcon: ({focused})=>(
-            focused ? (<Icon2B/>):(<Icon2/>)
-          ),
+          tabBarIcon: ({ focused }) => (focused ? <Icon2B /> : <Icon2 />),
         }}
       />
       <BottomTabNavigator.Screen
@@ -111,9 +120,7 @@ export default function BottomTab({ point, handlePoint }) {
         point={point}
         options={{
           headerTitle: (props) => <LogoTitle {...props} title={"후원하기"} />,
-          tabBarIcon: ({focused})=>(
-            focused ? (<Icon3C/>):(<Icon3/>)
-          ),
+          tabBarIcon: ({ focused }) => (focused ? <Icon3C /> : <Icon3 />),
         }}
       />
       <BottomTabNavigator.Screen
@@ -121,9 +128,7 @@ export default function BottomTab({ point, handlePoint }) {
         component={Pick}
         options={{
           headerTitle: (props) => <LogoTitle2 {...props} title={"좋아요"} />,
-          tabBarIcon: ({focused})=>(
-            focused ? (<Icon4B/>):(<Icon4/>)
-          ),
+          tabBarIcon: ({ focused }) => (focused ? <Icon4B /> : <Icon4 />),
         }}
       />
       <BottomTabNavigator.Screen
@@ -133,9 +138,7 @@ export default function BottomTab({ point, handlePoint }) {
           headerTitle: (props) => (
             <LogoTitle2 {...props} title={"마이페이지"} />
           ),
-          tabBarIcon: ({focused})=>(
-            focused ? (<Icon5B/>):(<Icon5/>)
-          ),
+          tabBarIcon: ({ focused }) => (focused ? <Icon5B /> : <Icon5 />),
         }}
       />
     </BottomTabNavigator.Navigator>

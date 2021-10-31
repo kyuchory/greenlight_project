@@ -44,6 +44,8 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const passwordRef = useRef();
 
+  const [loginObj, setLoginObj] = useState(""); /// 어차피 데탑에있는거로해야함 ㅅㅂ ;; 어이없네
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const [disabled, setDisabled] = useState(true);
@@ -71,6 +73,7 @@ const Login = ({ navigation }) => {
     try {
       // spinner.start();
       const user = await login({ email, password });
+      setLoginObj(email);
       Alert.alert('로그인 성공', user.email);
       dispatch(user);
       navigation.reset({routes: [{name: "BottomTab", params: { email, password }}]})//stack 초기화->뒤로가기 눌러도 로그인페이지로 다시 이동하지 않게 함
@@ -80,6 +83,7 @@ const Login = ({ navigation }) => {
     } 
     finally {
       // spinner.stop()
+      
     }
   };
 

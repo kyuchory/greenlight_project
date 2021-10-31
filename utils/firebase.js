@@ -3,6 +3,8 @@ import config from '../firebase.json';
 import "firebase/auth";
 
 
+
+
 const app = firebase.initializeApp(config);
 
 const Auth = app.auth();
