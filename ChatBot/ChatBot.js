@@ -59,20 +59,28 @@ export default function ChatBot() {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
-  const [mileage, setMileage] = useState(0);
+  const [fbObject, setFbObject] = useState({});
 
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
   console.log(email);
 
+  const getMileage= async()=>{
+    const prevMileage = await firestore.collection(email).get();
+    prevMileage.forEach((document)=>console.log(document.data()['마일리지']));
+  }
+
+  getMileage()
+
   const handleMileage = () => {
-    const prevMileage = firestore.collection(email).get();
+    const prevMileage = firestore.collection(email).get(mileage).then();
     console.log(prevMileage);
-    //const plusMileage = prevMileage + 5000;
-   // setMileage(plusMileage);
-   // firestore.collection(email).add({
-   //   마일리지: plusMileage,
-   // });
+    const plusMileage = prevMileage + 5000;
+    setMileage(plusMileage);
+    firestore.collection(email).add({
+      ...firestore.collection(email),
+      마일리지: plusMileage,
+    });
 
     console.log(firestore.collection(email).get(mileage));
   };
@@ -111,6 +119,7 @@ export default function ChatBot() {
     {
       <FabricConsumer>{({ actions }) => actions.setCount(999)}</FabricConsumer>;
     }
+    
   };
   const pickPictureYes = () => {
     setDisplay3(true);
@@ -209,7 +218,7 @@ export default function ChatBot() {
               </Text>
             </ImageBackground>
           </View>
-
+          
           <View
             style={styles.chatUser}
             pointerEvents={viewCondition0 ? "none" : "auto"}
