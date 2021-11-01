@@ -1,4 +1,4 @@
-import React, { useState, useContext,} from 'react'
+import React, { useState, useContext, useEffect,} from 'react'
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Input, Button } from '../Components'
 import { images } from '../utils/images';
@@ -21,22 +21,26 @@ Font.loadAsync({
 
 
 export default function Mypage() {
+
   const[mileage, setMileage] = useState(0);
 
-  const handleMileage = async() => {
-    const userEmail = useContext(UserContext);
-    const email = userEmail.user.email;
-    console.log(email);
-   
-    const document = await firestore.collection('User').doc(email).get();
-    // setTimeout(() => {},2000);
-    const tempmileage = await document.get('mileage'); //데이터베이스에서 가져온 마일리지
+  const userEmail = useContext(UserContext);
+  const email = userEmail.user.email;
 
+  const handleMileage = async()=>{
+    const document = await firestore.collection("User").doc(email).get();
+    const tempmileage = await document.get("mileage");
     setMileage(tempmileage);
+  }
+  setInterval(()=>{
+    try{
+      handleMileage();
+    }catch{
+      console.log("error");
+    }
+  },1000);
 
-  };
-  handleMileage();
-
+  
 
   
   //얇은 섹션 구분선

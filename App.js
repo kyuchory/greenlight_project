@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -11,6 +11,8 @@ import Signup from "./Login/Signup";
 import ChatBot from "./ChatBot/ChatBot";
 import CategoryOuter from "./CategoryComponents/CategoryOuter";
 import UserGuide from "./ChatBot/UserGuide";
+import OuterPage from "./CategoryComponents/OuterPage";
+
 
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
@@ -21,15 +23,18 @@ import { UserProvider } from "./contexts";
 
 import { LogBox } from 'react-native';
 
-
 LogBox.ignoreLogs(['Setting a timer']);
+
+
 const Stack = createStackNavigator();
+
 
 export default function App() {
   const [point, setPoint] = useState(1);
   const handlePoint = () => {
     setPoint(point + 5);
   };
+
 
   return (
     <UserProvider>
@@ -50,6 +55,8 @@ export default function App() {
         <Stack.Screen name="ChatBot" component={ChatBot} />
         <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
         <Stack.Screen name="UserGuide" component= {UserGuide}/>
+        <Stack.Screen name="OuterPage" component={OuterPage}/>
+
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -68,3 +75,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+

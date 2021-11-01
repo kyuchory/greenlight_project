@@ -13,6 +13,8 @@ import Pick from "../BottomMenu/Pick";
 import LogoTitle from "../Header/LogoTitle";
 import LogoTitle2 from "../Header/LogoTitle2";
 
+const visible = false;
+
 const BottomTabNavigator = createBottomTabNavigator();
 
 const Icon1 = () => {
@@ -92,7 +94,6 @@ const Icon5B = () => {
     />
   );
 };
-
 
 export default function BottomTab({ point, handlePoint }) {
   return (
