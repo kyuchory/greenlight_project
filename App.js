@@ -8,9 +8,9 @@ import Login from "./Login/Login";
 import BottomTab from "./BottomTab/BottomTab";
 import ABrand from "./Brands/ABrand";
 import Signup from "./Login/Signup";
-
 import ChatBot from "./ChatBot/ChatBot";
 import CategoryOuter from "./CategoryComponents/CategoryOuter";
+import UserGuide from "./ChatBot/UserGuide";
 
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
@@ -19,6 +19,10 @@ import { PointProvider } from "./context/point";
 import { FabricProvider } from "./ChatBot/ChatBot_Context";
 import { UserProvider } from "./contexts";
 
+import { LogBox } from 'react-native';
+
+
+LogBox.ignoreLogs(['Setting a timer']);
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -45,6 +49,7 @@ export default function App() {
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="ChatBot" component={ChatBot} />
         <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
+        <Stack.Screen name="UserGuide" component= {UserGuide}/>
 
       </Stack.Navigator>
     </NavigationContainer>
