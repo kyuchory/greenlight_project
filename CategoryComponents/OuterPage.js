@@ -17,6 +17,8 @@ Font.loadAsync({
     'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
     HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
     'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
+    BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
+    'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
   });
 
 
@@ -26,21 +28,36 @@ const Main = () => {
     return(
       <View style={styles.main}>
               
-        <View style = {styles.box1}>
-              <Image source= {require("../icon+image/outer_brownjacket1.png")} 
-              style={styles.image} />
-        </View>
+      <View style = {styles.box1}>
+            <Image source= {require("../icon+image/outer_brownjacket1.png")} 
+            style={styles.image} />
+      </View>
+      <View style={styles.box3}>
+        <Text style = {styles.textSmall}>
+          프로이탁
+        </Text>
+        <Text style = {styles.textBold}>
+          Brown Jacket
+        </Text>
+        <Text style = {styles.textSmall}>
+          45,000원
+        </Text>
+      </View>
+      <View style = {styles.box2}>
+          <View style = {styles.option}>
+          <Text style = {styles.textBold}>옵션선택칸</Text> 
+          </View>
 
-        <View style = {styles.box2}>
-            <View style = {styles.option}>
-            <Text>옵션선택칸</Text> 
-            </View>
-            <View style = {styles.payment}>
-            <Image source ={require("../icon+image/purchase_button.png")}
-            style={styles.purchase} />
-            </View>
-        </View>
-        
+          <View style = {styles.payment}>
+          <Image source ={require("../icon+image/purchase_button.png")}
+          style={styles.purchase} />
+          </View>
+
+          <View style = {styles.share}>
+          <Image source ={require("../icon+image/share.png")}
+          style={styles.share} /> 
+          </View>
+      </View>
 
 
       </View>
@@ -59,11 +76,18 @@ const Page = () => {
   
 }
 
+const Line1 = () => {
+  return(
+    <View style = {styles.line1}>
+    </View>
+  )
+}
  return (
 
     <View style={styles.container}>
         <ScrollView>
           <Main/>
+          <Line1/>
           <Page/>
         </ScrollView>
           
@@ -81,31 +105,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection:'column',
     width:'100%',
-    // height:'100%',
 
   },
 
   main:{
     width:'100%',
-    // height:'100%',
     backgroundColor:'white',
     marginTop:'10%',
     alignItems:"center",
-    borderColor:"red",
-    borderWidth:1
   },
 
   page: {
-    marginTop: '30%',
-    width:'100%',
-    // height: '750%',
+    marginLeft:'3%',
+    width:'95%',
+    justifyContent: 'center',
     alignItems:"center",
-    
+    marginTop: '3%',
   },
 
   box1: {
     width:'90%',
-    // height:'100%',
     flexDirection: 'column',
     backgroundColor: '#b6b6b6',
     marginTop: '10%',
@@ -114,41 +133,65 @@ const styles = StyleSheet.create({
 
   box2: {
     width:'90%',
-    // height:'100%',
+ //   height:'10%',
     flexDirection: 'row',
-    backgroundColor: 'yellow',
-    marginTop: '5%',
+    backgroundColor: 'white',
+    marginBottom: '3%',
     //alignItems: "center",
   },
 
+  box3: {
+    width:'100%',
+    flexDirection: 'column',
+   backgroundColor: 'white',
+    marginTop: '5%',
+    marginBottom: '3%',
+  },
+  line1:{
+    width:'100%',
+    height:'0.2%',
+    backgroundColor: '#b6b6b6',
+  },
   option:{
     width:'30%',
-    // height:'100%',
+   // height:'100%',
     backgroundColor: 'white',
     marginLeft: "10%",
   },
   
   payment: {
     width:'30%',
-    // height:'100%',
-    // backgroundColor: 'white',
-    // marginLeft: "20%",
+  //  height:'100%',
+    backgroundColor: 'white',
+    marginLeft: "10%",
+    marginRight: "10%",
+  },
+  share:{
+    marginLeft: "10%",
+    width: '10%',
+
   },
   
   image: {
     width: '100%',
   },
   page_img:{
-    width: '90%',
-    // height: '90%', 
+    width: '100%',
   },
   purchase: {
-    marginTop:500,
-
+    width: '100%',
+  },
+  share:{
+    width:'25%',
   },
   textSmall:{
-    fontSize:15,
+    fontSize:16,
     fontFamily: "Vitro_pride", 
-    marginLeft:'10%',
+    marginLeft:'5%',
     },
+  textBold:{
+    fontSize:18,
+    fontFamily: "BinggraeMelonaBold",
+    marginLeft:'5%',
+  }
 });
