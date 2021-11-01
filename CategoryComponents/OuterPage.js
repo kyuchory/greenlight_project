@@ -9,6 +9,7 @@ import { render } from 'react-dom';
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 
+
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
     'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
@@ -82,17 +83,17 @@ const Line1 = () => {
   )
 }
  return (
-    <View style={styles.container}>
-          <ScrollView>
 
+    <View style={styles.container}>
+        <ScrollView>
           <Main/>
           <Line1/>
           <Page/>
+        </ScrollView>
+          
 
-          </ScrollView>
+          
     </View>
-
-    
 
   ); 
 };
@@ -108,8 +109,6 @@ const styles = StyleSheet.create({
   },
 
   main:{
-    flexDirection: 'column',
-    //alignItems: 'flex-start',
     width:'100%',
     backgroundColor:'white',
     marginTop:'10%',
@@ -129,6 +128,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#b6b6b6',
     marginTop: '10%',
+    
   },
 
   box2: {

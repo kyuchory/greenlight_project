@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useContext,} from "react";
+import React, {useState, useEffect, useRef, useContext} from "react";
 import { StyleSheet,  Text,  View,  ImageBackground,  TextInput,  Animated,  Image,  Platform,} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
@@ -11,6 +11,7 @@ import FabricContext, {
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import { useNavigation } from "@react-navigation/native";
+import {Slider} from "./UserGuide";
 
 
 import * as Font from "expo-font";
@@ -171,12 +172,6 @@ export default function ChatBot() {
     navigation.goBack();
   }
 
-  //모달
-  const [isModalVisible, setModalVisible] = useState(false);
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
 
 
   return (
@@ -652,8 +647,8 @@ export default function ChatBot() {
                   )}
                 </View>
               ) : (
-                <View>
-                 <Text>사용설명서 modal</Text>
+                <View style={{height:550}}>
+                 <Slider/>
                 </View>
               )}
             </View>

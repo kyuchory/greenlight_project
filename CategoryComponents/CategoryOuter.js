@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     marginTop:'10%',
     justifyContent: 'space-around',
+
   },
 
   box: {

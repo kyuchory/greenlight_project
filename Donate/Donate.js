@@ -16,11 +16,12 @@ Font.loadAsync({
   });
 
 
-export default function Anything({ navigation }) {
+
+export default function Donate({ navigation }) {
 
   return (
       <View style={styles.container}>
-        <Text style={styles.ableBrand}>후원 가능 브랜드</Text>
+        <Text style={styles.ableBrand}>기부 브랜드</Text>
 
         <View style={styles.brandList}>
 
@@ -30,7 +31,7 @@ export default function Anything({ navigation }) {
             onPress={() => navigation.navigate("ABrand")}>
             <TouchableHighlight style={styles.circle}/>
             <View style={styles.nameAndBar}>
-              <Text style={styles.brandName}>GREENLIGHT</Text>
+              <Text style={styles.brandName}>'라이프업 숲' 조성 캠페인</Text>
               <PointConsumer>
                 {(value) => (
                   <View style={styles.progressBar}>
@@ -39,7 +40,7 @@ export default function Anything({ navigation }) {
                   </View>
                 )}
               </PointConsumer>
-              <Text style={{marginLeft:"1%"}}>폐섬유, 특수소재</Text>
+              <Text style={{marginLeft:"1%"}}>'라이프업'에서 주관하는 나무심기 운동,후원자 이름 새긴 비석 건립 계획</Text>
             </View>
           </TouchableOpacity>
 
@@ -49,7 +50,7 @@ export default function Anything({ navigation }) {
             onPress={() => navigation.navigate("ABrand")}>
             <TouchableHighlight style={styles.circle}/>
             <View style={styles.nameAndBar}>
-              <Text style={styles.brandName}>FRIEDTAG</Text>
+              <Text style={styles.brandName}>바다 정화 운동</Text>
               <PointConsumer>
                 {(value) => (
                   <View style={styles.progressBar}>
@@ -58,19 +59,13 @@ export default function Anything({ navigation }) {
                   </View>
                 )}
               </PointConsumer>
-              <Text style={{marginLeft:"1%"}}>폐섬유</Text>
+              <Text style={{marginLeft:"1%"}}>보류</Text>
             </View>
           </TouchableOpacity>
 
 
         </View>
-        <View style={styles.iconWrapper}>
-          <TouchableOpacity onPress={() => navigation.navigate("UserGuide")}>
-            <Image
-            source={require("../icon+image/userGuideIcon.png")}
-            style={{width: 110,height: 35,}}/>
-          </TouchableOpacity>
-        </View>
+
       </View>
   );
 }
@@ -133,10 +128,6 @@ const styles = StyleSheet.create({
     alignItems:"center",
   
   },
-  iconWrapper:{
-    height:"50%",
-    justifyContent:"flex-end",
-    alignItems:"center"
-  }
+
 
 });
