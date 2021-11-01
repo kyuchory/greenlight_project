@@ -1,22 +1,23 @@
 // import * as React from "react";
 // import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
-import React, { useState, useRef, useEffect, useContext } from 'react';
-import {ProgressContext, UserContext} from '../contexts';
-import styled from 'styled-components/native';
-import { Input, Image, Button} from '../Components';
-import { images } from '../utils/images';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { validateEmail, removeWhitespace } from '../utils/common';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { ProgressContext, UserContext } from "../contexts";
+import styled from "styled-components/native";
+import { Input, Image, Button } from "../Components";
+import { images } from "../utils/images";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { validateEmail, removeWhitespace } from "../utils/common";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 //파이어베이스 로그인
-import { Alert } from 'react-native';
-import { login } from '../utils/firebase';
+import { Alert } from "react-native";
+import { login } from "../utils/firebase";
+import { firestore } from "../utils/firebase";
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${({theme}) => theme.background};
+  background-color: ${({ theme }) => theme.background};
   padding: 0 20px;
   padding-top: ${({ insets: { top } }) => top}px;
   padding-bottom: ${({ insets: { bottom } }) => bottom}px;
@@ -40,50 +41,52 @@ const Login = ({ navigation }) => {
 
   const insets = useSafeAreaInsets();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const passwordRef = useRef();
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [disabled, setDisabled] = useState(true);
 
+
   useEffect(() => {
-    setDisabled(!(email && password && !errorMessage));}, [email, password, errorMessage]);
+    setDisabled(!(email && password && !errorMessage));
+  }, [email, password, errorMessage]);
 
   //올바른 이메일 형식인지 확인
-  const _handleEmailChange = email => {
+  const _handleEmailChange = (email) => {
     const changedEmail = removeWhitespace(email);
     setEmail(changedEmail);
     setErrorMessage(
-      validateEmail(changedEmail) ? '' : '이메일을 다시 확인해주세요'
+      validateEmail(changedEmail) ? "" : "이메일을 다시 확인해주세요"
     );
   };
 
   //올바른 비번인지 확인
-  const _handlePasswordChange = password => {
+  const _handlePasswordChange = (password) => {
     setPassword(removeWhitespace(password));
   };
-
 
   //spinner 사용안하는 방향으로 가야겠네ㅋㅋ  아~남 사용하기~~~로딩중 나타남
   const _handleLoginButtonPress = async () => {
     try {
       // spinner.start();
       const user = await login({ email, password });
-      Alert.alert('로그인 성공', user.email);
+      Alert.alert("로그인 성공", user.email);
       dispatch(user);
-      navigation.reset({routes: [{name: "BottomTab", params: { email, password }}]})//stack 초기화->뒤로가기 눌러도 로그인페이지로 다시 이동하지 않게 함
-    } 
-    catch (e) {
-      Alert.alert('로그인 살패', e.message);
-    } 
-    finally {
+      navigation.reset({
+        routes: [{ name: "BottomTab", params: { email, password } }],
+      }); //stack 초기화->뒤로가기 눌러도 로그인페이지로 다시 이동하지 않게 함
+    } catch (e) {
+      Alert.alert("로그인 살패", e.message);
+    } finally {
       // spinner.stop()
+      
     }
   };
 
-//키보드 감추기를 위한 keyboardawarescrollview 라이브러리 => 입력 도중 다른 영역을 터지 하면 키보드 사라지고, 스크롤 이동되는 것 가능
+  //키보드 감추기를 위한 keyboardawarescrollview 라이브러리 => 입력 도중 다른 영역을 터지 하면 키보드 사라지고, 스크롤 이동되는 것 가능
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={{ flex: 1 }}
@@ -100,7 +103,6 @@ const Login = ({ navigation }) => {
           returnKeyType="next"
         />
 
-
         <Input
           ref={passwordRef}
           label="Password"
@@ -111,8 +113,6 @@ const Login = ({ navigation }) => {
           returnKeyType="done"
           isPassword
         />
-
-
 
         <ErrorText>{errorMessage}</ErrorText>
         <Button
@@ -131,9 +131,6 @@ const Login = ({ navigation }) => {
 };
 
 export default Login;
-
-
-
 
 // export default function Login({ navigation }) {
 //   return (

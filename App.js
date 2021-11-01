@@ -17,18 +17,18 @@ import { theme } from './theme';
 
 import { PointProvider } from "./context/point";
 import { FabricProvider } from "./ChatBot/ChatBot_Context";
-
+import { UserProvider } from "./contexts";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const [point, setPoint] = useState(1);
-
   const handlePoint = () => {
     setPoint(point + 5);
   };
 
   return (
+    <UserProvider>
     <FabricProvider>
     <PointProvider>
     <ThemeProvider theme={theme}>
@@ -51,6 +51,7 @@ export default function App() {
     </ThemeProvider>
     </PointProvider>
     </FabricProvider>
+    </UserProvider>
   );
 }
 
