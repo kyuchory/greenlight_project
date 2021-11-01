@@ -11,6 +11,7 @@ import Signup from "./Login/Signup";
 
 import ChatBot from "./ChatBot/ChatBot";
 import CategoryOuter from "./CategoryComponents/CategoryOuter";
+import OuterPage from "./CategoryComponents/OuterPage";
 
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
@@ -45,6 +46,7 @@ export default function App() {
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="ChatBot" component={ChatBot} />
         <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
+        <Stack.Screen name="OuterPage" component={OuterPage}/>
 
       </Stack.Navigator>
     </NavigationContainer>
