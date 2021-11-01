@@ -19,7 +19,7 @@ Font.loadAsync({
 
 
 
-const databaseURL = "https://green-light-fc503-default-rtdb.firebaseio.com";
+const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
 
 class Outer extends React.Component {
   constructor(){
@@ -61,13 +61,13 @@ class Outer extends React.Component {
 
 export default function CategoryOuter() {
 
-
+/* 
   const FetchData = () => {
     //받아온 데이터를 저장할 배열
     //let product = [];
 
     firestore
-        .collection('product') //product 컬렉션 반환
+        .collection('outer') //product 컬렉션 반환
         .get()
         .then((docs) => {
           //forEach 함수로 각각의 다큐먼트에 함수 실행
@@ -97,20 +97,20 @@ export default function CategoryOuter() {
        </View>
         ); 
   }
-  
+   */
 
-
+/* 
 const Section = () => {
   return (
     <View style = {styles.section}>
     </View>
   )
 } 
-
+ */
 const Box = () => {
     return(
       <View style = {styles.box}>
-      <Image source= {require("../icon+image/homeImage.jpg")} 
+      <Image source= {require("../icon+image/default_profile.png")} 
           style={styles.image} />
       <Text style = {styles.textSmall}> 어쩌구 저쩌구 </Text>
       <Text style = {styles.textSmall}> 가격이 어쩌구</Text>
@@ -126,6 +126,7 @@ const Box = () => {
         <Box/>
         <Box/>
       </View>
+
     </View>
 
   ); 
