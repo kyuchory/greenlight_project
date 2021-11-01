@@ -9,6 +9,7 @@ import { render } from 'react-dom';
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 
+
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
     'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
@@ -25,21 +26,21 @@ const Main = () => {
     return(
       <View style={styles.main}>
               
-      <View style = {styles.box1}>
-            <Image source= {require("../icon+image/outer_brownjacket1.png")} 
-            style={styles.image} />
-      </View>
+        <View style = {styles.box1}>
+              <Image source= {require("../icon+image/outer_brownjacket1.png")} 
+              style={styles.image} />
+        </View>
 
-      <View style = {styles.box2}>
-          <View style = {styles.option}>
-          <Text>옵션선택칸</Text> 
-          </View>
-
-          <View style = {styles.payment}>
-          <Image source ={require("../icon+image/purchase_button.png")}
-          style={styles.purchase} />
-          </View>
-      </View>
+        <View style = {styles.box2}>
+            <View style = {styles.option}>
+            <Text>옵션선택칸</Text> 
+            </View>
+            <View style = {styles.payment}>
+            <Image source ={require("../icon+image/purchase_button.png")}
+            style={styles.purchase} />
+            </View>
+        </View>
+        
 
 
       </View>
@@ -59,16 +60,16 @@ const Page = () => {
 }
 
  return (
-    <View style={styles.container}>
-          <ScrollView>
 
+    <View style={styles.container}>
+        <ScrollView>
           <Main/>
           <Page/>
+        </ScrollView>
+          
 
-          </ScrollView>
+          
     </View>
-
-    
 
   ); 
 };
@@ -80,37 +81,40 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection:'column',
     width:'100%',
-    height:'100%',
+    // height:'100%',
+
   },
 
   main:{
-    flexDirection: 'column',
-    //alignItems: 'flex-start',
     width:'100%',
-    height:'170%',
+    // height:'100%',
     backgroundColor:'white',
     marginTop:'10%',
     alignItems:"center",
+    borderColor:"red",
+    borderWidth:1
   },
 
   page: {
     marginTop: '30%',
     width:'100%',
-    height: '750%',
+    // height: '750%',
     alignItems:"center",
+    
   },
 
   box1: {
     width:'90%',
-    height:'100%',
+    // height:'100%',
     flexDirection: 'column',
     backgroundColor: '#b6b6b6',
     marginTop: '10%',
+    
   },
 
   box2: {
     width:'90%',
-    height:'10%',
+    // height:'100%',
     flexDirection: 'row',
     backgroundColor: 'yellow',
     marginTop: '5%',
@@ -119,29 +123,28 @@ const styles = StyleSheet.create({
 
   option:{
     width:'30%',
-    height:'100%',
+    // height:'100%',
     backgroundColor: 'white',
     marginLeft: "10%",
   },
   
   payment: {
     width:'30%',
-    height:'100%',
-    backgroundColor: 'white',
-    marginLeft: "20%",
+    // height:'100%',
+    // backgroundColor: 'white',
+    // marginLeft: "20%",
   },
   
   image: {
     width: '100%',
-    height: '100%',
   },
   page_img:{
     width: '90%',
-    height: '90%', 
+    // height: '90%', 
   },
   purchase: {
-    width: '100%',
-    height: '100%',
+    marginTop:500,
+
   },
   textSmall:{
     fontSize:15,
