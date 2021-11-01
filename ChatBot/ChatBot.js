@@ -11,7 +11,7 @@ import FabricContext, {
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import { useNavigation } from "@react-navigation/native";
-import Modal from "react-native-simple-modal";
+
 
 import * as Font from "expo-font";
 Font.loadAsync({
