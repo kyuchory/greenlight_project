@@ -22,6 +22,7 @@ import { FabricProvider } from "./ChatBot/ChatBot_Context";
 import { UserProvider } from "./contexts";
 
 import { LogBox } from 'react-native';
+import Donate from "./Donate/Donate";
 
 LogBox.ignoreLogs(['Setting a timer']);
 
@@ -56,6 +57,7 @@ export default function App() {
         <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
         <Stack.Screen name="UserGuide" component= {UserGuide}/>
         <Stack.Screen name="OuterPage" component={OuterPage}/>
+        <Stack.Screen name="Donate" component={Donate}/>
 
 
       </Stack.Navigator>
