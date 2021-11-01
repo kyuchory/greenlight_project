@@ -10,6 +10,8 @@ import { images } from '../utils/images';
 import { Alert } from 'react-native';
 import { signup } from '../utils/firebase';
 
+import { firestore } from '../utils/firebase';
+
 const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -77,6 +79,12 @@ const Signup = ({ navigation }) => {
       console.log(user);
       Alert.alert('회원가입 성공', user.email);
       navigation.reset({routes: [{name: "Login"}]})//회원가입 마치면 자동으로 로그인페이지로 이동
+      firestore.collection('User').doc(user.email).set({
+        mileage: 0,
+        });
+      // firestore.collection(user.email).doc('test2').set({
+      //   마일리지: 0,
+      // });
     } catch (e) {
       Alert.alert('회원가입 실패', e.message);
     }

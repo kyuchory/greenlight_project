@@ -1,7 +1,9 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useContext, useEffect,} from 'react'
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Input, Button } from '../Components'
 import { images } from '../utils/images';
+import { UserContext } from "../contexts";
+import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
 
 Font.loadAsync({
@@ -16,8 +18,31 @@ Font.loadAsync({
   });
 
 
+
+
 export default function Mypage() {
 
+  const[mileage, setMileage] = useState(0);
+
+  const userEmail = useContext(UserContext);
+  const email = userEmail.user.email;
+
+  const handleMileage = async()=>{
+    const document = await firestore.collection("User").doc(email).get();
+    const tempmileage = await document.get("mileage");
+    setMileage(tempmileage);
+  }
+  setInterval(()=>{
+    try{
+      handleMileage();
+    }catch{
+      console.log("error");
+    }
+  },1000);
+
+  
+
+  
   //얇은 섹션 구분선
   const Line1 = () => {
     return(
@@ -49,16 +74,29 @@ export default function Mypage() {
     )
   }
   
+
   //쇼핑포인트, 기부포인트, 쿠폰, 후원내역
   const Shopping = () => {
+    // const userEmail = useContext(UserContext);
+    // const email = userEmail.user.email;
+    // console.log(email);
+
     return(
+      
       <View style = {styles.Shopping_Container}>
+        
         <View style = {styles.iconContents}>
           <Image source= {require("../icon+image/point.png")} 
           style={styles.image} />
           <Text style={styles.iconContentsText}>포인트</Text>
-          <Text style={styles.iconContentsNum}>5,000</Text>
+          {/* <Button
+            title="Press"
+            onPress={() => console.log(mileage)}
+            /> */}
+          <Text style={styles.iconContentsNum}>{mileage}</Text>
+          
         </View>
+         
         <View style = {styles.iconContents}>
            <Image source= {require("../icon+image/point_donate.png")} 
           style={styles.image} />
