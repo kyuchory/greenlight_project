@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -19,7 +19,9 @@ import { PointProvider } from "./context/point";
 import { FabricProvider } from "./ChatBot/ChatBot_Context";
 
 
+
 const Stack = createStackNavigator();
+
 
 export default function App() {
   const [point, setPoint] = useState(1);
@@ -27,6 +29,11 @@ export default function App() {
   const handlePoint = () => {
     setPoint(point + 5);
   };
+
+  const emailData ={
+    emailObj : emailObj,
+    handleEmail,
+  }
 
   return (
     <FabricProvider>
@@ -62,3 +69,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+

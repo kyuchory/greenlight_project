@@ -11,6 +11,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 //파이어베이스 로그인
 import { Alert } from 'react-native';
 import { login } from '../utils/firebase';
+import { firestore } from '../utils/firebase';
+
 
 const Container = styled.View`
   flex: 1;
@@ -44,11 +46,12 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const passwordRef = useRef();
 
-  const [loginObj, setLoginObj] = useState(""); /// 어차피 데탑에있는거로해야함 ㅅㅂ ;; 어이없네
-
   const [errorMessage, setErrorMessage] = useState('');
 
   const [disabled, setDisabled] = useState(true);
+
+  const userEmail = useContext(UserContext);
+
 
   useEffect(() => {
     setDisabled(!(email && password && !errorMessage));}, [email, password, errorMessage]);
@@ -73,9 +76,9 @@ const Login = ({ navigation }) => {
     try {
       // spinner.start();
       const user = await login({ email, password });
-      setLoginObj(email);
       Alert.alert('로그인 성공', user.email);
       dispatch(user);
+      console.log(userEmail.user.email);
       navigation.reset({routes: [{name: "BottomTab", params: { email, password }}]})//stack 초기화->뒤로가기 눌러도 로그인페이지로 다시 이동하지 않게 함
     } 
     catch (e) {
@@ -83,7 +86,9 @@ const Login = ({ navigation }) => {
     } 
     finally {
       // spinner.stop()
-      
+      firestore.collection(userEmail.user.email).add({
+        마일리지: 0,
+      })
     }
   };
 

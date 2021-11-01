@@ -1,12 +1,14 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react'
+import React, { useState, useCallback, useEffect, useRef, useContext } from 'react'
 import { StyleSheet, Text, View, ImageBackground, TextInput, Animated, Image, Platform} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from 'expo-image-picker'; //$ expo install expo-image-picker
 import DateTimePicker from '@react-native-community/datetimepicker';  //$ expo install @react-native-community/datetimepicker
 import FabricContext, { FabricConsumer, FabricProvider } from './ChatBot_Context';
+import { firestore } from '../utils/firebase';
+import { UserContext } from '../contexts';
 
-import * as Font from "expo-font";
+import * as Font from 'expo-font';
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
     'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
@@ -40,7 +42,22 @@ Font.loadAsync({
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
-    
+    const [mileage, setMileage] = useState(0);
+
+    const userEmail = useContext(UserContext);
+    const email = userEmail.user.email;
+
+    const handleMileage = () => {
+      const prevMileage = firestore.collection(email).get(mileage);
+      const plusMileage = prevMileage + 5000;
+      setMileage(plusMileage);
+      firestore.collection(email).add({
+        ...firestore.collection(email),
+        마일리지: plusMileage,
+      })
+
+      console.log(firestore.collection(email).get(mileage));
+    }
 
     const onChangeText = (event) =>{
       setText(event.target.value);
@@ -114,85 +131,60 @@ Font.loadAsync({
             alert('Sorry, we need camera roll permissions to make this work!');
           }
         }
-      }
-    })();
-  }, []);
+      })();
+    }, []);
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-    // console.log(result);
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
-  };
+    const pickImage = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });  
+      // console.log(result);
+      if (!result.cancelled) {
+        setImage(result.uri);
+      }      
+    };
 
-  //캘린더 함수들
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
-    setDate(currentDate);
-  };
+    //캘린더 함수들
+    const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate || date;
+      setShow(Platform.OS === 'ios');
+      setDate(currentDate);
+    };
 
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
+    const showMode = (currentMode) => {
+      setShow(true);
+      setMode(currentMode);
+    };
+  
+    const showDatepicker = () => {
+      showMode('date');
+    };
+  
+    const showTimepicker = () => {
+      showMode('time');
+    };
 
-  const showDatepicker = () => {
-    showMode("date");
-  };
 
-  const showTimepicker = () => {
-    showMode("time");
-  };
-
-  const WaitText = () => {
     return (
-        <View>
+        
         <View style={styles.container}>
           <ScrollView
           ref={scrollViewRef}
           onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })} //스크롤 하단 유지
           >
-            <Text
-              style={{
-                paddingTop: "10%",
-                paddingBottom: "10%",
-                paddingRight: "5%",
-                paddingLeft: "15%",
-              }}
-            >
-              승인되었습니다!{"\n"}택배 방문 희망일을 선택해주세요.{"\n"}
-              배송비 입금 확인 후, 택배 방문 희망일에{"\n"}수거할 예정입니다.
-            </Text>
-          </ImageBackground>
-        </View>
-
-        <View
-          style={styles.chatUser}
-          pointerEvents={viewCondition4 ? "none" : "auto"}
-        >
-          <ImageBackground
-            source={require("../icon+image/chatImageRight.png")}
-            resizeMode="stretch"
-            style={styles.chatImage}
-          >
-            <TouchableOpacity onPress={showDatepicker}>
-              <Text
-                style={{
-                  paddingTop: "5%",
-                  paddingBottom: "2%",
-                  paddingRight: "10%",
-                  paddingLeft: "5%",
-                }}
+          <View style={styles.chatContainer}>
+            <View style={styles.chatManager}>
+              <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
+              <ImageBackground
+              source={require("../icon+image/chatImageLeft.png")}
+              resizeMode="stretch"
+              style={styles.chatImage}
               >
-                !!날짜 선택!!{"\n"}
-                {date.getFullYear()}-{date.getMonth() + 1}-{date.getDate()}
+              <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>
+                안녕하세요!{"\n"}만나서 반갑습니다.{"\n"}'사용설명서' 혹은 '후원시작'을 클릭해주세요.
               </Text>
               </ImageBackground>
             </View>
@@ -222,37 +214,21 @@ Font.loadAsync({
               {start ? (
             <View>
                 <View style={styles.chatManager}>
-                  <Image
-                    source={require("../icon+image/robot.png")}
-                    style={styles.avatarImage}
-                  />
+                  <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
                   <ImageBackground
-                    source={require("../icon+image/chatImageLeft.png")}
-                    resizeMode="stretch"
-                    style={styles.chatImage}
+                  source={require("../icon+image/chatImageLeft.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
                   >
-                    <Text
-                      style={{
-                        paddingTop: "10%",
-                        paddingBottom: "10%",
-                        paddingRight: "5%",
-                        paddingLeft: "15%",
-                      }}
-                    >
-                      안녕하세요!{"\n"}만나서 반갑습니다.{"\n"}'사용설명서' 혹은
-                      '후원시작'을 클릭해주세요.
-                    </Text>
+                    <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>후원하실 상품 재질을 모두 선택해 주세요.</Text>
                   </ImageBackground>
                 </View>
-
-                <View
-                  style={styles.chatUser}
-                  pointerEvents={viewCondition0 ? "none" : "auto"}
-                >
+                
+                <View style={styles.chatUser} pointerEvents={viewCondition1 ? 'none' : 'auto'}>
                   <ImageBackground
-                    source={require("../icon+image/chatImageRight.png")}
-                    resizeMode="stretch"
-                    style={styles.chatImage}
+                  source={require("../icon+image/chatImageRight.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
                   >
                     <View style={styles.iconView}>
                     <TouchableOpacity onPress={choiceFiber}>
@@ -265,32 +241,18 @@ Font.loadAsync({
                   </ImageBackground>
                 </View>
 
-                {display0 ? (
-                  <View>
-                    {start ? (
-                      <View>
-                        <View style={styles.chatManager}>
-                          <Image
-                            source={require("../icon+image/robot.png")}
-                            style={styles.avatarImage}
-                          />
-                          <ImageBackground
-                            source={require("../icon+image/chatImageLeft.png")}
-                            resizeMode="stretch"
-                            style={styles.chatImage}
-                          >
-                            <Text
-                              style={{
-                                paddingTop: "10%",
-                                paddingBottom: "10%",
-                                paddingRight: "5%",
-                                paddingLeft: "15%",
-                              }}
-                            >
-                              후원하실 상품 재질을 모두 선택해 주세요.
-                            </Text>
-                          </ImageBackground>
-                        </View>
+                {display1 ? (
+                <View>
+                  <View style={styles.chatManager}>
+                  <Image source={require("../icon+image/robot.png")} style={styles.avatarImage}/>
+                  <ImageBackground
+                  source={require("../icon+image/chatImageLeft.png")}
+                  resizeMode="stretch"
+                  style={styles.chatImage}
+                  >
+                    <Text style={{paddingTop:"10%", paddingBottom:"10%", paddingRight:"5%", paddingLeft:"15%"}}>후원하실 상품의 개수를 입력해주세요.</Text>
+                    </ImageBackground>
+                  </View>
 
                   <View style={styles.chatUser}>
                   <ImageBackground
@@ -331,10 +293,12 @@ Font.loadAsync({
                         <Image source={require("../icon+image/confirmIcon.png")} style={{width:40, height:20}}/>
                         </TouchableOpacity>
                       </View>
-                    )}
+                      )}
+                      </ImageBackground>
                   </View>
-                ) : (
-                  <View></View>
+                </View>
+                ):(
+                <View></View>
                 )}
 
               
@@ -476,8 +440,7 @@ Font.loadAsync({
                   style={styles.chatImage}
                   >
                   <TouchableOpacity
-                  onPress={() =>
-                    actions.setFabric("테스트11")}>
+                  onPress={()=>handleMileage()}>
                     <Image source={require("../icon+image/finishIcon.png")} style={{width:100, height:30, marginTop:"5%",marginLeft:"5%",marginRight:"5%"}}/>
                   </TouchableOpacity>
                   </ImageBackground>                
