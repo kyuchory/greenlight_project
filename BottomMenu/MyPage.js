@@ -1,7 +1,9 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useContext,} from 'react'
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Input, Button } from '../Components'
 import { images } from '../utils/images';
+import { UserContext } from "../contexts";
+import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
 
 Font.loadAsync({
@@ -16,8 +18,27 @@ Font.loadAsync({
   });
 
 
-export default function Mypage() {
 
+
+export default function Mypage() {
+  const[mileage, setMileage] = useState(0);
+
+  const handleMileage = async() => {
+    const userEmail = useContext(UserContext);
+    const email = userEmail.user.email;
+    console.log(email);
+   
+    const document = await firestore.collection('User').doc(email).get();
+    // setTimeout(() => {},2000);
+    const tempmileage = await document.get('mileage'); //데이터베이스에서 가져온 마일리지
+
+    setMileage(tempmileage);
+
+  };
+  handleMileage();
+
+
+  
   //얇은 섹션 구분선
   const Line1 = () => {
     return(
@@ -49,16 +70,29 @@ export default function Mypage() {
     )
   }
   
+
   //쇼핑포인트, 기부포인트, 쿠폰, 후원내역
   const Shopping = () => {
+    // const userEmail = useContext(UserContext);
+    // const email = userEmail.user.email;
+    // console.log(email);
+
     return(
+      
       <View style = {styles.Shopping_Container}>
+        
         <View style = {styles.iconContents}>
           <Image source= {require("../icon+image/point.png")} 
           style={styles.image} />
           <Text style={styles.iconContentsText}>포인트</Text>
-          <Text style={styles.iconContentsNum}>5,000</Text>
+          {/* <Button
+            title="Press"
+            onPress={() => console.log(mileage)}
+            /> */}
+          <Text style={styles.iconContentsNum}>{mileage}</Text>
+          
         </View>
+         
         <View style = {styles.iconContents}>
            <Image source= {require("../icon+image/point_donate.png")} 
           style={styles.image} />

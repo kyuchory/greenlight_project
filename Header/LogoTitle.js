@@ -10,21 +10,21 @@ Font.loadAsync({
 
 function LogoTitle(props) {
   return (
-    <View style={stytles.headerView}>
-      <View style={stytles.titleWrapper}>
-        <Text style={stytles.title}>{props.title}</Text>
+    <View style={styles.headerView}>
+      <View style={styles.titleWrapper}>
+        <Text style={styles.title}>{props.title}</Text>
       </View>
-      <View style={stytles.inputWrapper}>
+      <View style={styles.inputWrapper}>
         <Image
           source={require("../icon+image/magnifyingGlass.png")}
-          style={stytles.inputicon}
+          style={styles.inputicon}
         />
-        <TextInput style={stytles.input} placeholder="검색어를 입력하세요" />
+        <TextInput style={styles.input} placeholder="검색어를 입력하세요" />
       </View>
-      <View style={stytles.iconWrapper}>
+      <View style={styles.iconWrapper}>
         <Image
           source={require("../icon+image/shoppingbag.png")}
-          style={stytles.icon}
+          style={styles.icon}
         />
       </View>
     </View>
@@ -34,7 +34,7 @@ function LogoTitle(props) {
 
 
 
-const stytles = StyleSheet.create({
+const styles = StyleSheet.create({
   headerView: {
     position: "relative",
     flexDirection: "row",
