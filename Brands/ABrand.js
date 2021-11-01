@@ -167,7 +167,7 @@ export default function ABrand() {
         </View>
         <View style={styles.brandIntro}>
           <View style={styles.brandtitle}>
-            <Text style={styles.brandName}>A Brand</Text>
+            <Text style={styles.brandName}>GreenLight</Text>
             <Image
               source={require("../icon+image/heart.png")}
               style={styles.heart}

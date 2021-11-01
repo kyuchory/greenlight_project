@@ -1,20 +1,5 @@
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  useRef,
-  useContext,
-} from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  TextInput,
-  Animated,
-  Image,
-  Platform,
-} from "react-native";
+import React, {useState, useEffect, useRef, useContext,} from "react";
+import { StyleSheet,  Text,  View,  ImageBackground,  TextInput,  Animated,  Image,  Platform,} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker"; //$ expo install expo-image-picker
@@ -26,6 +11,7 @@ import FabricContext, {
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import { useNavigation } from "@react-navigation/native";
+import Modal from "react-native-simple-modal";
 
 import * as Font from "expo-font";
 Font.loadAsync({
@@ -185,6 +171,12 @@ export default function ChatBot() {
     navigation.goBack();
   }
 
+  //모달
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
 
   return (
@@ -661,7 +653,7 @@ export default function ChatBot() {
                 </View>
               ) : (
                 <View>
-                  <Text>사용설명서 modal</Text>
+                 <Text>사용설명서 modal</Text>
                 </View>
               )}
             </View>

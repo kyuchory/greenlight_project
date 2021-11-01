@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, Image } from "react-native";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import ProgressBar from "../Components/ProgressBar";
 import { PointConsumer } from "../context/point";
@@ -14,6 +14,10 @@ Font.loadAsync({
     HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
     'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
   });
+
+  const touchGuide = () =>{
+
+  }
 
 export default function Anything({ navigation }) {
 
@@ -29,7 +33,7 @@ export default function Anything({ navigation }) {
             onPress={() => navigation.navigate("ABrand")}>
             <TouchableHighlight style={styles.circle}/>
             <View style={styles.nameAndBar}>
-              <Text style={styles.brandName}>A 브랜드</Text>
+              <Text style={styles.brandName}>GREENLIGHT</Text>
               <PointConsumer>
                 {(value) => (
                   <View style={styles.progressBar}>
@@ -48,7 +52,7 @@ export default function Anything({ navigation }) {
             onPress={() => navigation.navigate("ABrand")}>
             <TouchableHighlight style={styles.circle}/>
             <View style={styles.nameAndBar}>
-              <Text style={styles.brandName}>B 브랜드</Text>
+              <Text style={styles.brandName}>FRIEDTAG</Text>
               <PointConsumer>
                 {(value) => (
                   <View style={styles.progressBar}>
@@ -63,7 +67,13 @@ export default function Anything({ navigation }) {
 
 
         </View>
-
+        <View style={styles.iconWrapper}>
+          <TouchableOpacity onPress={() => navigation.navigate("UserGuide")}>
+            <Image
+            source={require("../icon+image/userGuideIcon.png")}
+            style={{width: 110,height: 35,}}/>
+          </TouchableOpacity>
+        </View>
       </View>
   );
 }
@@ -126,5 +136,10 @@ const styles = StyleSheet.create({
     alignItems:"center",
   
   },
+  iconWrapper:{
+    height:"50%",
+    justifyContent:"flex-end",
+    alignItems:"center"
+  }
 
 });
