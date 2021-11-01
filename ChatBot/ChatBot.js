@@ -25,18 +25,23 @@ import FabricContext, {
 } from "./ChatBot_Context";
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
+import { useNavigation } from "@react-navigation/native";
 
 import * as Font from "expo-font";
 Font.loadAsync({
-  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
+  'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
+  WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
+  'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
+  HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
+  'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
+  BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
+  'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
 });
 
 export default function ChatBot() {
+  const navigation = useNavigation();
+
   const [display0, setDisplay0] = useState(false);
   const [display1, setDisplay1] = useState(false);
   const [display2, setDisplay2] = useState(false);
@@ -59,32 +64,20 @@ export default function ChatBot() {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
-  const [mileage, setMileage] = useState(0);
-
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
-  console.log(email);
-
-  // const getMileage= async()=>{
-  //   const prevMileage = await firestore.collection(email).get();
-  //   setFbObject(prevMileage.forEach((document)=>document.data()['마일리지']));
-  // }
-
-  // console.log(getMileage());
 
   const handleMileage = async() => {
-    const prevMileage = await firestore.collection(email).get();
-    setMileage(prevMileage.forEach((document)=>document.data()['마일리지']));
-    
-    const plusMileage = mileage + 5000;
- 
-    setMileage(plusMileage);
 
+    const document = await firestore.collection('User').doc(email).get();
+    const prevMileage = document.get('mileage'); //데이터베이스에서 가져온 기존 마일리지
 
-    firestore.collection('User').doc(email).set({'마일리지':plusMileage});
-    // firestore.collection(email).add({
-    //   ...firestore.collection(email).doc('test2').set({'마일리지':plusMileage})
-    // });
+    // setMileage(prevMileage);
+    const plusMileage = prevMileage + 5000;
+
+    firestore.collection('User').doc(email).set({'mileage':plusMileage}); //데이터베이스의 마일리지 업데이트
+
+    backGo();//후원 종료시 화면back
   };
 
   const onChangeText = (event) => {
@@ -139,6 +132,7 @@ export default function ChatBot() {
         {({ actions }) => (actions.setCount(text), actions.setFabric("ttt"))}
       </FabricConsumer>;
       // https://velog.io/@kwonh/React-Context-API-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-React.createContext
+      
     }
   };
 
@@ -187,9 +181,15 @@ export default function ChatBot() {
   const showTimepicker = () => {
     showMode("time");
   };
+  const backGo = () =>{
+    navigation.goBack();
+  }
+
+
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}><Text style={styles.headerText}>후원 도우미</Text></View>
       <ScrollView
         ref={scrollViewRef}
         onContentSizeChange={() =>
@@ -670,6 +670,14 @@ export default function ChatBot() {
           )}
         </View>
       </ScrollView>
+      <View style={styles.bottom}>
+        <Image source={require("../icon+image/replay.png")} style={styles.bottomImg}/>
+        <TouchableOpacity onPress={backGo}>
+        <Image source={require("../icon+image/back.png")} style={styles.bottomImg}/>
+        </TouchableOpacity>
+        <TextInput style={styles.input} placeholder="   메시지 입력" />
+        <Image source={require("../icon+image/counselor.png")} style={styles.bottomImg}/>
+      </View>
     </View>
   );
 }
@@ -677,12 +685,23 @@ export default function ChatBot() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: "2%",
+    // padding: "2%",
     backgroundColor: "white",
+  },
+  header:{
+    marginTop:"8%",
+    height:"8%",
+    backgroundColor:"#26D95C"
+  },
+  headerText:{
+    fontFamily:"BinggraeMelona-Bold",
+    color:"white",
+    fontSize:25,
+    margin:"3%",
   },
   chatContainer: {
     flex: 1,
-    marginTop: "10%",
+    padding: "2%",
   },
   chatManager: {
     // backgroundColor:"yellow",
@@ -722,4 +741,22 @@ const styles = StyleSheet.create({
     marginLeft: "5%",
     marginRight: "10%",
   },
+  bottom:{
+    flexDirection:"row",
+    backgroundColor:"#F5F4F4",
+    height:"8%",
+    alignItems:"center"
+  },
+  input: {
+    width: "65%",
+    alignItems: "center",
+    borderColor:"black",
+    borderWidth:1,
+    borderRadius:10
+  },
+  bottomImg: {
+    width:20,
+    height:20,
+    margin:"3%"
+  }
 });
