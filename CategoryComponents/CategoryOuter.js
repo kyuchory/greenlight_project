@@ -21,6 +21,21 @@ Font.loadAsync({
 
 const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
 
+
+const getOuter = async() => {
+  const outer = await firestore.collection(outer).get();
+  //setMileage(prevMileage.forEach((document)=>document.data()['마일리지']));
+  console.log(outer);
+ // const plusMileage = mileage + 500
+ // setMileage(plusMileage);
+ 
+
+ // firestore.collection('User').doc(email).set({'마일리지':plusMileage});
+  // firestore.collection(email).add({
+  //   ...firestore.collection(email).doc('test2').set({'마일리지':plusMileage})
+  // });
+};
+
 class Outer extends React.Component {
   constructor(){
       super();
@@ -107,6 +122,7 @@ const Section = () => {
   )
 } 
  */
+
 const Box = () => {
     return(
       <View style = {styles.box}>
@@ -125,6 +141,7 @@ const Box = () => {
         <Box/>
         <Box/>
         <Box/>
+ 
       </View>
 
     </View>
