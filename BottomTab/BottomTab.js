@@ -50,7 +50,7 @@ const Icon2B = () => {
 const Icon3 = () => {
   return (
     <Image
-      source={require("../icon+image/solidarity.png")}
+      source={require("../icon+image/donation.png")}
       style={styles.middleIcon}
     />
   );

@@ -8,7 +8,7 @@ export default function Pick() {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.empty} />
-        <PickSubContents />
+        {/* <PickSubContents /> */}
       </ScrollView>
     </View>
   );
