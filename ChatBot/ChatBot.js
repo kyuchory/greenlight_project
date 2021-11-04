@@ -4,10 +4,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker"; //$ expo install expo-image-picker
 import DateTimePicker from "@react-native-community/datetimepicker"; //$ expo install @react-native-community/datetimepicker
-import FabricContext, {
-  FabricConsumer,
-  FabricProvider,
-} from "./ChatBot_Context";
+import FabricContext, { FabricConsumer,FabricProvider} from "./ChatBot_Context";
+import { PointConsumer } from "../context/point";
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import { useNavigation } from "@react-navigation/native";
@@ -59,12 +57,30 @@ export default function ChatBot() {
     const document = await firestore.collection('User').doc(email).get();
     const prevMileage = document.get('mileage'); //데이터베이스에서 가져온 기존 마일리지
 
-    // setMileage(prevMileage);
     const plusMileage = prevMileage + 5000;
 
     firestore.collection('User').doc(email).set({'mileage':plusMileage}); //데이터베이스의 마일리지 업데이트
+  };
 
-    backGo();//후원 종료시 화면back
+  const backGo = () =>{
+    navigation.goBack();
+  };
+
+  const plusProgressBar = async() => {
+    const document = await firestore.collection('Brand').doc('GreenLight').get();
+    const prevProgress = document.get('progress'); //데이터베이스에서 가져온 기존 진행도
+
+    const plusProgress = prevProgress + 1;
+
+    firestore.collection('Brand').doc('GreenLight').set({'progress':plusProgress}); //데이터베이스의 progress 업데이트    
+  };
+
+  const finish = () => {
+    {
+      handleMileage();
+      backGo();//후원 종료시 화면back
+      plusProgressBar();//후원 종료시 마일리지 플러스
+    }
   };
 
   const onChangeText = (event) => {
@@ -98,10 +114,6 @@ export default function ChatBot() {
     setSaid(true);
     setDisplay2(true);
     setViewCondition2(true);
-    {
-      <FabricConsumer>{({ actions }) => actions.setCount(999)}</FabricConsumer>;
-    }
-    
   };
   const pickPictureYes = () => {
     setDisplay3(true);
@@ -113,15 +125,7 @@ export default function ChatBot() {
     setViewCondition4(true);
   };
 
-  const finish = () => {
-    {
-      <FabricConsumer>
-        {({ actions }) => (actions.setCount(text), actions.setFabric("ttt"))}
-      </FabricConsumer>;
-      // https://velog.io/@kwonh/React-Context-API-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-React.createContext
-      
-    }
-  };
+ 
 
   //사진업로드 함수들
   useEffect(() => {
@@ -168,12 +172,7 @@ export default function ChatBot() {
   const showTimepicker = () => {
     showMode("time");
   };
-  const backGo = () =>{
-    navigation.goBack();
-  }
-  const plusProgressBar = () => {
-    
-  }
+
 
 
 
@@ -559,7 +558,7 @@ export default function ChatBot() {
                                 paddingLeft: "5%",
                               }}
                             >
-                              !!날짜 선택!!{"\n"}
+                              날짜 선택 : {"\n"}
                               {date.getFullYear()}-{date.getMonth() + 1}-
                               {date.getDate()}
                             </Text>
@@ -628,7 +627,7 @@ export default function ChatBot() {
                               resizeMode="stretch"
                               style={styles.chatImage}
                             >
-                              <TouchableOpacity onPress={() => handleMileage()}>
+                              <TouchableOpacity onPress={() => finish()}>
                                 <Image
                                   source={require("../icon+image/finishIcon.png")} //후원종료
                                   style={{
