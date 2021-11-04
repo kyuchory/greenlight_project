@@ -25,7 +25,6 @@ Font.loadAsync({
 });
 
 function ABrandProduct() {
-  const navigation = useNavigation();
   return (
     <View style={styles.containerProduct}>
       <View style={styles.productTitle}>
@@ -55,7 +54,7 @@ function ABrandProduct() {
                     style={{ width: 12, height: 12, marginRight: 2 }}
                   />
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("ChatBot")}
+                    // onPress={() => navigation.navigate("ChatBot")}
                   >
                     <Text style={styles.normal}>제품 상세정보</Text>
                   </TouchableOpacity>
@@ -146,6 +145,20 @@ function ABrandSubContents() {
 //ABrand
 
 export default function ABrand() {
+  const navigation = useNavigation();
+
+  const test = (value) => {
+    <PointConsumer>
+      {(value) => (
+      value.actons.setPoint(value.state.point + 10),
+      navigation.navigate("ChatBot")
+      )}
+    {/* value.actions.setPoint(value.state.point + 10); */}
+    
+
+    </PointConsumer>
+  };
+  
   return (
     <View style={styles.container}>
       <View style={styles.brandTopWrapper}>
@@ -164,8 +177,8 @@ export default function ABrand() {
               source={require("../icon+image/heart.png")}
               style={styles.heart}
             />
-            <TouchableOpacity onPress={() =>
-                      value.actions.setPoint(value.state.point + 10)}>
+            <TouchableOpacity onPress={() => navigation.navigate("ChatBot")}>
+            {/* value.actions.setPoint(value.state.point + 10) */}
             <Image
               source={require("../icon+image/give.png")}
               style={styles.give}

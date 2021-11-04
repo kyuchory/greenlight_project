@@ -11,7 +11,7 @@ import FabricContext, {
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import { useNavigation } from "@react-navigation/native";
-import {Slider} from "./UserGuide"
+import {Slider} from "./UserGuide";
 
 
 import * as Font from "expo-font";
@@ -170,6 +170,9 @@ export default function ChatBot() {
   };
   const backGo = () =>{
     navigation.goBack();
+  }
+  const plusProgressBar = () => {
+    
   }
 
 
@@ -627,7 +630,7 @@ export default function ChatBot() {
                             >
                               <TouchableOpacity onPress={() => handleMileage()}>
                                 <Image
-                                  source={require("../icon+image/finishIcon.png")}
+                                  source={require("../icon+image/finishIcon.png")} //후원종료
                                   style={{
                                     width: 100,
                                     height: 30,

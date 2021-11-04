@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect,} from 'react'
-import { StyleSheet, Text, View, Image, ImageBackground, } from "react-native";
+import { StyleSheet, Text, View, Image, ImageBackground,Dimensions } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from "../contexts";
 import { firestore } from "../utils/firebase";
@@ -18,6 +18,8 @@ Font.loadAsync({
     'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
     SpoqaHanSansNeoBold : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
     'SpoqaHanSansNeo-Bold' : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
+    esamanru_Light: require('../assets/fonts/esamanru_Light.ttf'),
+    'esamanru_Light': require('../assets/fonts/esamanru_Light.ttf'),
   });
 
 
@@ -53,11 +55,11 @@ Font.loadAsync({
                         style={styles.youtubePic}/>
                     </View>
                 </View>
-                <View style={styles.donateButton}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Text style={styles.buttonText}>기부하기</Text>
-                    </TouchableOpacity>
-                </View> 
+                <TouchableOpacity onPress={() => navigation.navigate("GoDonate")}>
+                    <View style={styles.donateButton}>
+                    <Text style={styles.buttonText}>기부하기</Text>                    
+                    </View> 
+                </TouchableOpacity>
             </ImageBackground>
 
         </View>
@@ -103,7 +105,7 @@ Font.loadAsync({
     },
     content:{
     flex:2,
-    fontFamily:"SpoqaHanSansNeoBold",
+    fontFamily:"esamanru_Light",
     fontSize:16,
     width:"100%",
     color:"white",
@@ -123,11 +125,11 @@ Font.loadAsync({
     
     },
     donateButton:{
-    width: '100%',
-    height: '10%',
+    width: Dimensions.get('window').width,
     backgroundColor:"#7CB199",
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    padding:"4%"
     },
     buttonText:{
         color:"white",
