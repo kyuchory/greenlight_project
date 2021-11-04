@@ -74,12 +74,12 @@ const Main = () => {
           {outerName}
         </Text>
         <Text style = {styles.textSmall}>
-          {outerPrice}
+          {outerPrice}원
         </Text>
       </View>
       <View style = {styles.box2}>
           <View style = {styles.option}>
-          <Text style = {styles.textBold}>Freesize</Text> 
+          <Text style = {styles.textSmall}>Freesize</Text> 
           </View>
 
           <View style = {styles.payment}>
@@ -93,7 +93,7 @@ const Main = () => {
           </View>
 
           <View style = {styles.like}>
-          <Image source ={require("../icon+image/outer_like.png")}
+          <Image source ={require("../icon+image/heart.png")}
           style={styles.like_img} /> 
           </View>
 
@@ -111,7 +111,8 @@ const Page = () => {
   return(
    <View style = {styles.page}>
       <Image source = {require("../icon+image/outer_brownjacketpage.jpg")}
-      style = {styles.page_img}/>
+      style = {styles.page_img}
+      resizeMode= {"contain"}/>
   </View> 
   )
   
@@ -143,13 +144,14 @@ const Line1 = () => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop:"8%",
     backgroundColor: 'white',
     flexDirection:'column',
     width:'100%',
 
   },
   header:{
-    marginTop:"5%",
+    marginTop:"-8%",
     height:"5%",
     flexDirection:"row",
     alignItems:"center",
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
     fontFamily:"BinggraeMelona-Bold",
     color: "black",
     fontSize:25,
-    marginLeft:"7%"
+    marginLeft:"4%"
   },
   main:{
     width:'100%',
@@ -176,11 +178,12 @@ const styles = StyleSheet.create({
   },
 
   page: {
-    marginLeft:'3%',
-    width:'95%',
+    marginBottom:'3%',
+    padding:"1%",
+    width:'100%',
     justifyContent: 'center',
-    alignItems:"center",
-    marginTop: '3%',
+    // borderColor:"red",
+    // borderWidth:1
   },
 
   box1: {
@@ -193,18 +196,18 @@ const styles = StyleSheet.create({
 
   box2: {
     width:'90%',
- //   height:'10%',
     flexDirection: 'row',
     backgroundColor: 'white',
-    //alignItems: "center",
+    justifyContent:"flex-start",
   },
 
   box3: {
-    width:'100%',
+    width:'90%',
     flexDirection: 'column',
    backgroundColor: 'white',
     marginTop: '5%',
     marginBottom: '3%',
+    
   },
   line1:{
     marginTop:'-15%',
@@ -213,27 +216,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#b6b6b6',
   },
   option:{
-    width:'25%',
-   // height:'100%',
+    flex:2,
+    
     backgroundColor: 'white',
-    marginTop:'2%',
-    marginLeft: "5%",
+    
+    justifyContent:"center",
+    // borderColor:"blue",
+    // borderWidth:1,
+
+    
   },
   
   payment: {
-    width:'32%',
-    backgroundColor: 'white',
-    marginRight: "2%",
-    marginLeft:"5%",
+    flex:4,
+    alignItems:"center",
+    justifyContent:"center"
   }, 
   like:{
-    width: '14%',
+    flex:1,
+    alignItems:"center",
+    justifyContent:"center"
   },
   share:{
-    marginTop:"2%",
-    marginLeft: "4%",
-    width: '14%',
-
+    flex:1,
+    alignItems:"center",
+    justifyContent:"center"
   },
  
   
@@ -241,25 +248,31 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   page_img:{
-    width: '100%',
+    width:'100%',
+    
   },
   purchase: {
     width: '100%',
+    borderRadius:10,
+    borderWidth:1,
+    borderColor:"black"
   },
   like_img:{
-    width:'100%',
+    width:30,
+    height:30
+    
   },
   share_img:{
-    width:'50%',
+    // width:'100%',
   },
   textSmall:{
     fontSize:16,
     fontFamily: "Vitro_pride", 
-    marginLeft:'5%',
+
     },
   textBold:{
     fontSize:20,
     fontFamily: "BinggraeMelonaBold",
-    marginLeft:'5%',
+
   }
 });

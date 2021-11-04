@@ -23,6 +23,8 @@ import { UserProvider } from "./contexts";
 
 import { LogBox } from 'react-native';
 import Donate from "./Donate/Donate";
+import DonateDetailPage1 from "./Donate/DonateDetailPage1";
+import GoDonate from "./Donate/GoDonate";
 
 LogBox.ignoreLogs(['Setting a timer']);
 
@@ -58,6 +60,8 @@ export default function App() {
         <Stack.Screen name="UserGuide" component= {UserGuide}/>
         <Stack.Screen name="OuterPage" component={OuterPage}/>
         <Stack.Screen name="Donate" component={Donate}/>
+        <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
+        <Stack.Screen name="GoDonate" component={GoDonate}/>
 
 
       </Stack.Navigator>

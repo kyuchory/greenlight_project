@@ -1,12 +1,9 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { useNavigation } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
 import React, { useCallback } from 'react';
 import { StyleSheet, Text, View, Image, LogBox } from "react-native";
 import { useState, useContext, useEffect,} from 'react'
 import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
-import { render } from 'react-dom';
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 
 Font.loadAsync({
@@ -16,7 +13,7 @@ Font.loadAsync({
     'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
     HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
     'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
-     BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
+    BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
     'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
   });
 
@@ -86,12 +83,17 @@ const Box = () => {
     return(
       <View style = {styles.box}>
        <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
-            <TouchableHighlight/>
-            <Image source= {{uri:`${outerImg}`}} 
-            style={styles.image} />
-      <Text style = {styles.textSmall}> {outerStore} </Text>
-      <Text style = {styles.textBold}> {outerName}</Text>
-      <Text style = {styles.textBold}> {outerPrice}원</Text>
+          <View style={styles.imageWrapper}>
+              <Image source= {{uri:`${outerImg}`}} 
+              style={styles.image}
+              />
+            </View>
+            <View style={styles.infoWrapper}>
+              <Text style = {styles.textSmall}>{outerStore}</Text>
+              <Text style = {styles.textBold}>{outerName}</Text>
+              <Text style = {styles.textBold}>{outerPrice}원</Text>
+            </View>
+
         </TouchableOpacity>
   
       </View>
@@ -101,12 +103,17 @@ const Box = () => {
     return(
       <View style = {styles.box}>
        <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
-            <TouchableHighlight/>
-            <Image source= {require("../icon+image/outer_greenjacket.jpg")} 
-          style={styles.image} />
-      <Text style = {styles.textSmall}> {outerStore2} </Text>
-      <Text style = {styles.textBold}> {outerName2}</Text>
-      <Text style = {styles.textBold}> {outerPrice2}원 </Text>
+         
+       <View style={styles.imageWrapper}>
+            <Image source= {{uri:`${outerImg2}`}} 
+            style={styles.image}
+            />
+          </View>
+          <View style={styles.infoWrapper}>
+            <Text style = {styles.textSmall}>{outerStore2}</Text>
+            <Text style = {styles.textBold}>{outerName2}</Text>
+            <Text style = {styles.textBold}>{outerPrice2}원</Text>
+          </View>
         </TouchableOpacity>
   
       </View>
@@ -116,12 +123,16 @@ const Box = () => {
     return(
       <View style = {styles.box}>
        <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
-            <TouchableHighlight/>
-            <Image source= {require("../icon+image/orange_jacket.jpg")} 
-          style={styles.image} />
-      <Text style = {styles.textSmall}> {outerStore3} </Text>
-      <Text style = {styles.textBold}> {outerName3}</Text>
-      <Text style = {styles.textBold}> {outerPrice3}원 </Text>
+       <View style={styles.imageWrapper}>
+            <Image source= {{uri:`${outerImg3}`}} 
+            style={styles.image}
+             />
+        </View>
+          <View style={styles.infoWrapper}>
+            <Text style = {styles.textSmall}>{outerStore3}</Text>
+            <Text style = {styles.textBold}>{outerName3}</Text>
+            <Text style = {styles.textBold}>{outerPrice3}원</Text>
+          </View>
         </TouchableOpacity>
   
       </View>
@@ -159,11 +170,9 @@ const Box = () => {
 const styles = StyleSheet.create({
 
   header:{
-    marginTop:"10%",
     height:"5%",
     flexDirection:"row",
     alignItems:"center",
-
   },
 
   backIcon:{
@@ -177,48 +186,76 @@ const styles = StyleSheet.create({
     fontFamily:"BinggraeMelona-Bold",
     color: "black",
     fontSize:25,
-    marginLeft:"17%"
+    marginLeft:"15%"
   },
 
   container: {
+    paddingTop:"8%",
     backgroundColor: 'white',
     width:"100%",
     height:"100%",
+    // borderColor:"blue",
+    // borderWidth:3,
   },
 
   section:{
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    marginTop: '10%',
+    alignItems: 'center',
     width:'100%',
     height:'30%',
     backgroundColor:'white',
-    marginTop:'-3%',
     justifyContent: 'space-around',
+    // paddingLeft:"1%",
+    paddingRight:"1%",
+    // borderColor:"red",
+    // borderWidth:1,
 
   },
 
   box: {
-    width:'31%',
-    height:'35%',
+    width:'32%',
+    // height:'100%',
     flexDirection: 'column',
+    alignItems:"center",
+    justifyContent:"center",
     backgroundColor: 'white',
-    marginTop: '10%',
+    // borderColor:"blue",
+    // borderWidth:1,
+    
   },
-
   
-  image: {
+  imageWrapper:{
+    flex: 5,
     width: '100%',
-    height: '80%',
-  },
+    alignItems: "flex-start",
+    justifyContent:"center",
+    // borderColor:"red",
+    // borderWidth:1,
 
+  },
+  image: {
+    width: 110,
+    height: 130,
+  },
+  infoWrapper:{
+    flex: 2,
+    width:"100%", 
+    // padding:"10%",
+    alignItems: "flex-start",
+    // borderColor:"pink",
+    // borderWidth:1,
+    
+  },
   textSmall:{
-    fontSize:17,
+    fontSize:14,
     fontFamily: "Vitro_pride", 
-    marginLeft:'1.5%',
+    // marginLeft:"-10%",
     },
   textBold:{
-    fontSize:18,
+    fontSize:14,
     fontFamily: "BinggraeMelonaBold",
-    //marginLeft:'10%',
+    // marginLeft:"0%",
+    // paddingBottom:"2%"
   }
 });
