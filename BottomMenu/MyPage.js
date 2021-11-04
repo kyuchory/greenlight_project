@@ -38,7 +38,7 @@ export default function Mypage() {
     }catch{
       console.log("error");
     }
-  },1000);
+  },10000);
 
   
 

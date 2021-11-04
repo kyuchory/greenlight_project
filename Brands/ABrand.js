@@ -180,7 +180,7 @@ export default function ABrand() {
           )}
           </PointConsumer>
         <Image
-          source={{ uri: "https://youthumbnail.com/image/youtube-player.webp" }}
+          source={require("../icon+image/AbrandYoutube.png")}
           style={styles.youtubePic}
         />
       </View>

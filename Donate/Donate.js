@@ -38,7 +38,7 @@ export default function Donate({ navigation }) {
 
       <TouchableOpacity
         style={styles.brandWrapper}
-        onPress={() => navigation.navigate("ABrand")}>
+        onPress={() => navigation.navigate("DonateDetailPage1")}>
         <Image
         source={require("../icon+image/forest1.png")}
         style={styles.brandImg}/>
