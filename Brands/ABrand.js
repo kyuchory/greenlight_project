@@ -13,6 +13,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import ProgressBar from "../Components/ProgressBar2";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { useNavigation } from "@react-navigation/native";
+import { firestore } from "../utils/firebase";
 
 import * as Font from "expo-font";
 Font.loadAsync({
@@ -25,6 +26,22 @@ Font.loadAsync({
 });
 
 function ABrandProduct() {
+
+  //context랑 파이어베이스랑 연결을 못하겠어서 그냥 파이어베이스만 씁니다...
+  const [point, setPoint] = useState(0);
+  const getProgress = async() => {
+    const document = await firestore.collection('Brand').doc('GreenLight').get();
+    const progress = document.get('progress'); //데이터베이스에서 가져온 진행도
+    // <PointConsumer>
+    // {(value) => (
+    //    value.actions.setPoint(progress)
+    // )}
+    // </PointConsumer>
+    setPoint(progress);
+  }
+
+  getProgress();
+
   return (
     <View style={styles.containerProduct}>
       <View style={styles.productTitle}>
@@ -41,27 +58,25 @@ function ABrandProduct() {
         <View style={styles.productDescText}>
           <Text style={styles.strong}>t_shirt</Text>
           <Text style={styles.normal}>1,000개</Text>
-          <PointConsumer>
-            {(value) => (
+          {/* <PointConsumer>
+            {(value) => ( */}
               <View>
-                <ProgressBar count={value.state.point * 0.01} width={100} />
+                <ProgressBar count={point * 0.01} width={100} />
                 <View>
-                  <Text style={styles.normal}> 폐섬유 {value.state.point}%</Text>
+                  <Text style={styles.normal}> 폐섬유 {point}%</Text>
                 </View>
                 <View style={styles.iconandimg}>
                   <Image
                     source={require("../icon+image/magnifyingGlass.png")}
                     style={{ width: 12, height: 12, marginRight: 2 }}
                   />
-                  <TouchableOpacity
-                    // onPress={() => navigation.navigate("ChatBot")}
-                  >
+
                     <Text style={styles.normal}>제품 상세정보</Text>
-                  </TouchableOpacity>
+
                 </View>
               </View>
-            )}
-          </PointConsumer>
+            {/* )}
+          </PointConsumer> */}
         </View>
       </View>
     </View>
@@ -150,12 +165,8 @@ export default function ABrand() {
   const test = (value) => {
     <PointConsumer>
       {(value) => (
-      value.actons.setPoint(value.state.point + 10),
-      navigation.navigate("ChatBot")
+      value.actions.setPoint(value.state.point + 10)
       )}
-    {/* value.actions.setPoint(value.state.point + 10); */}
-    
-
     </PointConsumer>
   };
   
@@ -178,7 +189,6 @@ export default function ABrand() {
               style={styles.heart}
             />
             <TouchableOpacity onPress={() => navigation.navigate("ChatBot")}>
-            {/* value.actions.setPoint(value.state.point + 10) */}
             <Image
               source={require("../icon+image/give.png")}
               style={styles.give}
