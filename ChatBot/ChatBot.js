@@ -49,18 +49,30 @@ export default function ChatBot() {
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
+  //후원내역
+  const [fiber, setFiber] = useState('');
+  const [clothNum, setClothNum] = useState(0);
+
+
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
 
   const handleMileage = async() => {
-
     const document = await firestore.collection('User').doc(email).get();
     const prevMileage = document.get('mileage'); //데이터베이스에서 가져온 기존 마일리지
-
     const plusMileage = prevMileage + 5000;
 
-    firestore.collection('User').doc(email).set({'mileage':plusMileage}); //데이터베이스의 마일리지 업데이트
+    const prevSupportCount = document.get('supportCount'); //데이터베이스에서 가져온 기존 후원 횟수
+    const plusSupportCount = prevSupportCount + 1;
+
+    firestore.collection('User').doc(email).set({//데이터베이스의 마일리지 업데이트.
+      'mileage':plusMileage,
+      'supportCount':plusSupportCount
+    }, { merge: true }); //{ merge: true }를 해줘야 덮어쓰지 않는다.
+
+
   };
+
 
   const backGo = () =>{
     navigation.goBack();
@@ -75,17 +87,26 @@ export default function ChatBot() {
     firestore.collection('Brand').doc('GreenLight').set({'progress':plusProgress}); //데이터베이스의 progress 업데이트    
   };
 
-  const finish = () => {
+
+  const handleSupportList = async() => {//데이터베이스에 후원내역목록 업데이트.
+    firestore.collection('User').doc(email).collection('supportList')
+    .add({'fiber':fiber,'clothNum':clothNum},{ merge: true });//add를 쓰면 문서 자동값 생성되어 추가
+    
+    
+  };
+
+  const finish = () => { //후원종료 버튼 눌렀을때 기능
     {
-      handleMileage();
+      handleMileage(); //마일리지와 후원내역 업데이트
+      handleSupportList();//후원내역목록(후원 소재 종류와 몇 벌인지) 업데이트.
       backGo();//후원 종료시 화면back
       plusProgressBar();//후원 종료시 마일리지 플러스
     }
   };
 
-  const onChangeText = (event) => {
-    setText(event.target.value);
-  };
+  // const onChangeText = (event) => {
+  //   setText(event.target.value);
+  // };
 
   const handleReady = () => {
     setStart(false);
@@ -102,18 +123,21 @@ export default function ChatBot() {
     setMaterial(false);
     setDisplay1(true);
     setViewCondition1(true);
+    setFiber("폐섬유");
   };
 
   const choiceSpecial = () => {
     setMaterial(true);
     setDisplay1(true);
     setViewCondition1(true);
+    setFiber("특수소재");
   };
 
   const saidYes = () => {
     setSaid(true);
     setDisplay2(true);
     setViewCondition2(true);
+    setClothNum(text);
   };
   const pickPictureYes = () => {
     setDisplay3(true);
@@ -345,7 +369,7 @@ export default function ChatBot() {
                                     }
                                     placeholder="입력"
                                     value={text}
-                                    onChange={onChangeText}
+                                    onChangeText={text=>setText(text)}
                                   />
                                 </View>
                                 <Text style={{ marginLeft: 5, marginTop: 4 }}>
@@ -381,7 +405,7 @@ export default function ChatBot() {
                                   <TextInput
                                     placeholder="입력"
                                     value={text}
-                                    onChange={onChangeText}
+                                    onChangeText={text=>setText(text)}
                                   />
                                 </View>
                                 <Text style={{ marginLeft: 5, marginTop: 4 }}>
