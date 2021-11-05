@@ -30,6 +30,8 @@ const[outerName, setOuterName] = useState(0);
 const[outerPrice, setOuterPrice] = useState(0);
 const[outerImg, setOuterImg] = useState(0);
 const[outerStore, setOuterStore] = useState(0);
+const[like, setLike] = useState(0);
+
 
 const handleFireBase = async()=>{
   const document = await firestore.collection("outer").doc("outer1").get();
@@ -37,12 +39,15 @@ const handleFireBase = async()=>{
   const tempPrice = await document.get("price");
   const tempImg = await document.get("uri");
   const tempStore = await document.get("store");
+  const tempLike = await document.get("like");
 
+  setLike(tempLike);
   setOuterName(tempName);
   setOuterPrice(tempPrice);
   setOuterImg(tempImg);
   setOuterStore(tempStore);
 }
+
 handleFireBase();
 
 const Main = () => {
@@ -92,11 +97,12 @@ const Main = () => {
           style={styles.share_img} /> 
           </View>
 
+          <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
           <View style = {styles.like}>
           <Image source ={require("../icon+image/heart.png")}
           style={styles.like_img} /> 
           </View>
-
+          </TouchableOpacity>
         
       </View>
 
