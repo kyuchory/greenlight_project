@@ -11,12 +11,6 @@ Font.loadAsync({
 function LogoTitle5(props) {
   return (
     <View style={stytles.headerView}>
-      <View style={stytles.iconWrapper}>
-        <Image
-          source={require("../icon+image/back.png")}
-          style={{ width: 28, height: 28 }}
-        />
-      </View>
       <View style={stytles.titleWrapper}>
         <Text style={stytles.title}>{props.title}</Text>
       </View>

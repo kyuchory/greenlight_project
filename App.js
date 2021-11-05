@@ -12,6 +12,20 @@ import ChatBot from "./ChatBot/ChatBot";
 import CategoryOuter from "./CategoryComponents/CategoryOuter";
 import UserGuide from "./ChatBot/UserGuide";
 import OuterPage from "./CategoryComponents/OuterPage";
+
+
+import { ThemeProvider } from 'styled-components/native';
+import { theme } from './theme';
+
+import { PointProvider } from "./context/point";
+import { FabricProvider } from "./ChatBot/ChatBot_Context";
+import { UserProvider } from "./contexts";
+
+import { LogBox } from 'react-native';
+import Donate from "./Donate/Donate";
+import DonateDetailPage1 from "./Donate/DonateDetailPage1";
+import GoDonate from "./Donate/GoDonate";
+import FirstOuter from "./CategoryComponents/FirstOuter";
 import Payment from "./CategoryComponents/Payment";
 import PaymentCompletion from "./CategoryComponents/PaymentCompletion";
 
@@ -19,23 +33,11 @@ import LogoTitle3 from "./Header/LogoTitle3";
 import LogoTitle4 from "./Header/LogoTitle4";
 import LogoTitle5 from "./Header/LogoTitle5";
 
-import { ThemeProvider } from "styled-components/native";
-import { theme } from "./theme";
-
-import { PointProvider } from "./context/point";
-import { FabricProvider } from "./ChatBot/ChatBot_Context";
-import { UserProvider } from "./contexts";
-
-import Donate from "./Donate/Donate";
-import FirstOuter from "./CategoryComponents/FirstOuter";
-import DonateDetailPage1 from "./Donate/DonateDetailPage1";
-import GoDonate from "./Donate/GoDonate";
-
-import { LogBox } from 'react-native';
-
 LogBox.ignoreLogs(['Setting a timer']);
 
+
 const Stack = createStackNavigator();
+
 
 export default function App() {
   const [point, setPoint] = useState(1);
@@ -43,34 +45,31 @@ export default function App() {
     setPoint(point + 5);
   };
 
+
   return (
     <UserProvider>
-      <FabricProvider>
-        <PointProvider>
-          <ThemeProvider theme={theme}>
-            <NavigationContainer>
-              <Stack.Navigator
-                initialRouteName="Login"
-                screenOptions={{
-                  headerShown: false,
-                }}
-              >
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen
-                  name="BottomTab"
-                  component={BottomTab}
-                  point={point}
-                />
-                <Stack.Screen name="ABrand" component={ABrand} />
-                <Stack.Screen name="Signup" component={Signup} />
-                <Stack.Screen name="ChatBot" component={ChatBot} />
-                <Stack.Screen name="CategoryOuter" component={CategoryOuter} />
-                <Stack.Screen name="UserGuide" component={UserGuide} />
-                <Stack.Screen name="OuterPage" component={OuterPage} />
-                <Stack.Screen name="Donate" component={Donate} />
-                <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
+    <FabricProvider>
+    <PointProvider>
+    <ThemeProvider theme={theme}>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="BottomTab" component={BottomTab} point={point}/>
+        <Stack.Screen name="ABrand" component={ABrand} />
+        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="ChatBot" component={ChatBot} />
+        <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
+        <Stack.Screen name="UserGuide" component= {UserGuide}/>
+        <Stack.Screen name="OuterPage" component={OuterPage}/>
+        <Stack.Screen name="Donate" component={Donate}/>
+        <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
         <Stack.Screen name="GoDonate" component={GoDonate}/>
-                <Stack.Screen
+        <Stack.Screen
                   name="FirstOuter"
                   component={FirstOuter}
                   options={{
@@ -80,27 +79,32 @@ export default function App() {
                     ),
                   }}
                 />
-                <Stack.Screen name="Payment" component={Payment} 
-                options={{
-                  headerShown: true,
-                  headerTitle: (props) => (
-                    <LogoTitle4 {...props} title={"주문하기"} />
-                  ),
-                }}
+                <Stack.Screen
+                  name="Payment"
+                  component={Payment}
+                  options={{
+                    headerShown: true,
+                    headerTitle: (props) => (
+                      <LogoTitle4 {...props} title={"주문하기"} />
+                    ),
+                  }}
                 />
-                <Stack.Screen name="PaymentCompletion" component={PaymentCompletion}
-                options={{
-                  headerShown: true,
-                  headerTitle: (props) => (
-                    <LogoTitle5 {...props} title={"주문완료"} />
-                  ),
-                }}
+                <Stack.Screen
+                  name="PaymentCompletion"
+                  component={PaymentCompletion}
+                  options={{
+                    headerShown: true,
+                    headerTitle: (props) => (
+                      <LogoTitle5 {...props} title={"주문완료"} />
+                    ),
+                  }}
                 />
-              </Stack.Navigator>
-            </NavigationContainer>
-          </ThemeProvider>
-        </PointProvider>
-      </FabricProvider>
+
+      </Stack.Navigator>
+    </NavigationContainer>
+    </ThemeProvider>
+    </PointProvider>
+    </FabricProvider>
     </UserProvider>
   );
 }

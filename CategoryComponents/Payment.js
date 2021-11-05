@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 import {
   Text,
@@ -9,6 +10,7 @@ import {
 } from "react-native";
 
 export default function Payment() {
+  const navigation = useNavigation();
   const [text, setText] = useState("");
   const [point, setPoint] = useState(0);
   const textHandler = (event) => {
@@ -112,7 +114,7 @@ export default function Payment() {
       </View>
       <View style={{ flex: 0.3, width: "100%" }}></View>
       <View style={styles.bottomPaymentBar}>
-        <TouchableOpacity style={styles.bottomPaymentBarTouch}>
+        <TouchableOpacity onPress={()=>navigation.navigate("PaymentCompletion")}>
           <Text>45,000원 결제하기</Text>
         </TouchableOpacity>
       </View>

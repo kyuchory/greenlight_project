@@ -27,6 +27,7 @@ Font.loadAsync({
   "BinggraeMelona-Bold": require("../assets/fonts/BinggraeMelona-Bold.ttf"),
 });
 
+
 export default function CategoryOuter() {
   state = { open: false };
 
@@ -85,11 +86,14 @@ export default function CategoryOuter() {
           </View>
 
           <View style={styles.payment}>
-                source={require("../icon+image/purchase_button.png")}
-                style={styles.purchase}
-                
+            <TouchableOpacity onPress={()=>navigation.navigate("Payment")}>
+            <Image
+              source={require("../icon+image/purchase_button.png")}
+              style={styles.purchase}
+            />
+            </TouchableOpacity>
           </View>
-          
+
           <View style={styles.share}>
             <Image
               source={require("../icon+image/share.png")}
