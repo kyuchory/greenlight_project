@@ -32,14 +32,14 @@ export default function Mypage() {
     const tempmileage = await document.get("mileage");
     setMileage(tempmileage);
   }
-  setInterval(()=>{
-    try{
-      handleMileage();
-    }catch{
-      console.log("error");
-    }
-  },1000);
-
+  // setInterval(()=>{
+  //   try{
+  //     handleMileage();
+  //   }catch{
+  //     console.log("error");
+  //   }
+  // },10000);
+  handleMileage();
   
 
   
@@ -86,10 +86,6 @@ export default function Mypage() {
           <Image source= {require("../icon+image/point.png")} 
           style={styles.image} />
           <Text style={styles.iconContentsText}>포인트</Text>
-          {/* <Button
-            title="Press"
-            onPress={() => console.log(mileage)}
-            /> */}
           <Text style={styles.iconContentsNum}>{mileage}</Text>
           
         </View>
@@ -175,11 +171,6 @@ export default function Mypage() {
           </View>
         </View>
       </View>
-      // <View style = {styles.Cancle_Container}>
-      // <Text style = {styles.textDelivery}>
-      //     취소/교환/환불
-      //   </Text>
-      // </View>
     )
   }
 
@@ -206,23 +197,14 @@ export default function Mypage() {
   return(
     <View style={styles.container}>
       <Line1/>
-
       <Profile/>
-      <Line2/>
-      
+      <Line2/>     
       <Shopping/>
-      <Line1/>
-      
+      <Line1/>     
       <Delivery/>
-      {/* <Delivery2/> */}
-      {/* <Delivery3/> */}
-      <Line1/>
-      
+      <Line1/>    
       <Cancle/>
-      {/* <Cancle2/>
-      <Cancle3/> */}
-      <Line2/>
-      
+      <Line2/>   
       <Call/>
 
     </View>
@@ -308,7 +290,7 @@ const styles = StyleSheet.create({
     marginTop:5,
   },
   iconContentsNum:{
-    fontSize: 20,
+    fontSize: 18,
     fontWeight:'400',
     // borderWidth:1,
     // borderColor:"blue",

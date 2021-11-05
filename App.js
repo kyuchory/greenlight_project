@@ -28,6 +28,8 @@ import { UserProvider } from "./contexts";
 
 import Donate from "./Donate/Donate";
 import FirstOuter from "./CategoryComponents/FirstOuter";
+import DonateDetailPage1 from "./Donate/DonateDetailPage1";
+import GoDonate from "./Donate/GoDonate";
 
 import { LogBox } from 'react-native';
 
@@ -48,7 +50,7 @@ export default function App() {
           <ThemeProvider theme={theme}>
             <NavigationContainer>
               <Stack.Navigator
-                initialRouteName="Payment"
+                initialRouteName="Login"
                 screenOptions={{
                   headerShown: false,
                 }}
@@ -66,6 +68,8 @@ export default function App() {
                 <Stack.Screen name="UserGuide" component={UserGuide} />
                 <Stack.Screen name="OuterPage" component={OuterPage} />
                 <Stack.Screen name="Donate" component={Donate} />
+                <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
+        <Stack.Screen name="GoDonate" component={GoDonate}/>
                 <Stack.Screen
                   name="FirstOuter"
                   component={FirstOuter}

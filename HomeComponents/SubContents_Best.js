@@ -3,15 +3,16 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 
 
-const SubContents_Eco=()=> {
+export default function SubContents_Best(){
   return (
 
     <View style={styles.container}>
+
       <View style={styles.imgContainer}>
-        <Image
-          source={require("../icon+image/environ_down.jpeg")}
+          <Image
+          source={require("../icon+image/best_down.jpeg")}
           style={styles.image}/>
-      </View>
+      </View>   
     </View>
   );
 }
@@ -19,13 +20,13 @@ const SubContents_Eco=()=> {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    //alignItems: 'flex-start',
+    //justifyContent: 'flex-start',
+    flexDirection:"column",
   },
   imgContainer:{
     flex:1,
-    // borderColor:"red",
-    // borderWidth:2,
+    //flexDirection:"row",
     width:"100%",
     height:"100%",
     alignItems: 'center',
@@ -33,11 +34,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width:"100%",
-    height:"100%",
-    resizeMode:'stretch'
+    height:"65%",
+    //resizeMode:'stretch'
 
   },
 });
-
-export default SubContents_Eco;
-

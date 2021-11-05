@@ -121,6 +121,7 @@ export default function BottomTab({ point, handlePoint }) {
         options={{
           headerTitle: (props) => <LogoTitle {...props} title={"후원하기"} />,
           tabBarIcon: ({ focused }) => (focused ? <Icon3C /> : <Icon3 />),
+          unmountOnBlur:true
         }}
       />
       <BottomTabNavigator.Screen
@@ -139,6 +140,7 @@ export default function BottomTab({ point, handlePoint }) {
             <LogoTitle2 {...props} title={"마이페이지"} />
           ),
           tabBarIcon: ({ focused }) => (focused ? <Icon5B /> : <Icon5 />),
+          unmountOnBlur:true
         }}
       />
     </BottomTabNavigator.Navigator>

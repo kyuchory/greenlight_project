@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { StyleSheet, Text, useWindowDimensions, Dimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 
+import Best from "./SubContents_Best";
+import Brand from "./SubContents_Brand"; 
 import Home from "./SubContents_Home";
 import Eco from "./SubContents_Eco";
 import Event from "./SubContents_Event";
@@ -12,8 +14,8 @@ import Event from "./SubContents_Event";
 let ScreenHeight = Dimensions.get("window").height //subMenu 내용물의 높이를 100%로 맞춰줌
 const renderScene = SceneMap({
   first: Home,
-  second: Home,
-  third: Home,
+  second: Brand,
+  third: Best,
   fourth: Eco,
   fifth: Event,
 });

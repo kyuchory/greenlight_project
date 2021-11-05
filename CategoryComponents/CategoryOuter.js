@@ -1,233 +1,235 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { useNavigation } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import React, { useCallback } from 'react';
-import { StyleSheet, Text, View, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { StyleSheet, Text, View, Image, LogBox } from "react-native";
+import { useState, useContext, useEffect } from "react";
 import { firestore } from "../utils/firebase";
-import * as Font from 'expo-font';
-import { render } from 'react-dom';
-import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+import * as Font from "expo-font";
+import {
+  TouchableHighlight,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 
 Font.loadAsync({
-    Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
-    'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-    WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-    'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
-     BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
-    'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
-  });
-
-
+  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
+  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
+  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
+  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
+  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  BinggraeMelonaBold: require("../assets/fonts/BinggraeMelona-Bold.ttf"),
+  "BinggraeMelona-Bold": require("../assets/fonts/BinggraeMelona-Bold.ttf"),
+});
 
 const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
-
-
-const getOuter = async() => {
-  const outer = await firestore.collection(outer).get();
-  //setMileage(prevMileage.forEach((document)=>document.data()['마일리지']));
-  console.log(outer);
- // const plusMileage = mileage + 500
- // setMileage(plusMileage);
- 
-
- // firestore.collection('User').doc(email).set({'마일리지':plusMileage});
-  // firestore.collection(email).add({
-  //   ...firestore.collection(email).doc('test2').set({'마일리지':plusMileage})
-  // });
-};
-
-class Outer extends React.Component {
-  constructor(){
-      super();
-      this.state = {
-        words:{}
-      }
-  }
-  _get(){
-    fetch(`${databaseURL}/outer.json`).then(res => {
-      if(res.status != 200) {
-        throw new Error(res.statusText);
-      }
-      return res.json();
-    }).then(words => this.setState({words: words}));
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.words != this.state.words;
-  }
-  componentDidMount() {
-    this._get();
-  }
-  render() {
-    return (
-      <div key={id}>
-        {Object.keys(this.state.words).map(id => {
-            const word = this.state.words[id];
-            return (
-              <Text> 상품명: {Outer.name}
-              </Text>
-            );
-        })}
-      </div>
-    );
-  }
-}
-
-
 
 export default function CategoryOuter() {
   const navigation = useNavigation();
 
-/* 
-  const FetchData = () => {
-    //받아온 데이터를 저장할 배열
-    //let product = [];
+  const [outerName, setOuterName] = useState(0);
+  const [outerPrice, setOuterPrice] = useState(0);
+  const [outerImg, setOuterImg] = useState(0);
+  const [outerStore, setOuterStore] = useState(0);
 
-    firestore
-        .collection('outer') //product 컬렉션 반환
-        .get()
-        .then((docs) => {
-          //forEach 함수로 각각의 다큐먼트에 함수 실행
-          docs.forEach((doc) => {
-            console.log(doc.data())
+  const [outerName2, setOuterName2] = useState(0);
+  const [outerPrice2, setOuterPrice2] = useState(0);
+  const [outerImg2, setOuterImg2] = useState(0);
+  const [outerStore2, setOuterStore2] = useState(0);
 
-           // const Box = () => {
-       
-              return(
-                <View style = {styles.box}>
-                <Image source= {require("../icon+image/homeImage.jpg")} 
-                    style={styles.image} />
-                <Text style = {styles.textSmall}> ${doc.data().name} </Text>
-                <Text>ddd</Text>
-                <Text style = {styles.textSmall}> ${doc.data().price} </Text>
-                </View>
+  const [outerName3, setOuterName3] = useState(0);
+  const [outerPrice3, setOuterPrice3] = useState(0);
+  const [outerImg3, setOuterImg3] = useState(0);
+  const [outerStore3, setOuterStore3] = useState(0);
 
-              )
-           // }
-            
-          });
+  const handleFireBase = async () => {
+    const document = await firestore.collection("outer").doc("outer1").get();
+    const tempName = await document.get("name");
+    const tempPrice = await document.get("price");
+    const tempImg = await document.get("uri");
+    const tempStore = await document.get("store");
 
-        });
-        return (
-       <View style = {styles.container}>
-         <Text>ddd</Text> 
-       </View>
-        ); 
-  }
-   */
+    setOuterName(tempName);
+    setOuterPrice(tempPrice);
+    setOuterImg(tempImg);
+    setOuterStore(tempStore);
 
-/* 
-const Section = () => {
-  return (
-    <View style = {styles.section}>
-    </View>
-  )
-} 
- */
+    const document2 = await firestore.collection("outer").doc("outer2").get();
+    const tempName2 = await document2.get("name");
+    const tempPrice2 = await document2.get("price");
+    const tempImg2 = await document2.get("uri");
+    const tempStore2 = await document2.get("store");
 
-const Box = () => {
-    return(
-      <View style = {styles.box}>
-       <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
-            <TouchableHighlight/>
-            <Image source= {require("../icon+image/outer_brownjacket1.png")} 
-          style={styles.image} />
-      <Text style = {styles.textSmall}> GreenLight </Text>
-      <Text style = {styles.textBold}> Brown Jacket</Text>
-      <Text style = {styles.textBold}> 50,000원</Text>
+    setOuterName2(tempName2);
+    setOuterPrice2(tempPrice2);
+    setOuterImg2(tempImg2);
+    setOuterStore2(tempStore2);
+
+    const document3 = await firestore.collection("outer").doc("outer3").get();
+    const tempName3 = await document3.get("name");
+    const tempPrice3 = await document3.get("price");
+    const tempImg3 = await document3.get("uri");
+    const tempStore3 = await document3.get("store");
+
+    setOuterName3(tempName3);
+    setOuterPrice3(tempPrice3);
+    setOuterImg3(tempImg3);
+    setOuterStore3(tempStore3);
+  };
+
+  handleFireBase();
+
+  const Box = () => {
+    return (
+      <View style={styles.box}>
+        <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
+          <View style={styles.imageWrapper}>
+            <Image source={{ uri: `${outerImg}` }} style={styles.image} />
+          </View>
+          <View style={styles.infoWrapper}>
+            <Text style={styles.textSmall}>{outerStore}</Text>
+            <Text style={styles.textBold}>{outerName}</Text>
+            <Text style={styles.textBold}>{outerPrice}원</Text>
+          </View>
         </TouchableOpacity>
-  
       </View>
-    )
-  } 
+    );
+  };
   const Box2 = () => {
-    return(
-      <View style = {styles.box}>
-       <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
-            <TouchableHighlight/>
-            <Image source= {require("../icon+image/outer_greenjacket.jpg")} 
-          style={styles.image} />
-      <Text style = {styles.textSmall}> GreenLight </Text>
-      <Text style = {styles.textBold}> Green Jacket</Text>
-      <Text style = {styles.textBold}> 50,000원</Text>
+    return (
+      <View style={styles.box}>
+        <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
+          <View style={styles.imageWrapper}>
+            <Image source={{ uri: `${outerImg2}` }} style={styles.image} />
+          </View>
+          <View style={styles.infoWrapper}>
+            <Text style={styles.textSmall}>{outerStore2}</Text>
+            <Text style={styles.textBold}>{outerName2}</Text>
+            <Text style={styles.textBold}>{outerPrice2}원</Text>
+          </View>
         </TouchableOpacity>
-  
       </View>
-    )
-  }   
+    );
+  };
   const Box3 = () => {
-    return(
-      <View style = {styles.box}>
-       <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
-            <TouchableHighlight/>
-            <Image source= {require("../icon+image/orange_jacket.jpg")} 
-          style={styles.image} />
-      <Text style = {styles.textSmall}> GreenLight </Text>
-      <Text style = {styles.textBold}> Orange Jacket</Text>
-      <Text style = {styles.textBold}> 50,000원</Text>
+    return (
+      <View style={styles.box}>
+        <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
+          <View style={styles.imageWrapper}>
+            <Image source={{ uri: `${outerImg3}` }} style={styles.image} />
+          </View>
+          <View style={styles.infoWrapper}>
+            <Text style={styles.textSmall}>{outerStore3}</Text>
+            <Text style={styles.textBold}>{outerName3}</Text>
+            <Text style={styles.textBold}>{outerPrice3}원</Text>
+          </View>
         </TouchableOpacity>
-  
       </View>
-    )
-  }  
- return (
+    );
+  };
+  return (
     <View style={styles.container}>
-      <View style={styles.section}>
-        <Box/>
-        <Box2/>
-        <Box3/>
- 
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image
+            source={require("../icon+image/back.png")}
+            style={styles.backIcon}
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Outer</Text>
       </View>
 
+      <View style={styles.section}>
+        <Box />
+        <Box2 />
+        <Box3 />
+      </View>
     </View>
-
-  ); 
-};
-
-
+  );
+}
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    width:"100%",
-    height:"100%",
+  header: {
+    height: "5%",
+    flexDirection: "row",
+    alignItems: "center",
   },
 
-  section:{
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    width:'100%',
-    height:'30%',
-    backgroundColor:'white',
-    marginTop:'10%',
-    justifyContent: 'space-around',
+  backIcon: {
+    width: 25,
+    height: 25,
+    marginLeft: "20%",
+  },
 
+  headerText: {
+    flex: 1,
+    fontFamily: "BinggraeMelona-Bold",
+    color: "black",
+    fontSize: 25,
+    marginLeft: "15%",
+  },
+
+  container: {
+    paddingTop: "8%",
+    backgroundColor: "white",
+    width: "100%",
+    height: "100%",
+    // borderColor:"blue",
+    // borderWidth:3,
+  },
+
+  section: {
+    flexDirection: "row",
+    marginTop: "10%",
+    alignItems: "center",
+    width: "100%",
+    height: "30%",
+    backgroundColor: "white",
+    justifyContent: "space-around",
+    // paddingLeft:"1%",
+    paddingRight: "1%",
+    // borderColor:"red",
+    // borderWidth:1,
   },
 
   box: {
-    width:'33%',
-    height:'35%',
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    marginTop: '10%',
+    width: "32%",
+    // height:'100%',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    // borderColor:"blue",
+    // borderWidth:1,
   },
 
-  
+  imageWrapper: {
+    flex: 5,
+    width: "100%",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    // borderColor:"red",
+    // borderWidth:1,
+  },
   image: {
-    //marginLeft: '30%',
-    width: '100%',
-    height: '95%',
+    width: 110,
+    height: 130,
   },
-
-  textSmall:{
-    fontSize:17,
-    fontFamily: "Vitro_pride", 
-    marginLeft:'1.5%',
-    },
-  textBold:{
-    fontSize:19,
+  infoWrapper: {
+    flex: 2,
+    width: "100%",
+    // padding:"10%",
+    alignItems: "flex-start",
+    // borderColor:"pink",
+    // borderWidth:1,
+  },
+  textSmall: {
+    fontSize: 14,
+    fontFamily: "Vitro_pride",
+    // marginLeft:"-10%",
+  },
+  textBold: {
+    fontSize: 14,
     fontFamily: "BinggraeMelonaBold",
-    //marginLeft:'10%',
-  }
+    // marginLeft:"0%",
+    // paddingBottom:"2%"
+  },
 });

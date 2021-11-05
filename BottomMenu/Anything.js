@@ -4,6 +4,7 @@ import { Button, StyleSheet, Text, View, Image } from "react-native";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import ProgressBar from "../Components/ProgressBar";
 import { PointConsumer } from "../context/point";
+import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
 
 Font.loadAsync({
@@ -20,6 +21,22 @@ Font.loadAsync({
 
 export default function Anything({ navigation }) {
 
+
+    //context랑 파이어베이스랑 연결을 못하겠어서 그냥 파이어베이스만 씁니다...
+    const [point, setPoint] = useState(0);
+    const getProgress = async() => {
+      const document = await firestore.collection('Brand').doc('GreenLight').get();
+      const progress = document.get('progress'); //데이터베이스에서 가져온 진행도
+      // <PointConsumer>
+      // {(value) => (
+      //    value.actions.setPoint(progress)
+      // )}
+      // </PointConsumer>
+      setPoint(progress);
+    }
+  
+    getProgress();
+
   return (
       <View style={styles.container}>
         <Text style={styles.ableBrand}>후원 가능 브랜드</Text>
@@ -35,14 +52,14 @@ export default function Anything({ navigation }) {
             style={styles.brandImg}/>
             <View style={styles.nameAndBar}>
               <Text style={styles.brandName}>GreenLight</Text>
-              <PointConsumer>
-                {(value) => (
+              {/* <PointConsumer>
+                {(value) => ( */}
                   <View style={styles.progressBar}>
-                    <ProgressBar count={value.state.point * 0.01} />
-                    <Text style={{marginLeft:"2%", fontSize:14}}>{value.state.point}%</Text>
+                    <ProgressBar count={point * 0.01} />
+                    <Text style={{marginLeft:"2%", fontSize:14}}>{point}%</Text>
                   </View>
-                )}
-              </PointConsumer>
+                {/* )}
+              </PointConsumer> */}
               <Text style={{marginLeft:"2%",fontFamily:"Vitro_pride", fontSize:12}}>폐섬유, 특수소재</Text>
             </View>
           </TouchableOpacity>
