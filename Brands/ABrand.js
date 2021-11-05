@@ -46,6 +46,9 @@ function ABrandProduct() {
             {(value) => (
               <View>
                 <ProgressBar count={value.state.point * 0.01} width={100} />
+                <View>
+                  <Text style={styles.normal}> 폐섬유 {value.state.point}%</Text>
+                </View>
                 <View style={styles.iconandimg}>
                   <Image
                     source={require("../icon+image/magnifyingGlass.png")}
@@ -55,19 +58,6 @@ function ABrandProduct() {
                     onPress={() => navigation.navigate("ChatBot")}
                   >
                     <Text style={styles.normal}>제품 상세정보</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.iconandimg}>
-                  <Image
-                    source={require("../icon+image/solidarity.png")}
-                    style={{ width: 12, height: 12, marginRight: 2 }}
-                  />
-                  <TouchableOpacity
-                    onPress={() =>
-                      value.actions.setPoint(value.state.point + 10)
-                    }
-                  >
-                    <Text style={styles.normal}>후원하기</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -165,19 +155,30 @@ export default function ABrand() {
             style={styles.backgroundPic}
           />
         </View>
+        <PointConsumer>
+            {(value) => (
         <View style={styles.brandIntro}>
           <View style={styles.brandtitle}>
-            <Text style={styles.brandName}>A Brand</Text>
+            <Text style={styles.brandName}>GreenLight</Text>
             <Image
               source={require("../icon+image/heart.png")}
               style={styles.heart}
             />
+            <TouchableOpacity onPress={() =>
+                      value.actions.setPoint(value.state.point + 10)}>
+            <Image
+              source={require("../icon+image/give.png")}
+              style={styles.give}
+            />
+            </TouchableOpacity>
           </View>
           <Text style={styles.brandDesc}>
             자연으로부터 받은 영감을 재사용 면을 이용해 새로운 의류로 만드는
             브랜드
           </Text>
         </View>
+          )}
+          </PointConsumer>
         <Image
           source={{ uri: "https://youthumbnail.com/image/youtube-player.webp" }}
           style={styles.youtubePic}
@@ -223,6 +224,11 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     marginLeft: 10,
+  },
+  give:{
+    width: 70,
+    height: 25,
+    marginLeft: 20,
   },
   brandDesc: {
     color: "white",
@@ -289,6 +295,7 @@ const styles = StyleSheet.create({
     color: "#848484",
     fontSize: 15,
     fontFamily: "Vitro_pride",
+    marginBottom:5
   },
   iconandimg: {
     flexDirection: "row",

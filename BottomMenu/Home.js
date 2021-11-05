@@ -42,7 +42,6 @@ export default function Home() {
           imageLoadingColor="#2196F3" //이건뭐지
         />
         <SubContents />
-        <Text>hi</Text>
       </ScrollView>
     </View>
   );

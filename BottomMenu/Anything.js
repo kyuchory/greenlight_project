@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, Image } from "react-native";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import ProgressBar from "../Components/ProgressBar";
 import { PointConsumer } from "../context/point";
@@ -13,7 +13,10 @@ Font.loadAsync({
     'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
     HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
     'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
+    SpoqaHanSansNeoBold : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
+    'SpoqaHanSansNeo-Bold' : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
   });
+
 
 export default function Anything({ navigation }) {
 
@@ -27,18 +30,20 @@ export default function Anything({ navigation }) {
           <TouchableOpacity
             style={styles.brandWrapper}
             onPress={() => navigation.navigate("ABrand")}>
-            <TouchableHighlight style={styles.circle}/>
+            <Image
+            source={require("../icon+image/brandImg1.jpg")}
+            style={styles.brandImg}/>
             <View style={styles.nameAndBar}>
-              <Text style={styles.brandName}>A 브랜드</Text>
+              <Text style={styles.brandName}>GreenLight</Text>
               <PointConsumer>
                 {(value) => (
                   <View style={styles.progressBar}>
                     <ProgressBar count={value.state.point * 0.01} />
-                    <Text style={{marginLeft:"4%", fontSize:14}}>{value.state.point}%</Text>
+                    <Text style={{marginLeft:"2%", fontSize:14}}>{value.state.point}%</Text>
                   </View>
                 )}
               </PointConsumer>
-              <Text style={{marginLeft:"1%"}}>폐섬유, 특수소재</Text>
+              <Text style={{marginLeft:"2%",fontFamily:"Vitro_pride", fontSize:12}}>폐섬유, 특수소재</Text>
             </View>
           </TouchableOpacity>
 
@@ -46,24 +51,32 @@ export default function Anything({ navigation }) {
           <TouchableOpacity
             style={styles.brandWrapper}
             onPress={() => navigation.navigate("ABrand")}>
-            <TouchableHighlight style={styles.circle}/>
+            <Image
+            source={require("../icon+image/brandImg2.jpg")}
+            style={styles.brandImg}/>
             <View style={styles.nameAndBar}>
-              <Text style={styles.brandName}>B 브랜드</Text>
+              <Text style={styles.brandName}>Friedtag</Text>
               <PointConsumer>
                 {(value) => (
                   <View style={styles.progressBar}>
                     <ProgressBar count={value.state.point * 0.01} />
-                    <Text style={{marginLeft:"3%", fontSize:14}}>{value.state.point}%</Text>
+                    <Text style={{marginLeft:"2%", fontSize:14}}>{value.state.point}%</Text>
                   </View>
                 )}
               </PointConsumer>
-              <Text style={{marginLeft:"1%"}}>폐섬유</Text>
+              <Text style={{marginLeft:"2%",fontFamily:"Vitro_pride", fontSize:12}}>폐섬유</Text>
             </View>
           </TouchableOpacity>
 
 
         </View>
-
+        <View style={styles.iconWrapper}>
+          <TouchableOpacity onPress={() => navigation.navigate("UserGuide")}>
+            <Image
+            source={require("../icon+image/userGuideIcon.png")}
+            style={{width: 110,height: 35,}}/>
+          </TouchableOpacity>
+        </View>
       </View>
   );
 }
@@ -100,14 +113,11 @@ const styles = StyleSheet.create({
     width:325,
     height:100
   },
-  circle:{
-    marginTop:"20%",
+  brandImg:{
     width:50,
-    height:50,
-    borderRadius:25,
-    backgroundColor:'#FAE0D4',
-    marginRight:"3%",
-
+    height:60,
+    marginRight:"2%",
+    marginLeft:"2%",
   },
   nameAndBar:{
     // borderColor:'red',
@@ -116,8 +126,9 @@ const styles = StyleSheet.create({
   },
   brandName: {
     alignItems: "flex-start",
-    fontSize: 23,
-    fontFamily:'Wemakeprice-Bold',
+    fontSize: 21,
+    fontFamily:'SpoqaHanSansNeoBold',
+    color:"#444343"
   },
   progressBar:{
     width:"70%",
@@ -126,5 +137,10 @@ const styles = StyleSheet.create({
     alignItems:"center",
   
   },
+  iconWrapper:{
+    height:"50%",
+    justifyContent:"flex-end",
+    alignItems:"center"
+  }
 
 });

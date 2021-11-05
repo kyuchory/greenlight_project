@@ -1,8 +1,10 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useContext, useEffect,} from 'react'
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Input, Button } from '../Components'
-import { images } from '../utils/images';
+import { useNavigation } from '@react-navigation/native';
+import { UserContext } from "../contexts";
+import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
@@ -16,8 +18,31 @@ Font.loadAsync({
   });
 
 
+
+
 export default function Mypage() {
 
+  const[mileage, setMileage] = useState(0);
+
+  const userEmail = useContext(UserContext);
+  const email = userEmail.user.email;
+
+  const handleMileage = async()=>{
+    const document = await firestore.collection("User").doc(email).get();
+    const tempmileage = await document.get("mileage");
+    setMileage(tempmileage);
+  }
+  setInterval(()=>{
+    try{
+      handleMileage();
+    }catch{
+      console.log("error");
+    }
+  },1000);
+
+  
+
+  
   //얇은 섹션 구분선
   const Line1 = () => {
     return(
@@ -49,21 +74,35 @@ export default function Mypage() {
     )
   }
   
+
   //쇼핑포인트, 기부포인트, 쿠폰, 후원내역
   const Shopping = () => {
+    const navigation = useNavigation();
     return(
+
       <View style = {styles.Shopping_Container}>
+        
         <View style = {styles.iconContents}>
           <Image source= {require("../icon+image/point.png")} 
           style={styles.image} />
           <Text style={styles.iconContentsText}>포인트</Text>
-          <Text style={styles.iconContentsNum}>5,000</Text>
+          {/* <Button
+            title="Press"
+            onPress={() => console.log(mileage)}
+            /> */}
+          <Text style={styles.iconContentsNum}>{mileage}</Text>
+          
         </View>
+
         <View style = {styles.iconContents}>
+          <TouchableOpacity onPress={() => navigation.navigate("Donate")}>
            <Image source= {require("../icon+image/point_donate.png")} 
           style={styles.image} />
-          <Text style={styles.iconContentsText}>기부하기</Text>
-          <Text style={styles.iconContentsNum}>3</Text>
+          <View style={{alignItems:"center"}}>
+            <Text style={styles.iconContentsText}>기부하기</Text>
+            <Text style={styles.iconContentsNum}>3</Text>
+          </View>
+          </TouchableOpacity>
         </View>
         <View style = {styles.iconContents}>
            <Image source= {require("../icon+image/coupon.png")} 
@@ -261,15 +300,18 @@ const styles = StyleSheet.create({
     width:"20%",
     // borderWidth:1,
     // borderColor:"red",
+    
   },
   iconContentsText:{
     fontSize: 10,
     fontFamily: "Vitro_pride",
-    marginTop:5
+    marginTop:5,
   },
   iconContentsNum:{
     fontSize: 20,
-    fontWeight:'400'
+    fontWeight:'400',
+    // borderWidth:1,
+    // borderColor:"blue",
   },
   numberContents:{
     alignItems:'center',
