@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./Login/Login";
 import BottomTab from "./BottomTab/BottomTab";
 import ABrand from "./Brands/ABrand";
+import BBrand from "./Brands/BBrand";
 import Signup from "./Login/Signup";
 import ChatBot from "./ChatBot/ChatBot";
 import CategoryOuter from "./CategoryComponents/CategoryOuter";
@@ -24,6 +25,7 @@ import { UserProvider } from "./contexts";
 import { LogBox } from 'react-native';
 import Donate from "./Donate/Donate";
 import DonateDetailPage1 from "./Donate/DonateDetailPage1";
+import DonateDetailPage2 from "./Donate/DonateDetailPage2";
 import GoDonate from "./Donate/GoDonate";
 
 import SupportList from "./ChatBot/SupportList";
@@ -65,6 +67,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="BottomTab" component={BottomTab} point={point}/>
         <Stack.Screen name="ABrand" component={ABrand} />
+        <Stack.Screen name="BBrand" component={BBrand} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="ChatBot" component={ChatBot} />
         <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
@@ -72,6 +75,7 @@ export default function App() {
         <Stack.Screen name="OuterPage" component={OuterPage}/>
         <Stack.Screen name="Donate" component={Donate}/>
         <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
+        <Stack.Screen name="DonateDetailPage2" component={DonateDetailPage2}/>
         <Stack.Screen name="GoDonate" component={GoDonate}/>
 
         <Stack.Screen name="SupportList" component={SupportList}/>
