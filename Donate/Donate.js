@@ -67,12 +67,12 @@ export default function Donate({ navigation }) {
 
       <TouchableOpacity
         style={styles.brandWrapper}
-        onPress={() => navigation.navigate("ABrand")}>
+        onPress={() => navigation.navigate("DonateDetailPage2")}>
         <Image
-        source={require("../icon+image/forest1.png")}
+        source={require("../icon+image/polarBear1.jpg")}
         style={styles.brandImg}/>
         <View style={styles.nameAndBar}>
-          <Text style={styles.brandName}>바다 정화 운동</Text>
+          <Text style={styles.brandName}>북극곰 살리기 캠페인</Text>
           <PointConsumer>
             {(value) => (
               <View style={styles.progressBar}>
@@ -82,7 +82,7 @@ export default function Donate({ navigation }) {
             )}
           </PointConsumer>
           <Text style={{marginLeft:"2%", marginTop:"2%",fontFamily:"Vitro_pride", fontSize:10}}>
-            일단 보류...</Text>
+            기후변화로 멸종위기에 놓인 북극곰을 살려주세요</Text>
         </View>
       </TouchableOpacity>
 

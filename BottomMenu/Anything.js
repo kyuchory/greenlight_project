@@ -67,7 +67,7 @@ export default function Anything({ navigation }) {
 
           <TouchableOpacity
             style={styles.brandWrapper}
-            onPress={() => navigation.navigate("ABrand")}>
+            onPress={() => navigation.navigate("BBrand")}>
             <Image
             source={require("../icon+image/brandImg2.jpg")}
             style={styles.brandImg}/>
