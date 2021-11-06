@@ -60,7 +60,7 @@ export default function ChatBot() {
   const handleMileage = async() => {
     const document = await firestore.collection('User').doc(email).get();
     const prevMileage = document.get('mileage'); //데이터베이스에서 가져온 기존 마일리지
-    const plusMileage = prevMileage + 5000;
+    const plusMileage = prevMileage + 50000;
 
     const prevSupportCount = document.get('supportCount'); //데이터베이스에서 가져온 기존 후원 횟수
     const plusSupportCount = prevSupportCount + 1;
