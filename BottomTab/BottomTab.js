@@ -97,7 +97,9 @@ const Icon5B = () => {
 
 export default function BottomTab({ point, handlePoint }) {
   return (
-    <BottomTabNavigator.Navigator>
+    <BottomTabNavigator.Navigator
+    initialRouteName="홈"
+    >
       <BottomTabNavigator.Screen
         name="홈"
         component={Home}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Image } from "react-native";
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from "react-native";
 import * as Font from "expo-font";
 
 //폰트

@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   purchase: {
-    width: "100%",
+    width: 120,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "black",
