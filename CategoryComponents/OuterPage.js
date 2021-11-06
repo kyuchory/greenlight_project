@@ -2,13 +2,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback } from 'react';
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image,Alert } from "react-native";
 import { useState, useContext, useEffect,} from 'react'
 import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
 import { render } from 'react-dom';
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
+import Modal from 'react-native-simple-modal';
+
+
 
 const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
 
@@ -23,13 +26,17 @@ Font.loadAsync({
     'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
   });
 
-
 export default function CategoryOuter() {
+
+state = {open:false};
+
 const navigation = useNavigation();
 const[outerName, setOuterName] = useState(0);
 const[outerPrice, setOuterPrice] = useState(0);
 const[outerImg, setOuterImg] = useState(0);
 const[outerStore, setOuterStore] = useState(0);
+const[like, setLike] = useState(0);
+const[heart, setHeart] = useState(0);
 
 const handleFireBase = async()=>{
   const document = await firestore.collection("outer").doc("outer1").get();
@@ -37,15 +44,20 @@ const handleFireBase = async()=>{
   const tempPrice = await document.get("price");
   const tempImg = await document.get("uri");
   const tempStore = await document.get("store");
+  const tempLike = await document.get("like");
 
+  setLike(tempLike);
   setOuterName(tempName);
   setOuterPrice(tempPrice);
   setOuterImg(tempImg);
   setOuterStore(tempStore);
 }
+
 handleFireBase();
 
+
 const Main = () => {
+
     return(
       <View style={styles.main}>
 
@@ -92,12 +104,19 @@ const Main = () => {
           style={styles.share_img} /> 
           </View>
 
+      
           <View style = {styles.like}>
+          <TouchableOpacity onPress={clickLikeFunction}>
+
           <Image source ={require("../icon+image/heart.png")}
           style={styles.like_img} /> 
+
+          </TouchableOpacity>
+
           </View>
 
-        
+
+
       </View>
 
 
@@ -106,6 +125,12 @@ const Main = () => {
       
     )
   }  
+
+//like 버튼을 눌렀을때 firebase의 상태가 변경되도록 설정, 하트가 빨개지게 설정
+
+function clickLikeFunction(){
+  Alert.alert('좋아요♥️');
+}
 
 const Page = () => {
   return(
