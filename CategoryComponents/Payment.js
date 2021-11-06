@@ -12,6 +12,7 @@ import {
   Image,
   Alert,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { onChange } from "react-native-reanimated";
 
 Font.loadAsync({
@@ -49,7 +50,7 @@ export default function Payment() {
       const plusMileage = mileage - 45000;
       setMileage(mileage - 45000);
       navigation.navigate("PaymentCompletion");
-      firestore.collection("User").doc(email).set({"mileage": plusMileage});
+      firestore.collection("User").doc(email).set({"mileage": plusMileage},{merge:true});
     }
   };
 
@@ -67,6 +68,7 @@ export default function Payment() {
   };
 
   return (
+  
     <View style={styles.container}>
       <View style={styles.line}></View>
       <View style={styles.firstBox}>
@@ -119,14 +121,14 @@ export default function Payment() {
       <View style={styles.line}></View>
       <View style={styles.thirdBox}>
         <View style={styles.thirdBoxLeft}>
-          <Text style={{ fontSize: 18, fontFamily: "BinggraeMelona-Bold" }}>
+          <Text style={{ fontSize: 18, fontFamily: "BinggraeMelona-Bold", marginBottom:5 }}>
             주문상품 정보
           </Text>
           <View style={styles.imageText}>
             <Image source={require("../icon+image/miniJacket.png")} />
             <View
               style={{
-                flexDirection: "column",
+                flexDirection: "column", marginLeft:5
               }}
             >
               <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
@@ -209,8 +211,9 @@ export default function Payment() {
             45,000원 결제하기
           </Text>
         </TouchableOpacity>
-      </View>
+        </View>
     </View>
+
   );
 }
 
@@ -236,7 +239,7 @@ const styles = StyleSheet.create({
   },
   bottomPaymentBar: {
     width: "100%",
-    position: "absolute",
+    // position: "absolute",
     bottom: 0,
     //alignSelf: "flex-start",
     justifyContent: "center",
@@ -286,7 +289,7 @@ const styles = StyleSheet.create({
   thirdBoxLeft: {},
   thirdBoxRight: {
     flexDirection: "column",
-    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   imageText: {
     flexDirection: "row",
