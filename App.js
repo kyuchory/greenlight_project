@@ -25,7 +25,17 @@ import { LogBox } from 'react-native';
 import Donate from "./Donate/Donate";
 import DonateDetailPage1 from "./Donate/DonateDetailPage1";
 import GoDonate from "./Donate/GoDonate";
+
 import SupportList from "./ChatBot/SupportList";
+
+import FirstOuter from "./CategoryComponents/FirstOuter";
+import Payment from "./CategoryComponents/Payment";
+import PaymentCompletion from "./CategoryComponents/PaymentCompletion";
+
+import LogoTitle3 from "./Header/LogoTitle3";
+import LogoTitle4 from "./Header/LogoTitle4";
+import LogoTitle5 from "./Header/LogoTitle5";
+
 
 LogBox.ignoreLogs(['Setting a timer']);
 
@@ -63,7 +73,40 @@ export default function App() {
         <Stack.Screen name="Donate" component={Donate}/>
         <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
         <Stack.Screen name="GoDonate" component={GoDonate}/>
+
         <Stack.Screen name="SupportList" component={SupportList}/>
+
+        <Stack.Screen
+                  name="FirstOuter"
+                  component={FirstOuter}
+                  options={{
+                    headerShown: true,
+                    headerTitle: (props) => (
+                      <LogoTitle3 {...props} title={"상세정보"} />
+                    ),
+                  }}
+                />
+                <Stack.Screen
+                  name="Payment"
+                  component={Payment}
+                  options={{
+                    headerShown: true,
+                    headerTitle: (props) => (
+                      <LogoTitle4 {...props} title={"주문하기"} />
+                    ),
+                  }}
+                />
+                <Stack.Screen
+                  name="PaymentCompletion"
+                  component={PaymentCompletion}
+                  options={{
+                    headerShown: true,
+                    headerTitle: (props) => (
+                      <LogoTitle5 {...props} title={"주문완료"} />
+                    ),
+                  }}
+                />
+
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -82,4 +125,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
