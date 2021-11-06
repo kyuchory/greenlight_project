@@ -31,10 +31,17 @@ export default function Donate({ navigation }) {
         style={styles.closeIcon}/>
         </TouchableOpacity>
         </View>
-    <Text style={styles.ableBrand}>후원 가능 브랜드</Text>
+        <View style={{flexDirection:"row", paddingLeft:"5%",}}>
+        <Image
+        source={require("../icon+image/donatable.png")}
+        style={styles.optionIcon}/>
+        <Image
+        source={require("../icon+image/donateHistory.png")}
+        style={styles.optionIcon}/>
+
+        </View>
 
     <View style={styles.brandList}>
-
 
       <TouchableOpacity
         style={styles.brandWrapper}
@@ -111,18 +118,18 @@ closeIcon:{
   height:20,
   marginRight:"5%"
 },
-ableBrand:{
-margin:7,
-fontSize: 18,
-fontFamily:'Vitro_pride',
-color:"#5D5D5D"
+optionIcon:{
+  width:50,
+  height:20,
+  marginRight:"2%",
+  borderRadius:6
 },
 brandList:{
 // borderColor:'red',
 // borderWidth:1,
 alignItems:"flex-start",
-paddingLeft:"5%"
-
+paddingLeft:"5%",
+marginTop:"2%",
 },
 brandWrapper:{
 borderColor:'#E7FCE0',
@@ -131,7 +138,7 @@ borderWidth:1,
 borderRadius:10,
 flexDirection:"row",
 alignItems:"center",
-marginTop:"7%",
+marginBottom:"5%",
 width:325,
 height:100
 },

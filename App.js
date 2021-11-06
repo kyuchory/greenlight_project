@@ -25,6 +25,9 @@ import { LogBox } from 'react-native';
 import Donate from "./Donate/Donate";
 import DonateDetailPage1 from "./Donate/DonateDetailPage1";
 import GoDonate from "./Donate/GoDonate";
+
+import SupportList from "./ChatBot/SupportList";
+
 import FirstOuter from "./CategoryComponents/FirstOuter";
 import Payment from "./CategoryComponents/Payment";
 import PaymentCompletion from "./CategoryComponents/PaymentCompletion";
@@ -32,6 +35,7 @@ import PaymentCompletion from "./CategoryComponents/PaymentCompletion";
 import LogoTitle3 from "./Header/LogoTitle3";
 import LogoTitle4 from "./Header/LogoTitle4";
 import LogoTitle5 from "./Header/LogoTitle5";
+
 
 LogBox.ignoreLogs(['Setting a timer']);
 
@@ -69,6 +73,9 @@ export default function App() {
         <Stack.Screen name="Donate" component={Donate}/>
         <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
         <Stack.Screen name="GoDonate" component={GoDonate}/>
+
+        <Stack.Screen name="SupportList" component={SupportList}/>
+
         <Stack.Screen
                   name="FirstOuter"
                   component={FirstOuter}
@@ -99,6 +106,7 @@ export default function App() {
                     ),
                   }}
                 />
+
 
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,10 +1,13 @@
 import React, { useState, useContext, useEffect,} from 'react'
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Button} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from "../contexts";
 import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+// // import Modal1 from 'react-native-simple-modal'
+// import Modal from "react-native-modal";
+
 
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
@@ -23,25 +26,59 @@ Font.loadAsync({
 export default function Mypage() {
 
   const[mileage, setMileage] = useState(0);
+  const[supportCount, setSupportCount] = useState(0);
+  const [name, setName] = useState('');
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
 
-  const handleMileage = async()=>{
+
+
+  const renderItem = async()=>{//마일리지,후원횟수,이름 불러오기
+
     const document = await firestore.collection("User").doc(email).get();
+
     const tempmileage = await document.get("mileage");
+    const tempsupportCount = await document.get("supportCount");
+    const tempName = await document.get("name");
     setMileage(tempmileage);
+    setSupportCount(tempsupportCount);
+    setName(tempName);
+
+
+
+
   }
-  // setInterval(()=>{
-  //   try{
-  //     handleMileage();
-  //   }catch{
-  //     console.log("error");
-  //   }
-  // },10000);
-  handleMileage();
+
+  renderItem();
   
 
+  // const ModalFunction = () => {
+    
+
+  //   return(
+  //     <View>
+  //       <Modal isVisible={modalVisible}>
+
+  //         <View style={styles.modalView}>
+  //           <Text>Hello World!</Text>
+  //           <Button
+  //           onPress={() => setModalVisible(false)}
+  //           title={"hide"}
+  //           />
+            
+  //          </View>
+  //       </Modal>
+  //   </View>
+
+  //   )
+
+  // }
+
+
+  
   
   //얇은 섹션 구분선
   const Line1 = () => {
@@ -58,7 +95,7 @@ export default function Mypage() {
                  style={styles.profileImage} />
         </View>
         <View style = {styles.ProfileInner}>
-          <Text style = {styles.textName}>기린이 님</Text>
+          <Text style = {styles.textName}>{name} 님</Text>
           <Text style = {styles.textInfo}>Lv.1 기린이</Text>
           <Text style = {styles.textInfo}>LifeUp 회원 혜택 보기</Text>
         </View>
@@ -75,9 +112,13 @@ export default function Mypage() {
   }
   
 
+
+
   //쇼핑포인트, 기부포인트, 쿠폰, 후원내역
   const Shopping = () => {
     const navigation = useNavigation();
+
+
     return(
 
       <View style = {styles.Shopping_Container}>
@@ -106,12 +147,18 @@ export default function Mypage() {
           <Text style={styles.iconContentsText}>쿠폰</Text>
           <Text style={styles.iconContentsNum}>5</Text>
         </View>
+        
         <View style = {styles.iconContents}>
+          <TouchableOpacity onPress={() => navigation.navigate("SupportList")}>
            <Image source= {require("../icon+image/donate.png")} 
-          style={styles.image} />
-          <Text style={styles.iconContentsText}>후원 내역</Text>
-          <Text style={styles.iconContentsNum}>3</Text>
+                  style={styles.image} />
+            <View style={{alignItems:"center"}}>
+              <Text style={styles.iconContentsText}>후원 내역</Text>
+              <Text style={styles.iconContentsNum}>{supportCount}</Text>
+            </View>
+          </TouchableOpacity>
         </View>
+        
 
       </View>
     )
@@ -195,18 +242,20 @@ export default function Mypage() {
   }
  
   return(
+    
     <View style={styles.container}>
+      
       <Line1/>
       <Profile/>
       <Line2/>     
       <Shopping/>
+      
       <Line1/>     
       <Delivery/>
       <Line1/>    
       <Cancle/>
       <Line2/>   
       <Call/>
-
     </View>
   );
 };
@@ -356,4 +405,27 @@ const styles = StyleSheet.create({
   fontSize:10,
   fontFamily: "Vitro_pride", 
   },
+
+
+
+  modalView: {
+    width:"100%",
+    height:300,
+    margin: 0,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+
+
 });

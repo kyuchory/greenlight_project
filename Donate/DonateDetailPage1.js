@@ -29,7 +29,7 @@ Font.loadAsync({
     return(
         <View style={styles.container}>
             <ImageBackground
-            source={require("../icon+image/forest2.jpg")}
+            source={require("../icon+image/forest2.png")}
             style={styles.backgroundPic}>
 
                 <View style={styles.IconWrapper}>

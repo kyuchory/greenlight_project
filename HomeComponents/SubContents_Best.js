@@ -10,7 +10,7 @@ export default function SubContents_Best(){
 
       <View style={styles.imgContainer}>
           <Image
-          source={require("../icon+image/best_down.jpeg")}
+          source={require("../icon+image/best.jpg")}
           style={styles.image}/>
       </View>   
     </View>
@@ -20,22 +20,20 @@ export default function SubContents_Best(){
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    //alignItems: 'flex-start',
-    //justifyContent: 'flex-start',
     flexDirection:"column",
   },
   imgContainer:{
     flex:1,
-    //flexDirection:"row",
     width:"100%",
     height:"100%",
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginTop:"5%"
   },
   image: {
     width:"100%",
-    height:"65%",
-    //resizeMode:'stretch'
+    height:"95%",
+    resizeMode:'stretch'
 
   },
 });
