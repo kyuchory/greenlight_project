@@ -13,7 +13,8 @@ import ChatBot from "./ChatBot/ChatBot";
 import CategoryOuter from "./CategoryComponents/CategoryOuter";
 import UserGuide from "./ChatBot/UserGuide";
 import OuterPage from "./CategoryComponents/OuterPage";
-
+import OuterPage2 from "./CategoryComponents/OuterPage2";
+import OuterPage3 from "./CategoryComponents/OuterPage3";
 
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
@@ -73,6 +74,9 @@ export default function App() {
         <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
         <Stack.Screen name="UserGuide" component= {UserGuide}/>
         <Stack.Screen name="OuterPage" component={OuterPage}/>
+        <Stack.Screen name="OuterPage2" component={OuterPage2}/> 
+        <Stack.Screen name="OuterPage3" component={OuterPage3}/>
+        
         <Stack.Screen name="Donate" component={Donate}/>
         <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
         <Stack.Screen name="DonateDetailPage2" component={DonateDetailPage2}/>

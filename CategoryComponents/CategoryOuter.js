@@ -102,7 +102,7 @@ const Box = () => {
   const Box2 = () => {
     return(
       <View style = {styles.box}>
-       <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
+       <TouchableOpacity onPress={() => navigation.navigate("OuterPage2")}>
          
        <View style={styles.imageWrapper}>
             <Image source= {{uri:`${outerImg2}`}} 
@@ -122,7 +122,7 @@ const Box = () => {
   const Box3 = () => {
     return(
       <View style = {styles.box}>
-       <TouchableOpacity onPress={() => navigation.navigate("OuterPage")}>
+       <TouchableOpacity onPress={() => navigation.navigate("OuterPage3")}>
        <View style={styles.imageWrapper}>
             <Image source= {{uri:`${outerImg3}`}} 
             style={styles.image}
