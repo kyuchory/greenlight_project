@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
 
   page: {
     marginBottom: "3%",
-    padding: "1%",
+    padding: "0%",
     width: "100%",
     justifyContent: "center",
     // borderColor:"red",
@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: "100%",
+    height:500
   },
   page_img: {
     width: "100%",
