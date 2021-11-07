@@ -30,7 +30,7 @@ function ABrandProduct() {
   //context랑 파이어베이스랑 연결을 못하겠어서 그냥 파이어베이스만 씁니다...
   const [point, setPoint] = useState(0);
   const getProgress = async() => {
-    const document = await firestore.collection('Brand').doc('GreenLight').get();
+    const document = await firestore.collection('Brand').doc('Friedtag').get();
     const progress = document.get('progress'); //데이터베이스에서 가져온 진행도
     // <PointConsumer>
     // {(value) => (
@@ -52,12 +52,12 @@ function ABrandProduct() {
       </View>
       <View style={styles.productDesc}>
         <Image
-          source={require("../icon+image/tshirtImg1.jpg")}
+          source={require("../icon+image/bagImg.jpg")}
           style={styles.tshirtImg}
         />
         <View style={styles.productDescText}>
-          <Text style={styles.strong}>t_shirt</Text>
-          <Text style={styles.normal}>1,000개</Text>
+          <Text style={{color: "#6E6E6E",fontSize: 17, fontFamily: "WemakepriceBold",}}>Eco-Friendly Bag</Text>
+          <Text style={styles.normal}>500개</Text>
           {/* <PointConsumer>
             {(value) => ( */}
               <View>
@@ -88,7 +88,7 @@ const ReviewBox = () => {
     <View style={styles.reviewBoxContainer}>
       <View>
         <Image
-          source={require("../icon+image/reviewTshirt.jpg")}
+          source={require("../icon+image/bagImg.jpg")}
           style={{ width: 100, height: 80 }}
         />
       </View>
@@ -102,7 +102,7 @@ const ReviewBox = () => {
         <View>
           <Text
             style={{ fontFamily: "Vitro_pride" }}
-          >{`품질이 좋고 친환경적이어서\n더욱 애착이 가는 옷이에요!`}</Text>
+          >{`튼튼하고 디자인이 예뻐요.\n폐섬유로 만들어서 더 특별해요!!`}</Text>
         </View>
       </View>
     </View>
@@ -188,7 +188,7 @@ export default function BBrand() {
               source={require("../icon+image/heart.png")}
               style={styles.heart}
             />
-            <TouchableOpacity onPress={() => navigation.navigate("ChatBot")}>
+            <TouchableOpacity onPress={() => navigation.navigate("ChatBot2")}>
             <Image
               source={require("../icon+image/give.png")}
               style={styles.give}
@@ -203,7 +203,7 @@ export default function BBrand() {
           )}
           </PointConsumer>
         <Image
-          source={require("../icon+image/AbrandYoutube.png")}
+          source={require("../icon+image/BbrandMainImg.png")}
           style={styles.youtubePic}
         />
       </View>

@@ -38,6 +38,8 @@ import PaymentCompletion from "./CategoryComponents/PaymentCompletion";
 import LogoTitle3 from "./Header/LogoTitle3";
 import LogoTitle4 from "./Header/LogoTitle4";
 import LogoTitle5 from "./Header/LogoTitle5";
+import DonationCompletion from "./Donate/DonationCompletion";
+import ChatBot2 from "./ChatBot/ChatBot2";
 
 
 LogBox.ignoreLogs(['Setting a timer']);
@@ -71,6 +73,7 @@ export default function App() {
         <Stack.Screen name="BBrand" component={BBrand} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="ChatBot" component={ChatBot} />
+        <Stack.Screen name="ChatBot2" component={ChatBot2} />
         <Stack.Screen name="CategoryOuter" component= {CategoryOuter} />
         <Stack.Screen name="UserGuide" component= {UserGuide}/>
         <Stack.Screen name="OuterPage" component={OuterPage}/>
@@ -81,6 +84,14 @@ export default function App() {
         <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
         <Stack.Screen name="DonateDetailPage2" component={DonateDetailPage2}/>
         <Stack.Screen name="GoDonate" component={GoDonate}/>
+        <Stack.Screen name="DonationCompletion"
+                      component={DonationCompletion}
+                      options={{
+                        headerShown: true,
+                        headerTitle: (props) => (
+                          <LogoTitle5 {...props} title={"기부완료"} />
+                        ),
+                      }}/>
 
         <Stack.Screen name="SupportList" component={SupportList}/>
 

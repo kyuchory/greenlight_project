@@ -9,6 +9,8 @@ import * as Font from 'expo-font';
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
     'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
+    Vitro_core: require('../assets/fonts/Vitro_core.ttf'),
+    'Vitro_core': require('../assets/fonts/Vitro_core.ttf'),
     WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
     'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
     HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
@@ -108,9 +110,9 @@ header:{
 },
 headerText:{
   flex:1,
-  fontFamily:"BinggraeMelona-Bold",
+  fontFamily:"Vitro_core",
   color: "#00FF00",
-  fontSize:25,
+  fontSize:24,
   marginLeft:"3%"
 },
 closeIcon:{

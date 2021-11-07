@@ -83,7 +83,8 @@ const Signup = ({ navigation }) => {
         name: name,
         mileage: 0,
         supportCount: 0,
-        
+        donateCount: 0,
+        depositCount: 0,
         });
 
 
