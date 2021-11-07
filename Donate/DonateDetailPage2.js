@@ -52,7 +52,7 @@ Font.loadAsync({
                     </Text>
                     <View style={styles.PicWrapper}>
                         <Image
-                        source={require("../icon+image/Donateyoutube.png")}
+                        source={require("../icon+image/bearMainImg.png")}
                         style={styles.youtubePic}/>
                     </View>
                 </View>

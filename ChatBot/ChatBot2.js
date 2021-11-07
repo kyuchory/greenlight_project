@@ -4,8 +4,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker"; //$ expo install expo-image-picker
 import DateTimePicker from "@react-native-community/datetimepicker"; //$ expo install @react-native-community/datetimepicker
-import FabricContext, { FabricConsumer,FabricProvider} from "./ChatBot_Context";
-import { PointConsumer } from "../context/point";
+import FabricContext, { FabricConsumer} from "./ChatBot_Context";
+
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import { useNavigation } from "@react-navigation/native";
@@ -24,14 +24,14 @@ Font.loadAsync({
   'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
 });
 
-export default function ChatBot() {
+export default function ChatBot2() {
   const navigation = useNavigation();
 
   const [display0, setDisplay0] = useState(false);
   const [display1, setDisplay1] = useState(false);
   const [display2, setDisplay2] = useState(false);
   const [display3, setDisplay3] = useState(false);
-  const [display4, setDisplay4] = useState(false);
+
   const [viewCondition0, setViewCondition0] = useState(false);
   const [viewCondition1, setViewCondition1] = useState(false);
   const [viewCondition2, setViewCondition2] = useState(false);
@@ -79,12 +79,12 @@ export default function ChatBot() {
   };
 
   const plusProgressBar = async() => {
-    const document = await firestore.collection('Brand').doc('GreenLight').get();
+    const document = await firestore.collection('Brand').doc('Friedtag').get();
     const prevProgress = document.get('progress'); //데이터베이스에서 가져온 기존 진행도
 
     const plusProgress = prevProgress + 1;
 
-    firestore.collection('Brand').doc('GreenLight').set({'progress':plusProgress}); //데이터베이스의 progress 업데이트    
+    firestore.collection('Brand').doc('Friedtag').set({'progress':plusProgress}); //데이터베이스의 progress 업데이트    
   };
 
 
@@ -119,34 +119,21 @@ export default function ChatBot() {
     setViewCondition0(true);
   };
 
-  const choiceFiber = () => {
-    setMaterial(false);
-    setDisplay1(true);
-    setViewCondition1(true);
-    setFiber("폐섬유");
-  };
-
-  const choiceSpecial = () => {
-    setMaterial(true);
-    setDisplay1(true);
-    setViewCondition1(true);
-    setFiber("특수소재");
-  };
-
   const saidYes = () => {
     setSaid(true);
-    setDisplay2(true);
-    setViewCondition2(true);
+    setDisplay1(true);
+    setViewCondition1(true);
     setClothNum(text);
+    setFiber("폐섬유");
   };
   const pickPictureYes = () => {
-    setDisplay3(true);
-    setViewCondition3(true);
+    setDisplay2(true);
+    setViewCondition2(true);
   };
 
   const pickCalendarYes = () => {
-    setDisplay4(true);
-    setViewCondition4(true);
+    setDisplay3(true);
+    setViewCondition3(true);
   };
 
  
@@ -264,56 +251,8 @@ export default function ChatBot() {
             <View>
               {start ? (
                 <View>
-                  <View style={styles.chatManager}>
-                    <Image
-                      source={require("../icon+image/robot.png")}
-                      style={styles.avatarImage}
-                    />
-                    <ImageBackground
-                      source={require("../icon+image/chatImageLeft.png")}
-                      resizeMode="stretch"
-                      style={styles.chatImage}
-                    >
-                      <Text
-                        style={{
-                          paddingTop: "10%",
-                          paddingBottom: "10%",
-                          paddingRight: "5%",
-                          paddingLeft: "15%",
-                        }}
-                      >
-                        후원하실 상품 재질을 모두 선택해 주세요.
-                      </Text>
-                    </ImageBackground>
-                  </View>
 
-                  <View
-                    style={styles.chatUser}
-                    pointerEvents={viewCondition1 ? "none" : "auto"}
-                  >
-                    <ImageBackground
-                      source={require("../icon+image/chatImageRight.png")}
-                      resizeMode="stretch"
-                      style={styles.chatImage}
-                    >
-                      <View style={styles.iconView}>
-                        <TouchableOpacity onPress={choiceFiber}>
-                          <Image
-                            source={require("../icon+image/fiberIcon.png")}
-                            style={{ width: 100, height: 30 }}
-                          />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={choiceSpecial}>
-                          <Image
-                            source={require("../icon+image/specialMaterialIcon.png")}
-                            style={{ width: 100, height: 30 }}
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </ImageBackground>
-                  </View>
-
-                  {display1 ? (
+                  {display0 ? (
                     <View>
                       <View style={styles.chatManager}>
                         <Image
@@ -345,47 +284,10 @@ export default function ChatBot() {
                           style={styles.chatImage}
                         >
                           {material ? (
-                            <View
-                              pointerEvents={viewCondition2 ? "none" : "auto"}
-                              style={{ alignItems: "center" }}
-                            >
-                              <View
-                                style={{
-                                  flexDirection: "row",
-                                  paddingTop: "10%",
-                                  paddingBottom: "2%",
-                                  paddingRight: "20%",
-                                  paddingLeft: "5%",
-                                }}
-                              >
-                                <Image
-                                  source={require("../icon+image/specialMaterialIcon.png")}
-                                  style={{ width: 100, height: 30 }}
-                                />
-                                <View style={{ backgroundColor: "#F2F2F2" }}>
-                                  <TextInput
-                                    onSubmitEditing={() =>
-                                      console.log("onSubmitEditing")
-                                    }
-                                    placeholder="입력"
-                                    value={text}
-                                    onChangeText={text=>setText(text)}
-                                  />
-                                </View>
-                                <Text style={{ marginLeft: 5, marginTop: 4 }}>
-                                  벌
-                                </Text>
-                              </View>
-                              <TouchableOpacity onPress={saidYes}>
-                                <Image
-                                  source={require("../icon+image/confirmIcon.png")}
-                                  style={{ width: 40, height: 20 }}
-                                />
-                              </TouchableOpacity>
-                            </View>
+                            <View></View>
                           ) : (
                             <View
-                              pointerEvents={viewCondition2 ? "none" : "auto"}
+                              pointerEvents={viewCondition1 ? "none" : "auto"}
                               style={{ alignItems: "center" }}
                             >
                               <View
@@ -427,7 +329,7 @@ export default function ChatBot() {
                     <View></View>
                   )}
 
-                  {display2 ? (
+                  {display1 ? (
                     <View>
                       <View style={styles.chatManager}>
                         <Image
@@ -476,7 +378,7 @@ export default function ChatBot() {
 
                       <View
                         style={styles.chatUser}
-                        pointerEvents={viewCondition3 ? "none" : "auto"}
+                        pointerEvents={viewCondition2 ? "none" : "auto"}
                       >
                         <ImageBackground
                           source={require("../icon+image/chatImageRight.png")}
@@ -510,7 +412,7 @@ export default function ChatBot() {
                     <View></View>
                   )}
 
-                  {display3 ? (
+                  {display2 ? (
                     <View>
                       <View style={styles.chatManager}>
                         <Image
@@ -569,7 +471,7 @@ export default function ChatBot() {
 
                       <View
                         style={styles.chatUser}
-                        pointerEvents={viewCondition4 ? "none" : "auto"}
+                        pointerEvents={viewCondition3 ? "none" : "auto"}
                       >
                         <ImageBackground
                           source={require("../icon+image/chatImageRight.png")}
@@ -619,7 +521,7 @@ export default function ChatBot() {
                     <View></View>
                   )}
 
-                  {display4 ? (
+                  {display3 ? (
                     <View>
                       <View style={styles.chatManager}>
                         <Image

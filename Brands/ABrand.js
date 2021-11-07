@@ -203,7 +203,7 @@ export default function ABrand() {
           )}
           </PointConsumer>
         <Image
-          source={require("../icon+image/AbrandYoutube.png")}
+          source={require("../icon+image/AbrandMainImg.png")}
           style={styles.youtubePic}
         />
       </View>

@@ -5,8 +5,6 @@ import { UserContext } from "../contexts";
 import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-// // import Modal1 from 'react-native-simple-modal'
-// import Modal from "react-native-modal";
 
 
 Font.loadAsync({
@@ -27,6 +25,7 @@ export default function Mypage() {
 
   const[mileage, setMileage] = useState(0);
   const[supportCount, setSupportCount] = useState(0);
+  const [donateCount, setDonateCount] = useState(0);
   const [name, setName] = useState('');
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -42,9 +41,11 @@ export default function Mypage() {
 
     const tempmileage = await document.get("mileage");
     const tempsupportCount = await document.get("supportCount");
+    const tempdonateCount = await document.get("donateCount");
     const tempName = await document.get("name");
     setMileage(tempmileage);
     setSupportCount(tempsupportCount);
+    setDonateCount(tempdonateCount);
     setName(tempName);
 
 
@@ -53,29 +54,7 @@ export default function Mypage() {
   }
 
   renderItem();
-  
 
-  // const ModalFunction = () => {
-    
-
-  //   return(
-  //     <View>
-  //       <Modal isVisible={modalVisible}>
-
-  //         <View style={styles.modalView}>
-  //           <Text>Hello World!</Text>
-  //           <Button
-  //           onPress={() => setModalVisible(false)}
-  //           title={"hide"}
-  //           />
-            
-  //          </View>
-  //       </Modal>
-  //   </View>
-
-  //   )
-
-  // }
 
 
   
@@ -137,7 +116,7 @@ export default function Mypage() {
           style={styles.image} />
           <View style={{alignItems:"center"}}>
             <Text style={styles.iconContentsText}>기부하기</Text>
-            <Text style={styles.iconContentsNum}>3</Text>
+            <Text style={styles.iconContentsNum}>{donateCount}</Text>
           </View>
           </TouchableOpacity>
         </View>
