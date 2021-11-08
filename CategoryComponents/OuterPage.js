@@ -33,7 +33,7 @@ Font.loadAsync({
 
 
 export default function CategoryOuter() {
-  state = { open: false };
+ // state = { open: false };
 
   const navigation = useNavigation();
   const [outerName, setOuterName] = useState(0);
@@ -51,7 +51,7 @@ export default function CategoryOuter() {
     const tempStore = await document.get("store");
     const tempLike = await document.get("like");
 
-    setLike(tempLike);
+   // setLike(tempLike);
     setOuterName(tempName);
     setOuterPrice(tempPrice);
     setOuterImg(tempImg);
@@ -139,29 +139,22 @@ export default function CategoryOuter() {
     )
   }
 
+
   function clickLikeFunction() {
     Alert.alert("좋아요♥️");
 
     console.log(like); //현재 상태 확인
+    //0은 false, 1은 true
 
-    //true 이면 false로 false이면 true로,,
-   //like = (true? false:true);
-
-    //console.log(like);
-
-
-    // const document = await firestore.collection("outer").doc("outer1").get();
-    // const tempLike = await document.get("like");
-
-    if(like === 0) { 
+    if(like === 0) {   
       setLike(1);
-      firestore.collection('outer').doc('outer1').set({"like":1}, {merge:true}); 
-      console.log("최종적으로 true")
+      console.log("1은 true")
+      firestore.collection('outer').doc('outer1').set({"like":1},{merge:true}); 
     }
     else{
       setLike(0);
-      firestore.collection('outer').doc('outer1').set({"like":0}, {merge:true}); 
-      console.log("최종적 false")
+      console.log("0은 false")
+      firestore.collection('outer').doc('outer1').set({"like":0},{merge:true}); 
     }
 
     }

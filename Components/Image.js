@@ -32,7 +32,7 @@ const profile_ButtonContainer = styled.TouchableOpacity`
     bottom: 0;
     right: 0;
     width: 30px;
-    height: 30px
+    height: 10px;
     border-radius: 15px;
     justify - content: center;
     align - items : center;

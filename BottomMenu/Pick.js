@@ -233,11 +233,8 @@ const Like3 =()=>{
         <Like1/>
         <Like2/>
         <Like3/>
- 
       </View>
-
     </View>
-
   ); 
 };
 
@@ -290,14 +287,13 @@ const styles = StyleSheet.create({
     //marginTop: '3%',
     alignItems: 'center',
     width:'100%',
-    height:'30%',
+    height:'35%',
     backgroundColor:'white',
-    // justifyContent: 'space-around',
+    //justifyContent: 'space-around',
     // paddingLeft:"1%",
     paddingRight:"1%",
     // borderColor:"red",
     // borderWidth:1,
-
   },
 
   box: {

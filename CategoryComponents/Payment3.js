@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import * as Font from "expo-font";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import {
@@ -26,7 +26,7 @@ Font.loadAsync({
   "BinggraeMelona-Bold": require("../assets/fonts/BinggraeMelona-Bold.ttf"),
 });
 
-export default function Payment() {
+export default function Payment3() {
   const navigation = useNavigation();
   const [text, setText] = useState("");
   
@@ -52,11 +52,11 @@ export default function Payment() {
   handleMileage();
 
   const paymentHandler = () => {
-    if (mileage < 45000) {
+    if (mileage < 55000) {
       Alert.alert("보유하신 포인트가 부족합니다.");
     } else {
-      const plusMileage = mileage - 45000;
-      setMileage(mileage - 45000);
+      const plusMileage = mileage - 55000;
+      setMileage(mileage - 55000);
       navigation.navigate("PaymentCompletion");
       firestore.collection("User").doc(email).set({
         "mileage": plusMileage,
@@ -66,7 +66,7 @@ export default function Payment() {
   };
 
   const allPointUse = () => {
-    onChangePoint("45000");
+    onChangePoint("55000");
   };
 
   const textHandler = (event) => {
@@ -225,7 +225,7 @@ export default function Payment() {
             color: "white",
           }}
         >
-          45,000원 결제하기
+          55,000원 결제하기
         </Text>
         </TouchableOpacity>
       </View>
