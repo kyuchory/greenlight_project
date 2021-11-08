@@ -24,7 +24,6 @@ export default function SupportList({ navigation }) {
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
 
-  const [data, setData] = useState("");
   const [listArray, setListArray] = useState([]);
 
   useEffect(() => {
@@ -42,43 +41,6 @@ export default function SupportList({ navigation }) {
       });
   }, []);
 
-  const findSupportList = async () => {
-    const document = await firestore
-      .collection("User")
-      .doc(email)
-      .collection("supportList")
-      .get();
-    document.forEach((doc) => {
-      const tempfiber = doc.data().fiber;
-      const tempclothNum = doc.data().clothNum;
-      listItem.push({ fiber: tempfiber, clothNum: tempclothNum });
-    });
-
-    // console.log(listItem);
-    // setData(listItem);
-    // for(let i = 0 ; i < listItem.length; i++){
-    //     <Text>{i}</Text>
-    // }
-  };
-
-  const Item = ({ listFiber, listClothNum }) => {
-    <View>
-      <Text>후원 재질: {listFiber}</Text>
-      <Text>후원한 벌: {listClothNum}</Text>
-    </View>;
-  };
-
-  const renderItem = ({ item }) => (
-    <Item listFiber={item.listFiber} listClothNum={item.listClothNum} />
-  );
-
-  // listArray.map((list)=>{
-  //   <View key={list.id}>
-
-  //   </View>
-  // })
-
-  // findSupportList();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -90,14 +52,6 @@ export default function SupportList({ navigation }) {
           />
         </TouchableOpacity>
       </View>
-
-      {/* <View>
-            <FlatList
-            data={data}
-            renderItem={renderItem}
-            />
-            
-        </View> */}
 
       <View style={styles.listcontainer}>
         {listArray.map((list) => (
