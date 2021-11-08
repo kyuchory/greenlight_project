@@ -149,12 +149,12 @@ export default function CategoryOuter() {
     if(like === 0) {   
       setLike(1);
       console.log("1은 true")
-      firestore.collection('Outer').doc('outer1').set({"like":1},{merge:true}); 
+      firestore.collection('outer').doc('outer1').set({"like":1},{merge:true}); 
     }
     else{
       setLike(0);
       console.log("0은 false")
-      firestore.collection('Outer').doc('outer1').set({"like":0},{merge:true}); 
+      firestore.collection('outer').doc('outer1').set({"like":0},{merge:true}); 
     }
 
     }
