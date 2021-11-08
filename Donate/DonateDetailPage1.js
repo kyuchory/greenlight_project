@@ -29,7 +29,7 @@ Font.loadAsync({
     return(
         <View style={styles.container}>
             <ImageBackground
-            source={require("../icon+image/forest2.jpg")}
+            source={require("../icon+image/forest2.png")}
             style={styles.backgroundPic}>
 
                 <View style={styles.IconWrapper}>
@@ -43,15 +43,16 @@ Font.loadAsync({
                 <View style={styles.contentsWrapper}>
                     <Text style={styles.title}>'라이프업 숲' 조성 캠페인</Text>
                     <Text style={styles.content}>
-                        환경보존을 위해 라이프업에서{"\n"}
-                        '숲 조성하기 캠페인'을 시작하였습니다.{"\n"}
-                        또한, 모든 후원자들에게 감사를 표하기 위해{"\n"}
+                        환경보존을 위해 라이프업에서 {"\n"}'숲 조성하기 캠페인'을 시작한 지{"\n"}
+                        어느덧 다섯 해가 되었습니다.{"\n"}
+                        이번 '라이프업 숲 5호' 역시{"\n"}
+                        모든 후원자들에게 감사를 표하기 위해{"\n"}
                         '후원자 비석'을 건립할 계획입니다.{"\n"}
-                        자세한 정보는 영상에서 확인하실 수 있습니다.
+                        라이프업과 함께 숲 조성 캠페인에 참여해 주세요!
                     </Text>
                     <View style={styles.PicWrapper}>
                         <Image
-                        source={require("../icon+image/Donateyoutube.png")}
+                        source={require("../icon+image/lifeupMainImg.png")}
                         style={styles.youtubePic}/>
                     </View>
                 </View>

@@ -24,16 +24,21 @@ export default function Anything({ navigation }) {
 
     //context랑 파이어베이스랑 연결을 못하겠어서 그냥 파이어베이스만 씁니다...
     const [point, setPoint] = useState(0);
+    const [point2, setPoint2] = useState(0);
     const getProgress = async() => {
       const document = await firestore.collection('Brand').doc('GreenLight').get();
       const progress = document.get('progress'); //데이터베이스에서 가져온 진행도
+      const document2 = await firestore.collection('Brand').doc('Friedtag').get();
+      const progress2 = document2.get('progress'); //데이터베이스에서 가져온 진행도
       // <PointConsumer>
       // {(value) => (
       //    value.actions.setPoint(progress)
       // )}
       // </PointConsumer>
       setPoint(progress);
+      setPoint2(progress2);
     }
+  
   
     getProgress();
 
@@ -67,20 +72,20 @@ export default function Anything({ navigation }) {
 
           <TouchableOpacity
             style={styles.brandWrapper}
-            onPress={() => navigation.navigate("ABrand")}>
+            onPress={() => navigation.navigate("BBrand")}>
             <Image
             source={require("../icon+image/brandImg2.jpg")}
             style={styles.brandImg}/>
             <View style={styles.nameAndBar}>
               <Text style={styles.brandName}>Friedtag</Text>
-              <PointConsumer>
-                {(value) => (
+              {/* <PointConsumer>
+                {(value) => ( */}
                   <View style={styles.progressBar}>
-                    <ProgressBar count={value.state.point * 0.01} />
-                    <Text style={{marginLeft:"2%", fontSize:14}}>{value.state.point}%</Text>
+                    <ProgressBar count={point2 * 0.01} />
+                    <Text style={{marginLeft:"2%", fontSize:14}}>{point2}%</Text>
                   </View>
-                )}
-              </PointConsumer>
+                {/* )}
+              </PointConsumer> */}
               <Text style={{marginLeft:"2%",fontFamily:"Vitro_pride", fontSize:12}}>폐섬유</Text>
             </View>
           </TouchableOpacity>

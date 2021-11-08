@@ -11,7 +11,7 @@ export default function SubContents_Brand(){
       
       <View style={styles.imgContainer}>
           <Image
-          source={require("../icon+image/brand_down.jpeg")}
+          source={require("../icon+image/brand.jpg")}
           style={styles.image}/>
       </View>   
     </View>
@@ -21,22 +21,20 @@ export default function SubContents_Brand(){
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    //alignItems: 'flex-start',
-    //justifyContent: 'flex-start',
     flexDirection:"column",
   },
   imgContainer:{
     flex:1,
-    //flexDirection:"row",
     width:"100%",
     height:"100%",
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginTop:"0%"
   },
   image: {
     width:"100%",
-    height:"65%",
-    resizeMode:'contain'
+    height:"90%",
+    resizeMode:'stretch'
 
   },
 });

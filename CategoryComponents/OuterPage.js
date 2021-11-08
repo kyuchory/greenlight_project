@@ -1,4 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
+import {
+  BottomTabBarHeightContext,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback } from "react";
@@ -56,7 +60,11 @@ export default function CategoryOuter() {
 
   handleFireBase();
 
+
+
   const Main = () => {
+
+
     return (
       <View style={styles.main}>
         <View style={styles.header}>
@@ -102,11 +110,9 @@ export default function CategoryOuter() {
           </View>
 
           <View style={styles.like}>
+
             <TouchableOpacity onPress={clickLikeFunction}>
-              <Image
-                source={require("../icon+image/heart.png")}
-                style={styles.like_img}
-              />
+              <Heart />
             </TouchableOpacity>
           </View>
         </View>
@@ -116,9 +122,46 @@ export default function CategoryOuter() {
 
   //like 버튼을 눌렀을때 firebase의 상태가 변경되도록 설정, 하트가 빨개지게 설정
 
+  const Heart =() => {
+    return(
+      <Image
+      source={require("../icon+image/heart.png")}
+      style={styles.like_img}
+    />  
+    )
+  }
+  const RedHeart=() =>{
+    return(
+      <Image
+      source={require("../icon+image/outer_like_red.png")}
+      style={styles.like_img}
+    /> 
+    )
+  }
+
   function clickLikeFunction() {
     Alert.alert("좋아요♥️");
-  }
+
+    console.log(like); //현재 상태 확인
+
+    //true 이면 false로 false이면 true로,,
+   //like = (true? false:true);
+
+    //console.log(like);
+
+    if(like = false) { 
+      setLike(true);
+      console.log("최종적으로 true")
+    }
+    else{
+      setLike(false);
+      console.log("최종적 false")
+    }
+
+    }
+   
+
+  
 
   const Page = () => {
     return (
@@ -182,7 +225,7 @@ const styles = StyleSheet.create({
 
   page: {
     marginBottom: "3%",
-    padding: "1%",
+    padding: "0%",
     width: "100%",
     justifyContent: "center",
     // borderColor:"red",
@@ -244,6 +287,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: "100%",
+    height:500
   },
   page_img: {
     width: "100%",

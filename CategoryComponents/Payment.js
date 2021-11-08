@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import * as Font from "expo-font";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import {
@@ -12,9 +12,9 @@ import {
   Image,
   Alert,
   ScrollView,
+  Dimensions
 } from "react-native";
-import { onChange } from "react-native-reanimated";
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 Font.loadAsync({
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
@@ -29,16 +29,24 @@ Font.loadAsync({
 export default function Payment() {
   const navigation = useNavigation();
   const [text, setText] = useState("");
-
+  
+  const [name, setName] = useState('');
   const [point, onChangePoint] = useState(0);
   const [mileage, setMileage] = useState(0);
+  const [depositCount, setDepositCount] = useState(0);
+
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
 
   const handleMileage = async () => {
     const document = await firestore.collection("User").doc(email).get();
+    const tempName = await document.get("name");
     const tempmileage = await document.get("mileage");
+    const tempdepositCount = await document.get("depositCount");
+
+    setName(tempName);
     setMileage(tempmileage);
+    setDepositCount(tempdepositCount+1);
   };
 
   handleMileage();
@@ -50,7 +58,10 @@ export default function Payment() {
       const plusMileage = mileage - 45000;
       setMileage(mileage - 45000);
       navigation.navigate("PaymentCompletion");
-      firestore.collection("User").doc(email).set({ mileage: plusMileage });
+      firestore.collection("User").doc(email).set({
+        "mileage": plusMileage,
+        "depositCount": depositCount,
+      },{merge:true});
     }
   };
 
@@ -60,7 +71,7 @@ export default function Payment() {
 
   const textHandler = (event) => {
     setText(event.nativeEvent.text);
-    console.log(text);
+    // console.log(text);
   };
   const pointHandler = (event) => {
     setPoint(event.nativeEvent.text);
@@ -68,7 +79,14 @@ export default function Payment() {
   };
 
   return (
-    <View style={styles.container}>
+   
+    <KeyboardAwareScrollView
+    style={{ backgroundColor: 'white' }}
+    resetScrollToCoords={{ x: 0, y: 0 }}
+    contentContainerStyle={styles.container}
+    scrollEnabled={true}
+  >
+    {/* <View style={styles.container}> */}
       <View style={styles.line}></View>
       <View style={styles.firstBox}>
         <View>
@@ -76,7 +94,7 @@ export default function Payment() {
         </View>
         <View>
           <Text style={{ fontFamily: "Vitro_pride" }}>
-            김단국 | 010-1234-5678
+            {name} | 010-1234-5678
           </Text>
         </View>
       </View>
@@ -93,7 +111,7 @@ export default function Payment() {
             style={{ marginBottom: "4%" }}
           />
           <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
-            김단국 | 010-1234-5678
+            {name} | 010-1234-5678
           </Text>
           <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
             경기도 용인시 수지구 죽전로 154 ict관
@@ -111,7 +129,7 @@ export default function Payment() {
           style={{
             borderWidth: 1,
             width: "80%",
-            height: "100%",
+            height: "80%",
             padding: 5,
             fontFamily: "BinggraeMelona-Bold",
           }}
@@ -120,14 +138,14 @@ export default function Payment() {
       <View style={styles.line}></View>
       <View style={styles.thirdBox}>
         <View style={styles.thirdBoxLeft}>
-          <Text style={{ fontSize: 18, fontFamily: "BinggraeMelona-Bold" }}>
+          <Text style={{ fontSize: 18, fontFamily: "BinggraeMelona-Bold", marginBottom:5 }}>
             주문상품 정보
           </Text>
           <View style={styles.imageText}>
             <Image source={require("../icon+image/miniJacket.png")} />
             <View
               style={{
-                flexDirection: "column",
+                flexDirection: "column", marginLeft:5
               }}
             >
               <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
@@ -145,7 +163,7 @@ export default function Payment() {
         </View>
         <View style={styles.thirdBoxRight}>
           <Text style={{ fontFamily: "Vitro_pride" }}>
-            김단국 | 010-1234-5678
+            {name} | 010-1234-5678
           </Text>
           <Text style={{ fontFamily: "Vitro_pride" }}> -0원</Text>
           <Text style={{ fontFamily: "Vitro_pride" }}> 45,000원</Text>
@@ -197,21 +215,25 @@ export default function Payment() {
           </View>
         </View>
       </View>
-      <View style={{ flex: 0.3, width: "100%" }}></View>
-      <View style={styles.bottomPaymentBar}>
-        <TouchableOpacity onPress={() => paymentHandler()}>
-          <Text
-            style={{
-              fontFamily: "BinggraeMelona-Bold",
-              marginTop: "8%",
-              color: "white",
-            }}
-          >
-            45,000원 결제하기
-          </Text>
+      {/* <View style={{ flex: 0.3, width: "100%" }}></View> */}
+    <View style={styles.bottomPaymentBar}>
+      <TouchableOpacity onPress={() => paymentHandler()}>
+        <Text
+          style={{
+            fontFamily: "BinggraeMelona-Bold",
+            
+            color: "white",
+          }}
+        >
+          45,000원 결제하기
+        </Text>
         </TouchableOpacity>
       </View>
-    </View>
+        
+    {/* </View> */}
+
+    </KeyboardAwareScrollView>
+   
   );
 }
 
@@ -228,21 +250,17 @@ export default function Payment() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: "column",
+    height:Dimensions.get("window").height,
     alignItems: "center",
     justifyContent: "center",
-    width: "100%",
     backgroundColor: "white",
   },
   bottomPaymentBar: {
-    width: "100%",
-    position: "absolute",
-    bottom: 0,
-    //alignSelf: "flex-start",
+    width: Dimensions.get("window").width,
     justifyContent: "center",
+    alignItems:"center",
     flexDirection: "row",
-    height: "6%",
+    height: "7%",
     backgroundColor: "#8C8CF5",
   },
   bottomPaymentBarTouch: {
@@ -259,27 +277,27 @@ const styles = StyleSheet.create({
   },
   firstBox: {
     width: "95%",
-    flex: 0.4,
+    height:"10%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
   textBox: {
     width: "100%",
-    flex: 0.2,
+    height:"8%",
     alignItems: "center",
     marginBottom: "5%",
   },
   secondBox: {
     width: "95%",
-    flex: 1.0,
+    height:"24%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
   thirdBox: {
     width: "95%",
-    flex: 0.8,
+    height:"20%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -287,7 +305,7 @@ const styles = StyleSheet.create({
   thirdBoxLeft: {},
   thirdBoxRight: {
     flexDirection: "column",
-    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   imageText: {
     flexDirection: "row",
@@ -295,21 +313,24 @@ const styles = StyleSheet.create({
 
   forthBox: {
     width: "95%",
-    flex: 1,
+    height:"25%",
     flexDirection: "column",
   },
   forthBoxUp: {
     height: "50%",
     justifyContent: "center",
+
   },
   forthBoxDown: {
     height: "50%",
+
   },
   forthBoxDownPoint: {
     height: "20%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+
   },
   forthBoxDownTextInput: {
     height: "80%",

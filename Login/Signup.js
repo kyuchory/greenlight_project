@@ -76,15 +76,18 @@ const Signup = ({ navigation }) => {
   const _handleSignupButtonPress = async() => {
     try{
       const user = await signup({email, password});
-      console.log(user);
+      // console.log(user);
       Alert.alert('회원가입 성공', user.email);
       navigation.reset({routes: [{name: "Login"}]})//회원가입 마치면 자동으로 로그인페이지로 이동
       firestore.collection('User').doc(user.email).set({
+        name: name,
         mileage: 0,
+        supportCount: 0,
+        donateCount: 0,
+        depositCount: 0,
         });
-      // firestore.collection(user.email).doc('test2').set({
-      //   마일리지: 0,
-      // });
+
+
     } catch (e) {
       Alert.alert('회원가입 실패', e.message);
     }

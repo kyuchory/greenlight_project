@@ -3,12 +3,15 @@ import React, { useCallback, useState } from "react";
 import { Button, StyleSheet, Text, View, Image } from "react-native";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import ProgressBar from "../Components/ProgressBar";
-import { PointConsumer } from "../context/point";
+
+import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
 
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
     'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
+    Vitro_core: require('../assets/fonts/Vitro_core.ttf'),
+    'Vitro_core': require('../assets/fonts/Vitro_core.ttf'),
     WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
     'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
     HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
@@ -21,6 +24,22 @@ Font.loadAsync({
 
 export default function Donate({ navigation }) {
 
+  const [lifeUppoint, setLifeUppoint] = useState(0);
+  const [polarBearPoint, setPolarBearPoint] = useState(0);
+
+  const getProgress = async() => {
+    const document = await firestore.collection('Brand').doc('LifeUpForest').get();
+    const lifeUpProgress = document.get('progress'); //데이터베이스에서 가져온 진행도
+    const document2 = await firestore.collection('Brand').doc('PolarBear').get();
+    const polarBearProgress = document2.get('progress'); //데이터베이스에서 가져온 진행도
+
+    setLifeUppoint(lifeUpProgress);
+    setPolarBearPoint(polarBearProgress);
+  }
+
+  getProgress();
+
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -31,10 +50,17 @@ export default function Donate({ navigation }) {
         style={styles.closeIcon}/>
         </TouchableOpacity>
         </View>
-    <Text style={styles.ableBrand}>후원 가능 브랜드</Text>
+        <View style={{flexDirection:"row", paddingLeft:"5%",}}>
+        <Image
+        source={require("../icon+image/donatable.png")}
+        style={styles.optionIcon}/>
+        <Image
+        source={require("../icon+image/donateHistory.png")}
+        style={styles.optionIcon}/>
+
+        </View>
 
     <View style={styles.brandList}>
-
 
       <TouchableOpacity
         style={styles.brandWrapper}
@@ -44,14 +70,12 @@ export default function Donate({ navigation }) {
         style={styles.brandImg}/>
         <View style={styles.nameAndBar}>
           <Text style={styles.brandName}>'라이프업 숲' 조성 캠페인</Text>
-          <PointConsumer>
-            {(value) => (
+
               <View style={styles.progressBar}>
-                <ProgressBar count={value.state.point * 0.01} />
-                <Text style={{marginLeft:"2%", fontSize:14}}>{value.state.point}%</Text>
+                <ProgressBar count={lifeUppoint * 0.01} />
+                <Text style={{marginLeft:"2%", fontSize:14}}>{lifeUppoint}%</Text>
               </View>
-            )}
-          </PointConsumer>
+
           <Text style={{marginLeft:"2%", marginTop:"2%",fontFamily:"Vitro_pride", fontSize:9}}>
             '라이프업'에서 주관하는 나무심기 운동, 후원자 이름 새긴 비석 건립 계획</Text>
         </View>
@@ -60,22 +84,20 @@ export default function Donate({ navigation }) {
 
       <TouchableOpacity
         style={styles.brandWrapper}
-        onPress={() => navigation.navigate("ABrand")}>
+        onPress={() => navigation.navigate("DonateDetailPage2")}>
         <Image
-        source={require("../icon+image/forest1.png")}
+        source={require("../icon+image/polarBear1.jpg")}
         style={styles.brandImg}/>
         <View style={styles.nameAndBar}>
-          <Text style={styles.brandName}>바다 정화 운동</Text>
-          <PointConsumer>
-            {(value) => (
+          <Text style={styles.brandName}>북극곰 살리기 캠페인</Text>
+
               <View style={styles.progressBar}>
-                <ProgressBar count={value.state.point * 0.01} />
-                <Text style={{marginLeft:"2%", fontSize:14}}>{value.state.point}%</Text>
+                <ProgressBar count={polarBearPoint * 0.01} />
+                <Text style={{marginLeft:"2%", fontSize:14}}>{polarBearPoint}%</Text>
               </View>
-            )}
-          </PointConsumer>
+
           <Text style={{marginLeft:"2%", marginTop:"2%",fontFamily:"Vitro_pride", fontSize:10}}>
-            일단 보류...</Text>
+            기후변화로 멸종위기에 놓인 북극곰을 살려주세요</Text>
         </View>
       </TouchableOpacity>
 
@@ -101,9 +123,9 @@ header:{
 },
 headerText:{
   flex:1,
-  fontFamily:"BinggraeMelona-Bold",
+  fontFamily:"Vitro_core",
   color: "#00FF00",
-  fontSize:25,
+  fontSize:24,
   marginLeft:"3%"
 },
 closeIcon:{
@@ -111,18 +133,18 @@ closeIcon:{
   height:20,
   marginRight:"5%"
 },
-ableBrand:{
-margin:7,
-fontSize: 18,
-fontFamily:'Vitro_pride',
-color:"#5D5D5D"
+optionIcon:{
+  width:50,
+  height:20,
+  marginRight:"2%",
+  borderRadius:6
 },
 brandList:{
 // borderColor:'red',
 // borderWidth:1,
 alignItems:"flex-start",
-paddingLeft:"5%"
-
+paddingLeft:"5%",
+marginTop:"2%",
 },
 brandWrapper:{
 borderColor:'#E7FCE0',
@@ -131,7 +153,7 @@ borderWidth:1,
 borderRadius:10,
 flexDirection:"row",
 alignItems:"center",
-marginTop:"7%",
+marginBottom:"5%",
 width:325,
 height:100
 },
