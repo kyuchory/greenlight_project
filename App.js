@@ -81,6 +81,8 @@ export default function App() {
         <Stack.Screen name="OuterPage2" component={OuterPage2}/> 
         <Stack.Screen name="OuterPage3" component={OuterPage3}/>
         
+        
+
         <Stack.Screen name="Donate" component={Donate}/>
         <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
         <Stack.Screen name="DonateDetailPage2" component={DonateDetailPage2}/>
