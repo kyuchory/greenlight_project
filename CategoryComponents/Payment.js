@@ -11,6 +11,7 @@ import {
   TextInput,
   Image,
   Alert,
+  ScrollView,
 } from "react-native";
 import { onChange } from "react-native-reanimated";
 
@@ -28,7 +29,7 @@ Font.loadAsync({
 export default function Payment() {
   const navigation = useNavigation();
   const [text, setText] = useState("");
-  
+
   const [point, onChangePoint] = useState(0);
   const [mileage, setMileage] = useState(0);
   const userEmail = useContext(UserContext);
@@ -49,7 +50,7 @@ export default function Payment() {
       const plusMileage = mileage - 45000;
       setMileage(mileage - 45000);
       navigation.navigate("PaymentCompletion");
-      firestore.collection("User").doc(email).set({"mileage": plusMileage});
+      firestore.collection("User").doc(email).set({ mileage: plusMileage });
     }
   };
 
@@ -173,7 +174,7 @@ export default function Payment() {
           </View>
           <View style={styles.forthBoxDownTextInput}>
             <TextInput
-              onChangeText={point=> onChangePoint(point)}
+              onChangeText={(point) => onChangePoint(point)}
               value={point}
               placeholder="0"
               style={{
