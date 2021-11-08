@@ -149,12 +149,18 @@ export default function CategoryOuter() {
 
     //console.log(like);
 
-    if(like = false) { 
-      setLike(true);
+
+    // const document = await firestore.collection("outer").doc("outer1").get();
+    // const tempLike = await document.get("like");
+
+    if(like === 0) { 
+      setLike(1);
+      firestore.collection('outer').doc('outer1').set({"like":1}, {merge:true}); 
       console.log("최종적으로 true")
     }
     else{
-      setLike(false);
+      setLike(0);
+      firestore.collection('outer').doc('outer1').set({"like":0}, {merge:true}); 
       console.log("최종적 false")
     }
 

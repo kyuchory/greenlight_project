@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { FlatList, StyleSheet, Text, View, Image } from "react-native";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import { firestore } from "../utils/firebase";
@@ -24,40 +24,29 @@ export default function SupportList({ navigation }) {
     const email = userEmail.user.email;
 
     const [data, setData] = useState('');
+    const [listItems, setListItems] = useState([]);
     const listItem = [];
+
+  
 
     const findSupportList = async() => {
         const document = await firestore.collection("User").doc(email).collection("supportList").get();
         document.forEach((doc) => {
             const tempfiber = doc.data().fiber;
             const tempclothNum = doc.data().clothNum;
-            listItem.push({fiber:tempfiber, clothNum:tempclothNum});            
+            // console.log(tempclothNum + tempfiber);
+            const itemArray = tempclothNum + "+" + tempfiber;
+            // console.log(itemArray);
+            setListItems([...listItems, itemArray]);
+
             });
-            
-            // console.log(listItem);
-            // setData(listItem);
-            // for(let i = 0 ; i < listItem.length; i++){
-            //     <Text>{i}</Text>
-            // }
             }
-            
-            
 
-    const Item  = ({ listFiber,listClothNum }) => {
-            <View>
-                <Text>후원 재질: {listFiber}</Text>
-                <Text>후원한 벌: {listClothNum}</Text>
-            
-            </View>
-        }
 
-        const renderItem = ({ item }) => (
-            
-            <Item listFiber={item.listFiber} listClothNum={item.listClothNum}/>
-            
-          );
 
-    // findSupportList();
+
+    findSupportList();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -69,17 +58,16 @@ export default function SupportList({ navigation }) {
         </TouchableOpacity>
         </View>
 
-        {/* <View>
-            <FlatList
-            data={data}
-            renderItem={renderItem}
-            />
-            
-        </View> */}
-        
-        <Text>만드는중............</Text>
-        
+        <View>
+        <Text>만드는중............</Text> 
+        <View>{listItems.map(  (goal)=> <Text>{goal}</Text> )}</View>
 
+
+        </View>
+
+
+        
+        
         
 
          </View>
@@ -88,11 +76,8 @@ export default function SupportList({ navigation }) {
 
 const styles = StyleSheet.create({
 container: {
-// display: "flex",
 flex: 1,
 backgroundColor: "#fff",
-// alignItems: "center",
-// justifyContent: "center",
 },
 header:{
   marginTop:"8%",
