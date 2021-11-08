@@ -40,6 +40,7 @@ import LogoTitle4 from "./Header/LogoTitle4";
 import LogoTitle5 from "./Header/LogoTitle5";
 import DonationCompletion from "./Donate/DonationCompletion";
 import ChatBot2 from "./ChatBot/ChatBot2";
+import GoDonate2 from "./Donate/GoDonate2";
 
 
 LogBox.ignoreLogs(['Setting a timer']);
@@ -84,6 +85,7 @@ export default function App() {
         <Stack.Screen name="DonateDetailPage1" component={DonateDetailPage1}/>
         <Stack.Screen name="DonateDetailPage2" component={DonateDetailPage2}/>
         <Stack.Screen name="GoDonate" component={GoDonate}/>
+        <Stack.Screen name="GoDonate2" component={GoDonate2}/>
         <Stack.Screen name="DonationCompletion"
                       component={DonationCompletion}
                       options={{

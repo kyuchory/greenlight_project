@@ -13,26 +13,27 @@ import {
   Alert,
   Dimensions
 } from "react-native";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 Font.loadAsync({
-  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  BinggraeMelonaBold: require("../assets/fonts/BinggraeMelona-Bold.ttf"),
-  "BinggraeMelona-Bold": require("../assets/fonts/BinggraeMelona-Bold.ttf"),
+  Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
+  'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
+  Vitro_core: require('../assets/fonts/Vitro_core.ttf'),
+  'Vitro_core': require('../assets/fonts/Vitro_core.ttf'),
+  BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
+  'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
+  SpoqaHanSansNeoBold : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
+  'SpoqaHanSansNeo-Bold' : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
 });
 
-export default function Payment() {
+export default function GoDonate2() {
   const navigation = useNavigation();
   const [text, setText] = useState("");
-  
-  const [name, setName] = useState('');
+  const [tempPoint, setTempPoint] = useState(0);
   const [point, onChangePoint] = useState(0);
   const [mileage, setMileage] = useState(0);
-  const [depositCount, setDepositCount] = useState(0);
+  const [plusDonateCount, setPlusDonateCount] = useState(0);
+  const [name, setName] = useState('');
+  const [progress, setProgress] = useState(0);
 
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
@@ -41,55 +42,76 @@ export default function Payment() {
     const document = await firestore.collection("User").doc(email).get();
     const tempName = await document.get("name");
     const tempmileage = await document.get("mileage");
-    const tempdepositCount = await document.get("depositCount");
+
+    const prevDonateCount = document.get('donateCount');
+    const tempdonateCount = prevDonateCount + 1;
+
+    const documentBrand = await firestore.collection('Brand').doc('PolarBear').get();
+    const tempProgress = documentBrand.get('progress'); //데이터베이스에서 가져온 진행도
 
     setName(tempName);
     setMileage(tempmileage);
-    setDepositCount(tempdepositCount+1);
+    setPlusDonateCount(tempdonateCount);
+    setProgress(tempProgress+1);
+    
   };
 
   handleMileage();
 
   const paymentHandler = () => {
-    if (mileage < 45000) {
+    if (mileage < tempPoint) {
       Alert.alert("보유하신 포인트가 부족합니다.");
     } else {
-      const plusMileage = mileage - 45000;
-      setMileage(mileage - 45000);
-      navigation.navigate("PaymentCompletion");
+      const plusMileage = mileage - tempPoint;
+      setMileage(mileage - tempPoint);
+      navigation.navigate("DonationCompletion");
+
       firestore.collection("User").doc(email).set({
         "mileage": plusMileage,
-        "depositCount": depositCount,
+        'donateCount':plusDonateCount,
+      },{merge:true});
+
+      firestore.collection("Brand").doc("PolarBear").set({
+        "progress": progress,
       },{merge:true});
     }
   };
 
-  const allPointUse = () => {
-    onChangePoint("45000");
-  };
+
 
   const textHandler = (event) => {
     setText(event.nativeEvent.text);
     // console.log(text);
   };
   const pointHandler = (event) => {
-    setPoint(event.nativeEvent.text);
-    console.log(point);
+    setTempPoint(event.nativeEvent.text);
+    console.log(tempPoint);
   };
 
   return (
    
-    <KeyboardAwareScrollView
-    style={{ backgroundColor: 'white' }}
-    resetScrollToCoords={{ x: 0, y: 0 }}
-    contentContainerStyle={styles.container}
-    scrollEnabled={true}
-  >
-    {/* <View style={styles.container}> */}
-      <View style={styles.line}></View>
+
+   <View style={styles.container}>
+    <View style={styles.header}>
+    <View style={{flex:3, }}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Image
+          source={require("../icon+image/back.png")}
+          style={styles.backIcon}
+        />
+      
+      </TouchableOpacity>
+      </View>
+      <View style={{flex:5, }}>
+      <Text style={styles.headerText}>기부하기</Text>
+      </View>
+    </View>
+
+    <View style={styles.line}></View>
+
       <View style={styles.firstBox}>
         <View>
-          <Text style={{ fontFamily: "BinggraeMelona-Bold" }}>주문자 정보</Text>
+          <Text style={{ fontFamily: "BinggraeMelona-Bold" }}>후원자 정보</Text>
         </View>
         <View>
           <Text style={{ fontFamily: "Vitro_pride" }}>
@@ -97,6 +119,7 @@ export default function Payment() {
           </Text>
         </View>
       </View>
+
       <View style={styles.line}></View>
       <View style={styles.secondBox}>
         <View>
@@ -106,7 +129,7 @@ export default function Payment() {
             배송지 정보
           </Text>
           <Image
-            source={require("../icon+image/dankook.png")}
+            source={require("../icon+image/dankook_green.png")}
             style={{ marginBottom: "4%" }}
           />
           <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
@@ -124,11 +147,11 @@ export default function Payment() {
         <TextInput
           onChange={textHandler}
           value={text}
-          placeholder="택배기사님께 전달할 말을 적어주세요."
+          placeholder="전달할 말을 적어주세요."
           style={{
             borderWidth: 1,
             width: "80%",
-            height: "80%",
+            height: "70%",
             padding: 5,
             fontFamily: "BinggraeMelona-Bold",
           }}
@@ -138,25 +161,22 @@ export default function Payment() {
       <View style={styles.thirdBox}>
         <View style={styles.thirdBoxLeft}>
           <Text style={{ fontSize: 18, fontFamily: "BinggraeMelona-Bold", marginBottom:5 }}>
-            주문상품 정보
+            기부대상 정보
           </Text>
           <View style={styles.imageText}>
-            <Image source={require("../icon+image/miniJacket.png")} />
+            <Image source={require("../icon+image/polarBear2.jpg")} style={{width:70,height:70}} />
             <View
               style={{
                 flexDirection: "column", marginLeft:5
               }}
             >
               <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
-                greenLight
+                LifeUp
               </Text>
               <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
-                Brown Jacket
+                북극곰 살리기 캠페인
               </Text>
-              <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
-                Brown/Free/수량 1개
-              </Text>
-              <Image source={require("../icon+image/useCoupon.png")} />
+        
             </View>
           </View>
         </View>
@@ -164,8 +184,8 @@ export default function Payment() {
           <Text style={{ fontFamily: "Vitro_pride" }}>
             {name} | 010-1234-5678
           </Text>
-          <Text style={{ fontFamily: "Vitro_pride" }}> -0원</Text>
-          <Text style={{ fontFamily: "Vitro_pride" }}> 45,000원</Text>
+          <Text> </Text>
+          <Text> </Text>
         </View>
       </View>
       <View style={styles.line}></View>
@@ -191,6 +211,7 @@ export default function Payment() {
           </View>
           <View style={styles.forthBoxDownTextInput}>
             <TextInput
+              onChange={pointHandler}
               onChangeText={point=> onChangePoint(point)}
               value={point}
               placeholder="0"
@@ -204,9 +225,9 @@ export default function Payment() {
               }}
             />
             <View>
-              <TouchableOpacity onPress={() => allPointUse()}>
+              <TouchableOpacity>
                 <Image
-                  source={require("../icon+image/allPoint.png")}
+                  source={require("../icon+image/inputIcon.png")}
                   style={{ marginTop: "21%" }}
                 />
               </TouchableOpacity>
@@ -214,38 +235,27 @@ export default function Payment() {
           </View>
         </View>
       </View>
-      {/* <View style={{ flex: 0.3, width: "100%" }}></View> */}
+
     <View style={styles.bottomPaymentBar}>
       <TouchableOpacity onPress={() => paymentHandler()}>
         <Text
           style={{
             fontFamily: "BinggraeMelona-Bold",
-            
             color: "white",
           }}
         >
-          45,000원 결제하기
+          {tempPoint}원 결제하기
         </Text>
         </TouchableOpacity>
       </View>
         
-    {/* </View> */}
+    </View>
 
-    </KeyboardAwareScrollView>
    
   );
 }
 
-{
-  /* <TextInput
-            onChange={textHandler}
-            value={text}
-            placeholder="택배기사님께 전달할 말을 적어주세요."
-            style={{ borderWidth: 1, width: "90%" ,
-            height:35, padding:5,
-        }}
-          /> */
-}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -253,14 +263,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
+    paddingTop:"8%",
+  },
+  header: {
+    height: "8%",
+    flexDirection: "row",
+    alignItems: "center",
+    // borderWidth:1,
+    // borderColor:"red"
+  },
+
+  backIcon: {
+    width: 25,
+    height: 25,
+    marginLeft: "20%",
+  },
+
+  headerText: {
+    
+    fontFamily: "BinggraeMelona-Bold",
+    color: "#00FF00",
+    fontSize: 25,
+    // marginLeft: "4%",
   },
   bottomPaymentBar: {
     width: Dimensions.get("window").width,
     justifyContent: "center",
     alignItems:"center",
-    flexDirection: "row",
+    // flexDirection: "row",
     height: "7%",
-    backgroundColor: "#8C8CF5",
+    backgroundColor: "#7CB199",
   },
   bottomPaymentBarTouch: {
     width: "100%",
@@ -285,11 +317,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height:"8%",
     alignItems: "center",
-    marginBottom: "5%",
+    marginBottom: "3%",
   },
   secondBox: {
     width: "95%",
-    height:"24%",
+    height:"20%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -305,6 +337,7 @@ const styles = StyleSheet.create({
   thirdBoxRight: {
     flexDirection: "column",
     alignItems: "flex-end",
+
   },
   imageText: {
     flexDirection: "row",
@@ -338,3 +371,5 @@ const styles = StyleSheet.create({
   },
   forthBoxDownPointLeft: {},
 });
+
+    

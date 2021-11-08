@@ -56,7 +56,7 @@ Font.loadAsync({
                         style={styles.youtubePic}/>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate("GoDonate")}>
+                <TouchableOpacity onPress={() => navigation.navigate("GoDonate2")}>
                     <View style={styles.donateButton}>
                     <Text style={styles.buttonText}>기부하기</Text>                    
                     </View> 

@@ -32,18 +32,27 @@ export default function GoDonate() {
   const [point, onChangePoint] = useState(0);
   const [mileage, setMileage] = useState(0);
   const [plusDonateCount, setPlusDonateCount] = useState(0);
+  const [name, setName] = useState('');
+  const [progress, setProgress] = useState(0);
+
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
 
   const handleMileage = async () => {
     const document = await firestore.collection("User").doc(email).get();
+    const tempName = await document.get("name");
     const tempmileage = await document.get("mileage");
 
     const prevDonateCount = document.get('donateCount');
     const tempdonateCount = prevDonateCount + 1;
 
+    const documentBrand = await firestore.collection('Brand').doc('LifeUpForest').get();
+    const tempProgress = documentBrand.get('progress'); //데이터베이스에서 가져온 진행도
+
+    setName(tempName);
     setMileage(tempmileage);
     setPlusDonateCount(tempdonateCount);
+    setProgress(tempProgress+1);
 
   };
 
@@ -56,9 +65,14 @@ export default function GoDonate() {
       const plusMileage = mileage - tempPoint;
       setMileage(mileage - tempPoint);
       navigation.navigate("DonationCompletion");
+
       firestore.collection("User").doc(email).set({
         "mileage": plusMileage,
         'donateCount':plusDonateCount,
+      },{merge:true});
+
+      firestore.collection("Brand").doc("LifeUpForest").set({
+        "progress": progress,
       },{merge:true});
     }
   };
@@ -101,7 +115,7 @@ export default function GoDonate() {
         </View>
         <View>
           <Text style={{ fontFamily: "Vitro_pride" }}>
-            김단국 | 010-1234-5678
+            {name} | 010-1234-5678
           </Text>
         </View>
       </View>
@@ -119,7 +133,7 @@ export default function GoDonate() {
             style={{ marginBottom: "4%" }}
           />
           <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
-            김단국 | 010-1234-5678
+          {name} | 010-1234-5678
           </Text>
           <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
             경기도 용인시 수지구 죽전로 154 ict관
@@ -168,7 +182,7 @@ export default function GoDonate() {
         </View>
         <View style={styles.thirdBoxRight}>
           <Text style={{ fontFamily: "Vitro_pride" }}>
-            김단국 | 010-1234-5678
+          {name} | 010-1234-5678
           </Text>
           <Text> </Text>
           <Text> </Text>
