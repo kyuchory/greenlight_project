@@ -305,7 +305,7 @@ Font.loadAsync({
 
 
 export default function CategoryOuter() {
-  state = { open: false };
+  //state = { open: false };
 
   const navigation = useNavigation();
   const [outerName, setOuterName] = useState(0);
@@ -323,7 +323,7 @@ export default function CategoryOuter() {
     const tempStore = await document.get("store");
     const tempLike = await document.get("like");
 
-    setLike(tempLike);
+    //setLike(tempLike);
     setOuterName(tempName);
     setOuterPrice(tempPrice);
     setOuterImg(tempImg);
@@ -394,8 +394,22 @@ export default function CategoryOuter() {
 
   function clickLikeFunction() {
     Alert.alert("좋아요♥️");
-  }
 
+    console.log(like); //현재 상태 확인
+    //0은 false, 1은 true
+
+    if(like === 0) {   
+      setLike(1);
+      console.log("1은 true")
+      firestore.collection('outer').doc('outer3').set({"like":1},{merge:true}); 
+    }
+    else{
+      setLike(0);
+      console.log("0은 false")
+      firestore.collection('outer').doc('outer3').set({"like":0},{merge:true}); 
+    }
+
+    }
   const Page = () => {
     return (
       <View style={styles.page}>

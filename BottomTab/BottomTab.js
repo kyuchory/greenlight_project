@@ -132,6 +132,7 @@ export default function BottomTab({ point, handlePoint }) {
         options={{
           headerTitle: (props) => <LogoTitle2 {...props} title={"좋아요"} />,
           tabBarIcon: ({ focused }) => (focused ? <Icon4B /> : <Icon4 />),
+          unmountOnBlur:true
         }}
       />
       <BottomTabNavigator.Screen
