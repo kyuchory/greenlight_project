@@ -3,7 +3,8 @@ import React, { useCallback, useState } from "react";
 import { Button, StyleSheet, Text, View, Image } from "react-native";
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import ProgressBar from "../Components/ProgressBar";
-import { PointConsumer } from "../context/point";
+
+import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
 
 Font.loadAsync({
@@ -22,6 +23,22 @@ Font.loadAsync({
 
 
 export default function Donate({ navigation }) {
+
+  const [lifeUppoint, setLifeUppoint] = useState(0);
+  const [polarBearPoint, setPolarBearPoint] = useState(0);
+
+  const getProgress = async() => {
+    const document = await firestore.collection('Brand').doc('LifeUpForest').get();
+    const lifeUpProgress = document.get('progress'); //데이터베이스에서 가져온 진행도
+    const document2 = await firestore.collection('Brand').doc('PolarBear').get();
+    const polarBearProgress = document2.get('progress'); //데이터베이스에서 가져온 진행도
+
+    setLifeUppoint(lifeUpProgress);
+    setPolarBearPoint(polarBearProgress);
+  }
+
+  getProgress();
+
 
   return (
     <View style={styles.container}>
@@ -53,14 +70,12 @@ export default function Donate({ navigation }) {
         style={styles.brandImg}/>
         <View style={styles.nameAndBar}>
           <Text style={styles.brandName}>'라이프업 숲' 조성 캠페인</Text>
-          <PointConsumer>
-            {(value) => (
+
               <View style={styles.progressBar}>
-                <ProgressBar count={value.state.point * 0.01} />
-                <Text style={{marginLeft:"2%", fontSize:14}}>{value.state.point}%</Text>
+                <ProgressBar count={lifeUppoint * 0.01} />
+                <Text style={{marginLeft:"2%", fontSize:14}}>{lifeUppoint}%</Text>
               </View>
-            )}
-          </PointConsumer>
+
           <Text style={{marginLeft:"2%", marginTop:"2%",fontFamily:"Vitro_pride", fontSize:9}}>
             '라이프업'에서 주관하는 나무심기 운동, 후원자 이름 새긴 비석 건립 계획</Text>
         </View>
@@ -75,14 +90,12 @@ export default function Donate({ navigation }) {
         style={styles.brandImg}/>
         <View style={styles.nameAndBar}>
           <Text style={styles.brandName}>북극곰 살리기 캠페인</Text>
-          <PointConsumer>
-            {(value) => (
+
               <View style={styles.progressBar}>
-                <ProgressBar count={value.state.point * 0.01} />
-                <Text style={{marginLeft:"2%", fontSize:14}}>{value.state.point}%</Text>
+                <ProgressBar count={polarBearPoint * 0.01} />
+                <Text style={{marginLeft:"2%", fontSize:14}}>{polarBearPoint}%</Text>
               </View>
-            )}
-          </PointConsumer>
+
           <Text style={{marginLeft:"2%", marginTop:"2%",fontFamily:"Vitro_pride", fontSize:10}}>
             기후변화로 멸종위기에 놓인 북극곰을 살려주세요</Text>
         </View>

@@ -26,6 +26,7 @@ export default function Mypage() {
   const[mileage, setMileage] = useState(0);
   const[supportCount, setSupportCount] = useState(0);
   const [donateCount, setDonateCount] = useState(0);
+  const [depositCount, setDepositCount] = useState(0);
   const [name, setName] = useState('');
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -42,14 +43,14 @@ export default function Mypage() {
     const tempmileage = await document.get("mileage");
     const tempsupportCount = await document.get("supportCount");
     const tempdonateCount = await document.get("donateCount");
+    const tempdepositCount = await document.get("depositCount");
     const tempName = await document.get("name");
+
     setMileage(tempmileage);
     setSupportCount(tempsupportCount);
     setDonateCount(tempdonateCount);
+    setDepositCount(tempdepositCount);
     setName(tempName);
-
-
-
 
   }
 
@@ -151,7 +152,7 @@ export default function Mypage() {
         </View>
         <View style = {styles.DelieveryContents}>
           <View style = {styles.numberContents}>
-            <Text style={styles.iconContentsNum}>1</Text>
+            <Text style={styles.iconContentsNum}>{depositCount}</Text>
             <Text style={styles.iconContentsText}>입금/결제</Text>
           </View>
           <View style = {styles.numberContents}>
