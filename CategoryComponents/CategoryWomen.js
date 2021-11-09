@@ -50,10 +50,9 @@ export default function CategoryWomen() {
           <Text style={styles.textBig}> 가방 </Text></View>
           <View style = {styles.box3}>
             <View style = {styles.box4}>
-            <TouchableOpacity onPress={() => navigation.navigate("CategoryOuter")}>
-            <TouchableHighlight/>
+            
             <Text style = {styles.textSmall}> 백팩 </Text>     
-            </TouchableOpacity>
+     
             </View>
 
             <View style = {styles.box4}>
