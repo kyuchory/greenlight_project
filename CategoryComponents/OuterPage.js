@@ -40,7 +40,8 @@ export default function CategoryOuter() {
   const [outerPrice, setOuterPrice] = useState(0);
   const [outerImg, setOuterImg] = useState(0);
   const [outerStore, setOuterStore] = useState(0);
-  const [like, setLike] = useState(0);
+  const [like, setLike] = useState();
+
   const [heart, setHeart] = useState(0);
 
   const handleFireBase = async () => {
