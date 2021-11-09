@@ -1,9 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { StyleSheet, Text, View } from 'react-native';
-import * as Font from 'expo-font';
-import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
-import { FontDisplay } from "expo-font";
+
+import * as Font from "expo-font";
 Font.loadAsync({
   Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
   'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
@@ -27,10 +26,7 @@ export default function CategoryWomen() {
           <Text style={styles.textBig}> 의류</Text></View>
           <View style = {styles.box3}>
             <View style = {styles.box4}>
-            <TouchableOpacity onPress={() => navigation.navigate("CategoryOuter")}>
-            <TouchableHighlight/>
             <Text style = {styles.textSmall}> 아우터 </Text>     
-            </TouchableOpacity>
             </View>
 
             <View style = {styles.box4}>
@@ -72,10 +68,7 @@ export default function CategoryWomen() {
           <Text style={styles.textBig}> 신발 </Text></View>
           <View style = {styles.box3}>
             <View style = {styles.box4}>
-            <TouchableOpacity onPress={() => navigation.navigate("CategoryOuter")}>
-            <TouchableHighlight/>
             <Text style = {styles.textSmall}> 운동화 </Text>     
-            </TouchableOpacity>
             </View>
 
             <View style = {styles.box4}>
@@ -95,10 +88,7 @@ export default function CategoryWomen() {
           <Text style={styles.textBig}> 액세서리/기타잡화 </Text></View>
           <View style = {styles.box3}>
             <View style = {styles.box4}>
-            <TouchableOpacity onPress={() => navigation.navigate("CategoryOuter")}>
-            <TouchableHighlight/>
-            <Text style = {styles.textSmall}> 목걸이 </Text>     
-            </TouchableOpacity>
+            <Text style = {styles.textSmall}> 목걸이 </Text>
             </View>
 
             <View style = {styles.box4}>
@@ -141,33 +131,24 @@ const styles = StyleSheet.create({
  
   Line:{
     flexDirection: 'row',
-    //alignItems: 'flex-start',
     width:'95%',
     height:'0.2%',
     backgroundColor:'#b6b6b6',
   },
   box2: {
       marginTop:15,
-     // marginBottom:10,
       flexDirection: 'column',
-    //  alignItems: 'flex-start',
       width:'90%',
       height:'5%',
       backgroundColor:'white',
   },
   box3: {
     flexDirection: 'row',
-    //marginLeft:'3%',
-   // alignItems: 'flex-start',
     width:'85%',
-    height:'5%',
-    //backgroundColor:'#b6b6b6',
+    height:'5.5%',
   },
   box4:{
     flexDirection: 'column',
-   // marginLeft:'3%',
-    //marginTop:'5%',
-   // alignItems: 'flex-start',
     width:'50%',
     height:'100%',
     backgroundColor:'lightgrey', 
@@ -176,7 +157,6 @@ const styles = StyleSheet.create({
 
   textMain: {
     fontSize:20,
-    fontWeight:"bold",
     fontFamily: "Vitro_pride", 
     marginLeft:10,
     color:"grey"
@@ -187,12 +167,10 @@ const styles = StyleSheet.create({
     fontFamily: "Vitro_pride", 
     marginLeft:15,
     marginTop:12,
-    fontWeight:"bold",
     },
 
   textBig:{
     fontSize:20,
-    fontWeight:"bold",
     fontFamily: "Vitro_pride", 
     marginLeft:10, 
   },
