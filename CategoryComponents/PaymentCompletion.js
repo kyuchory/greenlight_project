@@ -19,8 +19,7 @@ export default function PaymentCompletion() {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={styles.textBox}>
-        <View>
+      <View style={styles.textBox}>       
           <Text
             style={{
               fontSize: 20,
@@ -32,10 +31,10 @@ export default function PaymentCompletion() {
             주문이 정상적으로 완료 되었습니다.
           </Text>
           <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
-            {" "}
+            {/* {" "} */}
             업체(브랜드)의 주문 확인 후 발송됩니다.
           </Text>
-        </View>
+       
       </View>
       <View style={styles.buttonBox}>
         <Image
