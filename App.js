@@ -120,12 +120,16 @@ export default function App() {
                 <Stack.Screen
                   name="Payment"
                   component={Payment}
-                  
                 />
                 <Stack.Screen
                   name="PaymentCompletion"
                   component={PaymentCompletion}
-                  
+                  options={{
+                    headerShown: true,
+                    headerTitle: (props) => (
+                      <LogoTitle5 {...props} title={"주문 완료"} />
+                    ),
+                  }}
                 />
 
                 <Stack.Screen

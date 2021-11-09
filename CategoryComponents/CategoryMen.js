@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
-import { FontDisplay } from "expo-font";
 Font.loadAsync({
   Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
   'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
@@ -146,26 +145,18 @@ const styles = StyleSheet.create({
   },
   box2: {
       marginTop:15,
-     // marginBottom:10,
       flexDirection: 'column',
-    //  alignItems: 'flex-start',
       width:'90%',
       height:'5%',
       backgroundColor:'white',
   },
   box3: {
     flexDirection: 'row',
-    //marginLeft:'3%',
-   // alignItems: 'flex-start',
     width:'85%',
-    height:'5%',
-    //backgroundColor:'#b6b6b6',
+    height:'5.5%',
   },
   box4:{
     flexDirection: 'column',
-   // marginLeft:'3%',
-    //marginTop:'5%',
-   // alignItems: 'flex-start',
     width:'50%',
     height:'100%',
     backgroundColor:'lightgrey', 
@@ -174,7 +165,6 @@ const styles = StyleSheet.create({
 
   textMain: {
     fontSize:20,
-    fontWeight:"bold",
     fontFamily: "Vitro_pride", 
     marginLeft:10,
     color:"grey"
@@ -185,12 +175,10 @@ const styles = StyleSheet.create({
     fontFamily: "Vitro_pride", 
     marginLeft:15,
     marginTop:12,
-    fontWeight:"bold",
     },
 
   textBig:{
     fontSize:20,
-    fontWeight:"bold",
     fontFamily: "Vitro_pride", 
     marginLeft:10, 
   },

@@ -71,7 +71,7 @@ const stytles = StyleSheet.create({
 
   iconWrapper: {
     width:"10%",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   icon: {
     width: 28,

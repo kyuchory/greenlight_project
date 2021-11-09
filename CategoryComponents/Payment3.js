@@ -309,6 +309,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
+    paddingBottom:"13%"
   },
 
   bottomPaymentBar: {
@@ -316,11 +317,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#8C8CF5",
-    paddingTop: "5%",
-    paddingBottom: "5%",
+    // paddingTop: "5%",
+    // paddingBottom: "5%",
     position: "absolute",
     bottom: 0,
-    height: 40,
+    height: 55,
   },
   bottomPaymentBarTouch: {
     width: "100%",

@@ -4,7 +4,6 @@ import {
 } from "@react-navigation/bottom-tabs";
 import * as React from "react";
 import { StyleSheet, Image } from "react-native";
-
 import Anything from "../BottomMenu/Anything";
 import Category from "../BottomMenu/Category";
 import Home from "../BottomMenu/Home";

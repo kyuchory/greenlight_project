@@ -261,9 +261,7 @@ const styles = StyleSheet.create({
   },
   option: {
     flex: 2,
-
     backgroundColor: "white",
-
     justifyContent: "center",
   },
 
