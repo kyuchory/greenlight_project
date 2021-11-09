@@ -25,7 +25,6 @@ Font.loadAsync({
 
 
 export default function CategoryOuter() {
-//  state = { open: false };
 
   const navigation = useNavigation();
   const [outerName, setOuterName] = useState(0);
@@ -72,7 +71,6 @@ export default function CategoryOuter() {
           <Image
             source={require("../icon+image/outer_greenjacket.jpg")}
             style={styles.image}
-        
           />
         </View>
         <View style={styles.box3}>
@@ -108,6 +106,57 @@ export default function CategoryOuter() {
           </View>
         </View>
       </View>
+      // <View style={styles.main}>
+      //   <View style={styles.header}>
+      //     <TouchableOpacity onPress={() => navigation.goBack()}>
+      //       <Image
+      //         source={require("../icon+image/back.png")}
+      //         style={styles.backIcon}
+      //       />
+      //     </TouchableOpacity>
+      //     <Text style={styles.headerText}>{outerName}</Text>
+      //   </View>
+
+      //   <View style={styles.box1}>
+      //     <Image
+      //       source={require("../icon+image/outer_greenjacket.jpg")}
+      //       style={styles.image}
+        
+      //     />
+      //   </View>
+      //   <View style={styles.box3}>
+      //     <Text style={styles.textSmall}>{outerStore}</Text>
+      //     <Text style={styles.textBold}>{outerName}</Text>
+      //     <Text style={styles.textSmall}>{outerPrice}원</Text>
+      //   </View>
+      //   <View style={styles.box2}>
+      //     <View style={styles.option}>
+      //       <Text style={styles.textSmall}>Freesize</Text>
+      //     </View>
+
+      //     <View style={styles.payment}>
+      //       <TouchableOpacity onPress={()=>navigation.navigate("Payment2")}>
+      //       <Image
+      //         source={require("../icon+image/purchase_button.png")}
+      //         style={styles.purchase}
+      //       />
+      //       </TouchableOpacity>
+      //     </View>
+
+      //     <View style={styles.share}>
+      //       <Image
+      //         source={require("../icon+image/share.png")}
+      //         style={styles.share_img}
+      //       />
+      //     </View>
+
+      //     <View style={styles.like}>
+      //     <TouchableOpacity onPress={clickLikeFunction}>
+      //         <OriginalHeart/>
+      //       </TouchableOpacity>
+      //     </View>
+      //   </View>
+      // </View>
     );
   };
 
@@ -231,10 +280,9 @@ const styles = StyleSheet.create({
 
   box1: {
     width: "90%",
-    height:"60%",
     flexDirection: "column",
     backgroundColor: "#b6b6b6",
-    marginTop: "5%",
+    marginTop: "3%",
   },
 
   box2: {
@@ -252,7 +300,7 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
   },
   line1: {
-    marginTop: "-28%",
+    marginTop: "-5%",
     width: "100%",
     height: "0.2%",
     backgroundColor: "#b6b6b6",
@@ -285,10 +333,12 @@ const styles = StyleSheet.create({
 
   image: {
     width: "100%",
-    height: "100%",
+    height:500
+    
   },
   page_img: {
     width: "100%",
+    
   },
   purchase: {
     width: 120,
