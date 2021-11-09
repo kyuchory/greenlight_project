@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Font from "expo-font";
 Font.loadAsync({
   Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
@@ -26,7 +26,9 @@ export default function CategoryWomen() {
           <Text style={styles.textBig}> 의류</Text></View>
           <View style = {styles.box3}>
             <View style = {styles.box4}>
+            <TouchableOpacity onPress={() => navigation.navigate("CategoryOuter")}>
             <Text style = {styles.textSmall}> 아우터 </Text>     
+            </TouchableOpacity>
             </View>
 
             <View style = {styles.box4}>

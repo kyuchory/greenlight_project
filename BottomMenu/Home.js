@@ -14,7 +14,6 @@ export default function Home() {
           images={[
             require("../icon+image/ecoImg1.png"),
             require("../icon+image/eventImg3.png"),
-            "https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
           ]}
           sliderBoxHeight={400} //슬라이드 이미지 높이
           dotColor="#FFEE58" //밑에 현재 이미지 dot 색상
