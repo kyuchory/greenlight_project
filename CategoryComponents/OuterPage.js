@@ -51,7 +51,7 @@ export default function CategoryOuter() {
     const tempStore = await document.get("store");
     const tempLike = await document.get("like");
 
-   // setLike(tempLike);
+   setLike(tempLike);
     setOuterName(tempName);
     setOuterPrice(tempPrice);
     setOuterImg(tempImg);
@@ -312,6 +312,7 @@ const styles = StyleSheet.create({
   },
   purchase: {
     width: 120,
+    height:50,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "black",

@@ -59,22 +59,29 @@ export default function GoDonate() {
   handleMileage();
 
   const paymentHandler = () => {
-    if (mileage < tempPoint) {
-      Alert.alert("보유하신 포인트가 부족합니다.");
-    } else {
-      const plusMileage = mileage - tempPoint;
-      setMileage(mileage - tempPoint);
-      navigation.navigate("DonationCompletion");
-
-      firestore.collection("User").doc(email).set({
-        "mileage": plusMileage,
-        'donateCount':plusDonateCount,
-      },{merge:true});
-
-      firestore.collection("Brand").doc("LifeUpForest").set({
-        "progress": progress,
-      },{merge:true});
+    if(tempPoint <= 10 ||tempPoint ==="."||tempPoint ==="-"||tempPoint ===".-"||tempPoint ===".."||tempPoint ==="-."){
+      Alert.alert("10원 이상의 금액을 후원해 주세요.")
     }
+    else{
+      if (mileage < tempPoint) {
+        Alert.alert("보유하신 포인트가 부족합니다.");
+      } else {
+        const plusMileage = mileage - tempPoint;
+        setMileage(mileage - tempPoint);
+        navigation.navigate("DonationCompletion");
+  
+        firestore.collection("User").doc(email).set({
+          "mileage": plusMileage,
+          'donateCount':plusDonateCount,
+        },{merge:true});
+  
+        firestore.collection("Brand").doc("LifeUpForest").set({
+          "progress": progress,
+        },{merge:true});
+      }
+
+    }
+    
   };
 
 
@@ -215,6 +222,7 @@ export default function GoDonate() {
               onChangeText={point=> onChangePoint(point)}
               value={point}
               placeholder="0"
+              keyboardType="number-pad"
               style={{
                 fontFamily: "Vitro_pride",
                 marginTop: "5%",

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef, useContext} from "react";
-import { StyleSheet,  Text,  View,  ImageBackground,  TextInput,  Animated,  Image,  Platform,} from "react-native";
+import { StyleSheet,  Text,  View,  ImageBackground,  TextInput,  Alert,  Image,  Platform,} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker"; //$ expo install expo-image-picker
@@ -120,11 +120,16 @@ export default function ChatBot2() {
   };
 
   const saidYes = () => {
+    if(text === '' ||text === '0'||text === '.' ||text === '-' ||text === '..' ||text === '.-'){
+      Alert.alert("1 이상의 값을 입력해 주세요.");
+    }
+    else{
     setSaid(true);
     setDisplay1(true);
     setViewCondition1(true);
     setClothNum(text);
     setFiber("폐섬유");
+    }
   };
   const pickPictureYes = () => {
     setDisplay2(true);
@@ -308,6 +313,7 @@ export default function ChatBot2() {
                                     placeholder="입력"
                                     value={text}
                                     onChangeText={text=>setText(text)}
+                                    keyboardType="number-pad"
                                   />
                                 </View>
                                 <Text style={{ marginLeft: 5, marginTop: 4 }}>
