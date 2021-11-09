@@ -30,7 +30,7 @@ export default function Payment3() {
   const navigation = useNavigation();
   const [text, setText] = useState("");
   const [tempPoint, setTempPoint] = useState(0);
-  const [point, onChangePoint] = useState(0);
+  const [point, onChangePoint] = useState("0");
   const [mileage, setMileage] = useState(0);
   const [plusDonateCount, setPlusDonateCount] = useState(0);
   const [name, setName] = useState("");
@@ -70,8 +70,7 @@ export default function Payment3() {
       navigation.navigate("PaymentCompletion");
       firestore.collection("User").doc(email).set(
         {
-          mileage: plusMileage,
-          depositCount: depositCount,
+          mileage: plusMileage
         },
         { merge: true }
       );
@@ -174,7 +173,10 @@ export default function Payment3() {
                 주문상품 정보
               </Text>
               <View style={styles.imageText}>
-              <Image source={require("../icon+image/orange_jacket.jpg")} style={{width:70, height:70}}/>
+                <Image
+                  source={require("../icon+image/orange_jacket.jpg")}
+                  style={{ width: 70, height: 70 }}
+                />
                 <View
                   style={{
                     flexDirection: "column",
@@ -199,7 +201,7 @@ export default function Payment3() {
                 {name} | 010-1234-5678
               </Text>
               <Text style={{ fontFamily: "Vitro_pride" }}> -0원</Text>
-              <Text style={{ fontFamily: "Vitro_pride" }}> 45,000원</Text>
+              <Text style={{ fontFamily: "Vitro_pride" }}> 55,000원</Text>
             </View>
           </View>
 
@@ -259,20 +261,19 @@ export default function Payment3() {
             />
           </View>
         </View>
-
-        <View style={styles.bottomPaymentBar}>
-          <TouchableOpacity onPress={() => paymentHandler()}>
-            <Text
-              style={{
-                fontFamily: "BinggraeMelona-Bold",
-                color: "white",
-              }}
-            >
-              55,000원 결제하기
-            </Text>
-          </TouchableOpacity>
-        </View>
       </ScrollView>
+      <View style={styles.bottomPaymentBar}>
+        <TouchableOpacity onPress={() => paymentHandler()}>
+          <Text
+            style={{
+              fontFamily: "BinggraeMelona-Bold",
+              color: "white",
+            }}
+          >
+            55,000원 결제하기
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -317,6 +318,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#8C8CF5",
     paddingTop: "5%",
     paddingBottom: "5%",
+    position: "absolute",
+    bottom: 0,
+    height: 40,
   },
   bottomPaymentBarTouch: {
     width: "100%",
