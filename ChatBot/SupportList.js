@@ -6,16 +6,16 @@ import {
 } from "react-native-gesture-handler";
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
-
+import { ScrollView } from "react-native-gesture-handler";
 import * as Font from "expo-font";
 
 Font.loadAsync({
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
+  "Vitro_pride": require("../assets/fonts/Vitro_pride.ttf"),
   WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
   "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
   HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  "HSBombaram3_Regular": require("../assets/fonts/HSBombaram3_Regular.ttf"),
   SpoqaHanSansNeoBold: require("../assets/fonts/SpoqaHanSansNeo-Bold.ttf"),
   "SpoqaHanSansNeo-Bold": require("../assets/fonts/SpoqaHanSansNeo-Bold.ttf"),
 });
@@ -23,7 +23,6 @@ Font.loadAsync({
 export default function SupportList({ navigation }) {
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
-
   const [listArray, setListArray] = useState([]);
 
   useEffect(() => {
@@ -37,7 +36,7 @@ export default function SupportList({ navigation }) {
           ...doc.data(),
         }));
         setListArray(list);
-        console.log(listArray);
+        // console.log(listArray);
       });
   }, []);
 
@@ -53,25 +52,30 @@ export default function SupportList({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.listcontainer}>
-        {listArray.map((list) => (
-          <View key={list.id} style={{ borderWidth: 5, width: "90%" ,marginTop:"5%", marginBottom:"5%", }}>
-            <Text>벌수 : {list.clothNum}</Text>
-            <Text>후원 종류 : {list.fiber}</Text>
-          </View>
-        ))}
-      </View>
+      <ScrollView>
+        <View style={styles.listcontainer}>
+          {listArray.map((list,index) => (
+            <View key={list.id} style={styles.itemBox}>
+              <View style={styles.indexBox}>
+                <Text style={styles.index}>{index+1}</Text>
+              </View>
+              <View style={styles.itemInfoBox}>
+                <Text style={styles.itemInfo}>후원 종류 : {list.fiber}</Text>
+                <Text style={styles.itemInfo}>벌수 : {list.clothNum}</Text>
+              </View>
+
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    // display: "flex",
     flex: 1,
     backgroundColor: "#fff",
-    //\\ alignItems: "center",
-    // justifyContent: "center",
   },
   header: {
     marginTop: "8%",
@@ -91,55 +95,34 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: "5%",
   },
-  optionIcon: {
-    width: 50,
-    height: 20,
-    marginRight: "2%",
-    borderRadius: 6,
-  },
-  brandList: {
-    // borderColor:'red',
-    // borderWidth:1,
-    alignItems: "flex-start",
-    paddingLeft: "5%",
-    marginTop: "2%",
-  },
-  brandWrapper: {
-    borderColor: "#E7FCE0",
-    backgroundColor: "#E7FCE0",
-    borderWidth: 1,
-    borderRadius: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: "5%",
-    width: 325,
-    height: 100,
-  },
-  brandImg: {
-    width: 50,
-    height: 60,
-    marginRight: "2%",
-    marginLeft: "2%",
-  },
-  nameAndBar: {
-    // borderColor:'red',
-    // borderWidth:1,
-    flexDirection: "column",
-  },
-  brandName: {
-    alignItems: "flex-start",
-    fontSize: 18,
-    fontFamily: "SpoqaHanSansNeoBold",
-    color: "#444343",
-  },
-  progressBar: {
-    width: "70%",
-    flexDirection: "row",
 
-    alignItems: "center",
-  },
   listcontainer:{
     alignItems: "center",
     justifyContent: "center",
+  },
+  itemBox:{
+    borderWidth: 2,
+    borderColor:"#C9C9C9", 
+    width: "90%",
+    marginTop: "3%",
+    marginBottom: "1%",
+    flexDirection:"row"
+  },
+  indexBox:{
+    borderRightWidth:2,
+    // borderWidth: 2,
+    borderRightColor:"#C9C9C9",
+    justifyContent:"center",
+    alignItems:"center",
+    width: 50
+  },
+  index:{
+    fontFamily:"SpoqaHanSansNeoBold"
+  },
+  itemInfoBox:{
+    marginLeft:"3%"
+  },
+  itemInfo:{
+    fontFamily:"Vitro_pride"
   }
 });

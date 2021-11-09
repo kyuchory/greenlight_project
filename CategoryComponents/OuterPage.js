@@ -1,58 +1,48 @@
-import { NavigationContainer } from "@react-navigation/native";
-import {
-  BottomTabBarHeightContext,
-  createBottomTabNavigator,
-} from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import React, { useCallback } from "react";
-import { StyleSheet, Text, View, Image, Alert } from "react-native";
-import { useState, useContext, useEffect } from "react";
+import React, { useContext,useState } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { firestore } from "../utils/firebase";
+import { UserContext } from "../contexts";
 import * as Font from "expo-font";
-import { render } from "react-dom";
-import {
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import {TouchableOpacity} from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
-import Modal from "react-native-simple-modal";
 
 const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
 
 Font.loadAsync({
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
+  "Vitro_pride": require("../assets/fonts/Vitro_pride.ttf"),
   WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
   "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
   HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  "HSBombaram3_Regular": require("../assets/fonts/HSBombaram3_Regular.ttf"),
   BinggraeMelonaBold: require("../assets/fonts/BinggraeMelona-Bold.ttf"),
   "BinggraeMelona-Bold": require("../assets/fonts/BinggraeMelona-Bold.ttf"),
 });
 
 
-export default function CategoryOuter() {
- // state = { open: false };
+export default function OuterPage() {
 
   const navigation = useNavigation();
   const [outerName, setOuterName] = useState(0);
   const [outerPrice, setOuterPrice] = useState(0);
   const [outerImg, setOuterImg] = useState(0);
   const [outerStore, setOuterStore] = useState(0);
-  const [like, setLike] = useState();
-
-  const [heart, setHeart] = useState(0);
+  const [like, setLike] = useState(0);
+  const userEmail = useContext(UserContext);
+  const email = userEmail.user.email;
 
   const handleFireBase = async () => {
     const document = await firestore.collection("outer").doc("outer1").get();
+    const document2 = await firestore.collection("User").doc(email).get();
+
     const tempName = await document.get("name");
     const tempPrice = await document.get("price");
     const tempImg = await document.get("uri");
     const tempStore = await document.get("store");
-    const tempLike = await document.get("like");
+    const tempLike = await document2.get("likeBrown");
 
-   // setLike(tempLike);
+    setLike(tempLike);
     setOuterName(tempName);
     setOuterPrice(tempPrice);
     setOuterImg(tempImg);
@@ -155,23 +145,16 @@ export default function CategoryOuter() {
 
 
   function clickLikeFunction() {
-    Alert.alert("좋아요♥️");
-
-    console.log(like); //현재 상태 확인
-    //0은 false, 1은 true
-
     if(like === 0) {   
       setLike(1);
-      console.log("1은 true")
-      firestore.collection('outer').doc('outer1').set({"like":1},{merge:true});
+      firestore.collection('User').doc(email).set({"likeBrown":1},{merge:true});
       return(
         <Heart/>
       )
     }
     else{
       setLike(0);
-      console.log("0은 false")
-      firestore.collection('outer').doc('outer1').set({"like":0},{merge:true});
+      firestore.collection('User').doc(email).set({"likeBrown":0},{merge:true});
       return(
         <RedHeart/>
       ) 
@@ -247,8 +230,6 @@ const styles = StyleSheet.create({
     padding: "0%",
     width: "100%",
     justifyContent: "center",
-    // borderColor:"red",
-    // borderWidth:1
   },
 
   box1: {
@@ -284,8 +265,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
 
     justifyContent: "center",
-    // borderColor:"blue",
-    // borderWidth:1,
   },
 
   payment: {
@@ -313,6 +292,7 @@ const styles = StyleSheet.create({
   },
   purchase: {
     width: 120,
+    height:50,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "black",
@@ -321,9 +301,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  share_img: {
-    // width:'100%',
-  },
+
   textSmall: {
     fontSize: 16,
     fontFamily: "Vitro_pride",

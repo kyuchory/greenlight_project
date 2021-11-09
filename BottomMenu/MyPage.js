@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect,} from 'react'
+import React, { useState, useContext,} from 'react'
 import { StyleSheet, Text, View, Image, Button} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from "../contexts";
@@ -77,7 +77,10 @@ export default function Mypage() {
         <View style = {styles.ProfileInner}>
           <Text style = {styles.textName}>{name} 님</Text>
           <Text style = {styles.textInfo}>Lv.1 기린이</Text>
-          <Text style = {styles.textInfo}>LifeUp 회원 혜택 보기</Text>
+          <View style={styles.textInfoBox}>
+            <Text style = {{fontSize: 15,fontFamily: "Vitro_pride",}}>LifeUp 회원 혜택 보기</Text>
+          </View> 
+          
         </View>
       </View>
     )
@@ -125,7 +128,7 @@ export default function Mypage() {
            <Image source= {require("../icon+image/coupon.png")} 
           style={styles.image} />
           <Text style={styles.iconContentsText}>쿠폰</Text>
-          <Text style={styles.iconContentsNum}>5</Text>
+          <Text style={styles.iconContentsNum}>0</Text>
         </View>
         
         <View style = {styles.iconContents}>
@@ -156,7 +159,7 @@ export default function Mypage() {
             <Text style={styles.iconContentsText}>입금/결제</Text>
           </View>
           <View style = {styles.numberContents}>
-            <Text style={styles.iconContentsNum}>1</Text>
+            <Text style={styles.iconContentsNum}>0</Text>
             <Text style={styles.iconContentsText}>배송중</Text>
           </View>
           <View style = {styles.numberContents}>
@@ -164,7 +167,7 @@ export default function Mypage() {
             <Text style={styles.iconContentsText}>배송완료</Text>
           </View>
           <View style = {styles.numberContents}>
-            <Text style={styles.iconContentsNum}>1</Text>
+            <Text style={styles.iconContentsNum}>0</Text>
             <Text style={styles.iconContentsText}>구매확정</Text>
           </View>
         </View>
@@ -185,7 +188,7 @@ export default function Mypage() {
             <Text style={styles.iconContentsText}>교환</Text>
           </View>
           <View style = {styles.numberContents}>
-            <Text style={styles.iconContentsNum}>1</Text>
+            <Text style={styles.iconContentsNum}>0</Text>
             <Text style={styles.iconContentsText}>교환완료</Text>
           </View>
           <View style = {styles.numberContents}>
@@ -193,7 +196,7 @@ export default function Mypage() {
             <Text style={styles.iconContentsText}>환불</Text>
           </View>
           <View style = {styles.numberContents}>
-            <Text style={styles.iconContentsNum}>1</Text>
+            <Text style={styles.iconContentsNum}>0</Text>
             <Text style={styles.iconContentsText}>환불완료</Text>
           </View>
         </View>
@@ -367,6 +370,17 @@ const styles = StyleSheet.create({
     marginTop:5,
     fontSize: 15,
     fontFamily: "Vitro_pride",
+  },
+  textInfoBox: {
+    marginLeft:15,
+    marginTop:5,
+    fontSize: 15,
+    fontFamily: "Vitro_pride",
+    borderColor:"#E6E6E6",
+    borderWidth:1,
+    width:"80%",
+    justifyContent:"center",
+    alignItems:"center"
   },
 
   textNumber: {

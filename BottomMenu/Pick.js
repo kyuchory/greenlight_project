@@ -1,13 +1,10 @@
-import * as React from "react";
-import { ScrollView } from "react-native-gesture-handler";
-import PickSubContents from "../PickComponents/PickSubContents";
 import { useNavigation } from '@react-navigation/native';
-import { useCallback } from 'react';
+import React, { useState, useContext} from 'react'
 import { StyleSheet, Text, View, Image, LogBox } from "react-native";
-import { useState, useContext, useEffect,} from 'react'
 import { firestore } from "../utils/firebase";
+import { UserContext } from "../contexts";
 import * as Font from 'expo-font';
-import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+import {TouchableOpacity } from "react-native-gesture-handler";
 
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
@@ -28,6 +25,8 @@ const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
 
 export default function Pick() {
 const navigation = useNavigation();
+const userEmail = useContext(UserContext);
+const email = userEmail.user.email;
 
 const[outerName, setOuterName] = useState(0);
 const[outerPrice, setOuterPrice] = useState(0);
@@ -48,12 +47,14 @@ const[outerStore3, setOuterStore3] = useState(0);
 const[outerlike3, setOuterLike3]= useState(0);
 
 const handleFireBase = async()=>{
+  const documentUser = await firestore.collection("User").doc(email).get();
+
   const document = await firestore.collection("outer").doc("outer1").get();
   const tempName = await document.get("name");
   const tempPrice = await document.get("price");
   const tempImg = await document.get("uri");
   const tempStore = await document.get("store");
-  const templike = await document.get("like");
+  const templike = await documentUser.get("likeBrown");
 
   setOuterLike(templike);
   setOuterName(tempName);
@@ -66,8 +67,7 @@ const handleFireBase = async()=>{
   const tempPrice2 = await document2.get("price");
   const tempImg2 = await document2.get("uri");
   const tempStore2 = await document2.get("store");
-  const templike2 = await document2.get("like");
-  
+  const templike2 =  await documentUser.get("likeGreen");
   setOuterLike2(templike2);
   setOuterName2(tempName2);
   setOuterPrice2(tempPrice2);
@@ -79,7 +79,7 @@ const handleFireBase = async()=>{
   const tempPrice3 = await document3.get("price");
   const tempImg3 = await document3.get("uri");
   const tempStore3 = await document3.get("store");
-  const templike3 = await document3.get("like");
+  const templike3 =  await documentUser.get("likeOrange");
   
   setOuterLike3(templike3);
   setOuterName3(tempName3);
@@ -87,19 +87,7 @@ const handleFireBase = async()=>{
   setOuterImg3(tempImg3);
   setOuterStore3(tempStore3);
 
-  const document11 = await firestore.collection("outer").get();
-        document11.forEach((doc) => {
-            const templike = doc.data().like;
-            const tempname = doc.data().name;   
-            if(templike == 1){
-              const reallike = "찜"
-              console.log(tempname + ' '+ reallike);
-            }
-            else{
-              const reallike = "안찜"
-              console.log(tempname + ' '+ reallike);
-            }         
-            });
+
 }
 
 
@@ -189,7 +177,6 @@ const Box = () => {
   }  
 
 const Like1 = () => {
-  console.log("1번째꺼" + outerlike);
   if(outerlike === 1){
     return(
       <Box />
@@ -202,7 +189,6 @@ const Like1 = () => {
 }
 
 const Like2 =()=>{
-  console.log("2번째꺼" + outerlike2);
   if(outerlike2 === 1){
     return(
       <Box2 />
@@ -215,7 +201,6 @@ const Like2 =()=>{
 }
 
 const Like3 =()=>{
-  console.log("3번째꺼" + outerlike3);
   if(outerlike3 === 1){
     return(
       <Box3 />
@@ -244,14 +229,10 @@ const styles = StyleSheet.create({
   box_2: {
     width:'0%',
     height:'0%',
-    // height:'100%',
     flexDirection: 'column',
     alignItems:"center",
     justifyContent:"center",
     backgroundColor: 'white',
-    // borderColor:"blue",
-    // borderWidth:1,
-    
   },
 
   image_none:{
@@ -278,34 +259,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width:"100%",
     height:"100%",
-    // borderColor:"blue",
-    // borderWidth:3,
   },
 
   section:{
     flexDirection: 'row',
-    //marginTop: '3%',
     alignItems: 'center',
     width:'100%',
     height:'35%',
     backgroundColor:'white',
-    //justifyContent: 'space-around',
-    // paddingLeft:"1%",
     paddingRight:"1%",
-    // borderColor:"red",
-    // borderWidth:1,
   },
 
   box: {
     width:'32%',
-    // height:'100%',
     flexDirection: 'column',
     alignItems:"center",
     justifyContent:"center",
     backgroundColor: 'white',
-    // borderColor:"blue",
-    // borderWidth:1,
-    
   },
   
   imageWrapper:{
@@ -313,9 +283,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: "flex-start",
     justifyContent:"center",
-    // borderColor:"red",
-    // borderWidth:1,
-
   },
   image: {
     width: 110,
@@ -324,21 +291,14 @@ const styles = StyleSheet.create({
   infoWrapper:{
     flex: 2,
     width:"100%", 
-    // padding:"10%",
     alignItems: "flex-start",
-    // borderColor:"pink",
-    // borderWidth:1,
-    
   },
   textSmall:{
     fontSize:14,
     fontFamily: "Vitro_pride", 
-    // marginLeft:"-10%",
     },
   textBold:{
     fontSize:14,
     fontFamily: "BinggraeMelonaBold",
-    // marginLeft:"0%",
-    // paddingBottom:"2%"
   }
 });
