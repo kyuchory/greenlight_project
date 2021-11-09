@@ -120,44 +120,24 @@ export default function App() {
                 <Stack.Screen
                   name="Payment"
                   component={Payment}
-                  // options={{
-                  //   headerShown: true,
-                  //   headerTitle: (props) => (
-                  //     <LogoTitle4 {...props} title={"주문하기"} />
-                  //   ),
-                  // }}
+                  
                 />
                 <Stack.Screen
                   name="PaymentCompletion"
                   component={PaymentCompletion}
-                  options={{
-                    headerShown: true,
-                    headerTitle: (props) => (
-                      <LogoTitle5 {...props} title={"주문완료"} />
-                    ),
-                  }}
+                  
                 />
 
                 <Stack.Screen
                   name="Payment2"
                   component={Payment2}
-                  options={{
-                    headerShown: true,
-                    headerTitle: (props) => (
-                      <LogoTitle4 {...props} title={"주문하기"} />
-                    ),
-                  }}
+                  
                 />
 
                 <Stack.Screen
                   name="Payment3"
                   component={Payment3}
-                  options={{
-                    headerShown: true,
-                    headerTitle: (props) => (
-                      <LogoTitle4 {...props} title={"주문하기"} />
-                    ),
-                  }}
+                  
                 />
               </Stack.Navigator>
             </NavigationContainer>
