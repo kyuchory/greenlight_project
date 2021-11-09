@@ -50,10 +50,9 @@ export default function CategoryMen() {
           <Text style={styles.textBig}> 가방 </Text></View>
           <View style = {styles.box3}>
             <View style = {styles.box4}>
-            <TouchableOpacity onPress={() => navigation.navigate("CategoryOuter")}>
-            <TouchableHighlight/>
+           
             <Text style = {styles.textSmall}> 백팩 </Text>     
-            </TouchableOpacity>
+
             </View>
 
             <View style = {styles.box4}>
@@ -73,10 +72,9 @@ export default function CategoryMen() {
           <Text style={styles.textBig}> 신발 </Text></View>
           <View style = {styles.box3}>
             <View style = {styles.box4}>
-            <TouchableOpacity onPress={() => navigation.navigate("CategoryOuter")}>
-            <TouchableHighlight/>
+            
             <Text style = {styles.textSmall}> 운동화 </Text>     
-            </TouchableOpacity>
+  
             </View>
 
             <View style = {styles.box4}>
@@ -96,10 +94,9 @@ export default function CategoryMen() {
           <Text style={styles.textBig}> 액세서리/기타잡화 </Text></View>
           <View style = {styles.box3}>
             <View style = {styles.box4}>
-            <TouchableOpacity onPress={() => navigation.navigate("CategoryOuter")}>
-            <TouchableHighlight/>
+           
             <Text style = {styles.textSmall}> 목걸이 </Text>     
-            </TouchableOpacity>
+
             </View>
 
             <View style = {styles.box4}>
