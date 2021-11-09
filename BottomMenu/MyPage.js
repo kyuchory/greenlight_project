@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect,} from 'react'
+import React, { useState, useContext,} from 'react'
 import { StyleSheet, Text, View, Image, Button} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from "../contexts";

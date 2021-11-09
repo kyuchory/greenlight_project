@@ -1,18 +1,14 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import React, { useCallback } from "react";
-import { StyleSheet, Text, View, Image, Alert } from "react-native";
-import { useState, useContext, useEffect } from "react";
+import React, { useContext,useState } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { firestore } from "../utils/firebase";
+import { UserContext } from "../contexts";
 import * as Font from "expo-font";
-import { render } from "react-dom";
 import {
   TouchableHighlight,
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
-import Modal from "react-native-simple-modal";
 
 const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
 
@@ -37,17 +33,20 @@ export default function CategoryOuter() {
   const [outerImg, setOuterImg] = useState(0);
   const [outerStore, setOuterStore] = useState(0);
   const [like, setLike] = useState(0);
-  const [heart, setHeart] = useState(0);
+  const userEmail = useContext(UserContext);
+  const email = userEmail.user.email;
 
   const handleFireBase = async () => {
     const document = await firestore.collection("outer").doc("outer2").get();
+    const document2 = await firestore.collection("User").doc(email).get();
+
     const tempName = await document.get("name");
     const tempPrice = await document.get("price");
     const tempImg = await document.get("uri");
     const tempStore = await document.get("store");
-    const tempLike = await document.get("like");
+    const tempLike = await document2.get("likeGreen");
 
-  //  setLike(tempLike);
+    setLike(tempLike);
     setOuterName(tempName);
     setOuterPrice(tempPrice);
     setOuterImg(tempImg);
@@ -103,11 +102,8 @@ export default function CategoryOuter() {
           </View>
 
           <View style={styles.like}>
-            <TouchableOpacity onPress={clickLikeFunction}>
-              <Image
-                source={require("../icon+image/heart.png")}
-                style={styles.like_img}
-              />
+          <TouchableOpacity onPress={clickLikeFunction}>
+              <OriginalHeart/>
             </TouchableOpacity>
           </View>
         </View>
@@ -115,23 +111,52 @@ export default function CategoryOuter() {
     );
   };
 
+
+ //like 버튼을 눌렀을때 firebase의 상태가 변경되도록 설정, 하트가 빨개지게 설정
+ const OriginalHeart = () => {
+  if(like===0){
+    return(
+      <Heart/>
+    )
+  }
+  else{
+    return(
+      <RedHeart/>
+    )
+  }
+}
+
+  const Heart =() => {
+    return(
+      <Image
+      source={require("../icon+image/heart.png")}
+      style={styles.like_img}
+    />  
+    )
+  }
+  const RedHeart=() =>{
+    return(
+      <Image
+      source={require("../icon+image/outer_like_red.png")}
+      style={styles.like_img}
+    /> 
+    )
+  }
   //like 버튼을 눌렀을때 firebase의 상태가 변경되도록 설정, 하트가 빨개지게 설정
-
   function clickLikeFunction() {
-    Alert.alert("좋아요♥️");
-    
-    console.log(like); //현재 상태 확인
-    //0은 false, 1은 true
-
     if(like === 0) {   
       setLike(1);
-      console.log("1은 true")
-      firestore.collection('outer').doc('outer2').set({"like":1},{merge:true}); 
+      firestore.collection('User').doc(email).set({"likeGreen":1},{merge:true});
+      return(
+        <Heart/>
+      )
     }
     else{
       setLike(0);
-      console.log("0은 false")
-      firestore.collection('outer').doc('outer2').set({"like":0},{merge:true}); 
+      firestore.collection('User').doc(email).set({"likeGreen":0},{merge:true});
+      return(
+        <RedHeart/>
+      ) 
     }
 
     }

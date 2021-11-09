@@ -85,6 +85,9 @@ const Signup = ({ navigation }) => {
         supportCount: 0,
         donateCount: 0,
         depositCount: 0,
+        likeBrown: 0,
+        likeGreen: 0,
+        likeOrange: 0,
         });
 
 
