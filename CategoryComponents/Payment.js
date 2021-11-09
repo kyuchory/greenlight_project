@@ -12,9 +12,9 @@ import {
   Image,
   Alert,
   ScrollView,
-  Dimensions
+  Dimensions,
 } from "react-native";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 Font.loadAsync({
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
@@ -29,8 +29,8 @@ Font.loadAsync({
 export default function Payment() {
   const navigation = useNavigation();
   const [text, setText] = useState("");
-  
-  const [name, setName] = useState('');
+
+  const [name, setName] = useState("");
   const [point, onChangePoint] = useState(0);
   const [mileage, setMileage] = useState(0);
   const [depositCount, setDepositCount] = useState(0);
@@ -46,7 +46,7 @@ export default function Payment() {
 
     setName(tempName);
     setMileage(tempmileage);
-    setDepositCount(tempdepositCount+1);
+    setDepositCount(tempdepositCount + 1);
   };
 
   handleMileage();
@@ -58,15 +58,18 @@ export default function Payment() {
       const plusMileage = mileage - 45000;
       setMileage(mileage - 45000);
       navigation.navigate("PaymentCompletion");
-      firestore.collection("User").doc(email).set({
-        "mileage": plusMileage,
-        "depositCount": depositCount,
-      },{merge:true});
+      firestore.collection("User").doc(email).set(
+        {
+          mileage: plusMileage,
+          depositCount: depositCount,
+        },
+        { merge: true }
+      );
     }
   };
 
   const allPointUse = () => {
-    onChangePoint("45000");
+    onChangePoint(mileage);
   };
 
   const textHandler = (event) => {
@@ -79,161 +82,176 @@ export default function Payment() {
   };
 
   return (
-   
-    <KeyboardAwareScrollView
-    style={{ backgroundColor: 'white' }}
-    resetScrollToCoords={{ x: 0, y: 0 }}
-    contentContainerStyle={styles.container}
-    scrollEnabled={true}
-  >
-    {/* <View style={styles.container}> */}
-      <View style={styles.line}></View>
-      <View style={styles.firstBox}>
-        <View>
-          <Text style={{ fontFamily: "BinggraeMelona-Bold" }}>주문자 정보</Text>
+    <View>
+      <KeyboardAwareScrollView
+        style={{ backgroundColor: "white" }}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={styles.container}
+        scrollEnabled={true}
+      >
+        {/* <View style={styles.container}> */}
+        <View style={{width:"100%",height:"13.5%",}}></View>
+        <View style={styles.line}></View>
+        <View style={styles.firstBox}>
+          <View>
+            <Text style={{ fontFamily: "BinggraeMelona-Bold" }}>
+              주문자 정보
+            </Text>
+          </View>
+          <View>
+            <Text style={{ fontFamily: "Vitro_pride" }}>
+              {name} | 010-1234-5678
+            </Text>
+          </View>
         </View>
-        <View>
-          <Text style={{ fontFamily: "Vitro_pride" }}>
-            {name} | 010-1234-5678
-          </Text>
+        <View style={styles.line}></View>
+        <View style={styles.secondBox}>
+          <View>
+            <Text
+              style={{ marginBottom: "4%", fontFamily: "BinggraeMelona-Bold" }}
+            >
+              배송지 정보
+            </Text>
+            <Image
+              source={require("../icon+image/dankook.png")}
+              style={{ marginBottom: "4%" }}
+            />
+            <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
+              {name} | 010-1234-5678
+            </Text>
+            <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
+              경기도 용인시 수지구 죽전로 154 ict관
+            </Text>
+          </View>
+          <View>
+            <Text style={{ fontFamily: "Vitro_pride" }}>변경하기</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.line}></View>
-      <View style={styles.secondBox}>
-        <View>
-          <Text
-            style={{ marginBottom: "4%", fontFamily: "BinggraeMelona-Bold" }}
-          >
-            배송지 정보
-          </Text>
-          <Image
-            source={require("../icon+image/dankook.png")}
-            style={{ marginBottom: "4%" }}
+        <View style={styles.textBox}>
+          <TextInput
+            onChange={textHandler}
+            value={text}
+            placeholder="택배기사님께 전달할 말을 적어주세요."
+            style={{
+              borderWidth: 1,
+              width: "80%",
+              height: "80%",
+              padding: 5,
+              fontFamily: "BinggraeMelona-Bold",
+            }}
           />
-          <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
-            {name} | 010-1234-5678
-          </Text>
-          <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
-            경기도 용인시 수지구 죽전로 154 ict관
-          </Text>
         </View>
-        <View>
-          <Text style={{ fontFamily: "Vitro_pride" }}>변경하기</Text>
-        </View>
-      </View>
-      <View style={styles.textBox}>
-        <TextInput
-          onChange={textHandler}
-          value={text}
-          placeholder="택배기사님께 전달할 말을 적어주세요."
-          style={{
-            borderWidth: 1,
-            width: "80%",
-            height: "80%",
-            padding: 5,
-            fontFamily: "BinggraeMelona-Bold",
-          }}
-        />
-      </View>
-      <View style={styles.line}></View>
-      <View style={styles.thirdBox}>
-        <View style={styles.thirdBoxLeft}>
-          <Text style={{ fontSize: 18, fontFamily: "BinggraeMelona-Bold", marginBottom:5 }}>
-            주문상품 정보
-          </Text>
-          <View style={styles.imageText}>
-            <Image source={require("../icon+image/miniJacket.png")} />
-            <View
+        <View style={styles.line}></View>
+        <View style={styles.thirdBox}>
+          <View style={styles.thirdBoxLeft}>
+            <Text
               style={{
-                flexDirection: "column", marginLeft:5
+                fontSize: 18,
+                fontFamily: "BinggraeMelona-Bold",
+                marginBottom: 5,
               }}
             >
-              <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
-                greenLight
-              </Text>
-              <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
-                Brown Jacket
-              </Text>
-              <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
-                Brown/Free/수량 1개
-              </Text>
-              <Image source={require("../icon+image/useCoupon.png")} />
+              주문상품 정보
+            </Text>
+            <View style={styles.imageText}>
+              <Image source={require("../icon+image/miniJacket.png")} />
+              <View
+                style={{
+                  flexDirection: "column",
+                  marginLeft: 5,
+                }}
+              >
+                <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
+                  greenLight
+                </Text>
+                <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
+                  Brown Jacket
+                </Text>
+                <Text style={{ fontSize: 12, fontFamily: "Vitro_pride" }}>
+                  Brown/Free/수량 1개
+                </Text>
+                <Image source={require("../icon+image/useCoupon.png")} />
+              </View>
+            </View>
+          </View>
+          <View style={styles.thirdBoxRight}>
+            <Text style={{ fontFamily: "Vitro_pride" }}>
+              {name} | 010-1234-5678
+            </Text>
+            <Text style={{ fontFamily: "Vitro_pride" }}> -0원</Text>
+            <Text style={{ fontFamily: "Vitro_pride" }}> 45,000원</Text>
+          </View>
+        </View>
+        <View style={styles.line}></View>
+        <View style={styles.forthBox}>
+          <View style={styles.forthBoxUp}>
+            <Text
+              style={{ fontFamily: "BinggraeMelona-Bold", marginBottom: "2%" }}
+            >
+              포인트 사용
+            </Text>
+            <Text style={{ fontFamily: "Vitro_pride" }}>
+              보유포인트 {mileage}원
+            </Text>
+          </View>
+          <View style={styles.forthBoxDown}>
+            <View style={styles.forthBoxDownPoint}>
+              <View>
+                <Text style={{ fontFamily: "Vitro_pride" }}>보유포인트</Text>
+              </View>
+              <View>
+                <Text style={{ fontFamily: "Vitro_pride" }}>{mileage}원</Text>
+              </View>
+            </View>
+            <View style={styles.forthBoxDownTextInput}>
+              <TextInput
+                onChangeText={(point) => onChangePoint(point)}
+                value={point}
+                placeholder="0"
+                style={{
+                  fontFamily: "Vitro_pride",
+                  marginTop: "5%",
+                  borderWidth: 1,
+                  width: "70%",
+                  height: "50%",
+                  padding: 5,
+                }}
+              />
+              <View>
+                <TouchableOpacity onPress={() => allPointUse()}>
+                  <Image
+                    source={require("../icon+image/allPoint.png")}
+                    style={{ marginTop: "21%" }}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </View>
-        <View style={styles.thirdBoxRight}>
-          <Text style={{ fontFamily: "Vitro_pride" }}>
-            {name} | 010-1234-5678
-          </Text>
-          <Text style={{ fontFamily: "Vitro_pride" }}> -0원</Text>
-          <Text style={{ fontFamily: "Vitro_pride" }}> 45,000원</Text>
+        <View style={styles.fifthBox}>
+          <Image
+            source={require("../icon+image/paymentMethod.png")}
+            style={{ width: "100%", height: "45%" }}
+          />
         </View>
-      </View>
-      <View style={styles.line}></View>
-      <View style={styles.forthBox}>
-        <View style={styles.forthBoxUp}>
+        {/* <View style={{ flex: 0.3, width: "100%" }}></View> */}
+
+        {/* </View> */}
+      </KeyboardAwareScrollView>
+      <View style={styles.bottomPaymentBar}>
+        <TouchableOpacity onPress={() => paymentHandler()}>
           <Text
-            style={{ fontFamily: "BinggraeMelona-Bold", marginBottom: "2%" }}
+            style={{
+              fontFamily: "BinggraeMelona-Bold",
+
+              color: "white",
+            }}
           >
-            포인트 사용
+            45,000원 결제하기
           </Text>
-          <Text style={{ fontFamily: "Vitro_pride" }}>
-            보유포인트 {mileage}원
-          </Text>
-        </View>
-        <View style={styles.forthBoxDown}>
-          <View style={styles.forthBoxDownPoint}>
-            <View>
-              <Text style={{ fontFamily: "Vitro_pride" }}>보유포인트</Text>
-            </View>
-            <View>
-              <Text style={{ fontFamily: "Vitro_pride" }}>{mileage}원</Text>
-            </View>
-          </View>
-          <View style={styles.forthBoxDownTextInput}>
-            <TextInput
-              onChangeText={(point) => onChangePoint(point)}
-              value={point}
-              placeholder="0"
-              style={{
-                fontFamily: "Vitro_pride",
-                marginTop: "5%",
-                borderWidth: 1,
-                width: "70%",
-                height: "50%",
-                padding: 5,
-              }}
-            />
-            <View>
-              <TouchableOpacity onPress={() => allPointUse()}>
-                <Image
-                  source={require("../icon+image/allPoint.png")}
-                  style={{ marginTop: "21%" }}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </View>
-      {/* <View style={{ flex: 0.3, width: "100%" }}></View> */}
-    <View style={styles.bottomPaymentBar}>
-      <TouchableOpacity onPress={() => paymentHandler()}>
-        <Text
-          style={{
-            fontFamily: "BinggraeMelona-Bold",
-            
-            color: "white",
-          }}
-        >
-          45,000원 결제하기
-        </Text>
         </TouchableOpacity>
       </View>
-        
-    {/* </View> */}
-
-    </KeyboardAwareScrollView>
-   
+    </View>
   );
 }
 
@@ -250,18 +268,19 @@ export default function Payment() {
 
 const styles = StyleSheet.create({
   container: {
-    height:Dimensions.get("window").height,
+    height: Dimensions.get("window").height,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
   },
   bottomPaymentBar: {
     width: Dimensions.get("window").width,
-    justifyContent: "center",
-    alignItems:"center",
-    flexDirection: "row",
     height: "7%",
     backgroundColor: "#8C8CF5",
+    position: "absolute",
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
   },
   bottomPaymentBarTouch: {
     width: "100%",
@@ -277,27 +296,27 @@ const styles = StyleSheet.create({
   },
   firstBox: {
     width: "95%",
-    height:"10%",
+    height: "10%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
   textBox: {
     width: "100%",
-    height:"8%",
+    height: "8%",
     alignItems: "center",
     marginBottom: "5%",
   },
   secondBox: {
     width: "95%",
-    height:"24%",
+    height: "24%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
   thirdBox: {
     width: "95%",
-    height:"20%",
+    height: "20%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -313,24 +332,21 @@ const styles = StyleSheet.create({
 
   forthBox: {
     width: "95%",
-    height:"25%",
+    height: "25%",
     flexDirection: "column",
   },
   forthBoxUp: {
     height: "50%",
     justifyContent: "center",
-
   },
   forthBoxDown: {
     height: "50%",
-
   },
   forthBoxDownPoint: {
     height: "20%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-
   },
   forthBoxDownTextInput: {
     height: "80%",
@@ -338,4 +354,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   forthBoxDownPointLeft: {},
+  fifthBox: {
+    width: "95%",
+    height: "20%",
+    backgroundColor: "orange",
+  },
 });

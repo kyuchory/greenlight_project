@@ -87,7 +87,7 @@ export default function CategoryOuter() {
           </View>
 
           <View style={styles.payment}>
-            <TouchableOpacity onPress={()=>navigation.navigate("Payment")}>
+            <TouchableOpacity onPress={()=>navigation.navigate("Payment2")}>
             <Image
               source={require("../icon+image/purchase_button.png")}
               style={styles.purchase}
