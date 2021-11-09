@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
-import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
 Font.loadAsync({
   Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
@@ -27,7 +27,6 @@ export default function CategoryMen() {
           <View style = {styles.box3}>
             <View style = {styles.box4}>
             <TouchableOpacity onPress={() => navigation.navigate("CategoryOuter")}>
-            <TouchableHighlight/>
             <Text style = {styles.textSmall}> 아우터 </Text>     
             </TouchableOpacity>
             </View>
