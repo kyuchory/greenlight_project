@@ -1,7 +1,6 @@
-import { NavigationContainer } from "@react-navigation/native";
-import React, { useCallback, useState } from "react";
-import { Button, StyleSheet, Text, View, Image } from "react-native";
-import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import ProgressBar from "../Components/ProgressBar";
 
 import { firestore } from "../utils/firebase";
@@ -12,10 +11,6 @@ Font.loadAsync({
     'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
     Vitro_core: require('../assets/fonts/Vitro_core.ttf'),
     'Vitro_core': require('../assets/fonts/Vitro_core.ttf'),
-    WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-    'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
     SpoqaHanSansNeoBold : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
     'SpoqaHanSansNeo-Bold' : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
   });
@@ -109,11 +104,8 @@ export default function Donate({ navigation }) {
 
 const styles = StyleSheet.create({
 container: {
-// display: "flex",
 flex: 1,
 backgroundColor: "#fff",
-// alignItems: "center",
-// justifyContent: "center",
 },
 header:{
   marginTop:"8%",
@@ -140,8 +132,6 @@ optionIcon:{
   borderRadius:6
 },
 brandList:{
-// borderColor:'red',
-// borderWidth:1,
 alignItems:"flex-start",
 paddingLeft:"5%",
 marginTop:"2%",
@@ -164,8 +154,6 @@ marginRight:"2%",
 marginLeft:"2%",
 },
 nameAndBar:{
-// borderColor:'red',
-// borderWidth:1,
 flexDirection:"column"
 },
 brandName: {

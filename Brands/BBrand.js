@@ -32,11 +32,7 @@ function ABrandProduct() {
   const getProgress = async() => {
     const document = await firestore.collection('Brand').doc('Friedtag').get();
     const progress = document.get('progress'); //데이터베이스에서 가져온 진행도
-    // <PointConsumer>
-    // {(value) => (
-    //    value.actions.setPoint(progress)
-    // )}
-    // </PointConsumer>
+
     setPoint(progress);
   }
 
@@ -58,8 +54,7 @@ function ABrandProduct() {
         <View style={styles.productDescText}>
           <Text style={{color: "#6E6E6E",fontSize: 17, fontFamily: "WemakepriceBold",}}>Eco-Friendly Bag</Text>
           <Text style={styles.normal}>500개</Text>
-          {/* <PointConsumer>
-            {(value) => ( */}
+
               <View>
                 <ProgressBar count={point * 0.01} width={100} />
                 <View>
@@ -75,8 +70,7 @@ function ABrandProduct() {
 
                 </View>
               </View>
-            {/* )}
-          </PointConsumer> */}
+
         </View>
       </View>
     </View>
@@ -161,14 +155,6 @@ function ABrandSubContents() {
 
 export default function BBrand() {
   const navigation = useNavigation();
-
-  const test = (value) => {
-    <PointConsumer>
-      {(value) => (
-      value.actions.setPoint(value.state.point + 10)
-      )}
-    </PointConsumer>
-  };
   
   return (
     <View style={styles.container}>
@@ -305,15 +291,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
-    // borderColor:"red",
-    // borderWidth:1,
   },
   productDescText: {
     flex: 1,
     marginLeft: "5%",
-    // borderColor:"blue",
-    // borderWidth:1,
-    // justifyContent:'space-around'
   },
   normal: {
     color: "#848484",

@@ -6,10 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 Font.loadAsync({
   Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
   'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-  WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-  'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
 });
 
 
@@ -137,7 +133,6 @@ const styles = StyleSheet.create({
  
   Line:{
     flexDirection: 'row',
-    //alignItems: 'flex-start',
     width:'95%',
     height:'0.2%',
     backgroundColor:'#b6b6b6',

@@ -32,7 +32,7 @@ export default function Payment() {
   const [tempPoint, setTempPoint] = useState(0);
   const [point, onChangePoint] = useState("0");
   const [mileage, setMileage] = useState(0);
-  const [plusDonateCount, setPlusDonateCount] = useState(0);
+  const [plusDepositCount, setPlusDepositCount] = useState(0);
   const [name, setName] = useState("");
   const [progress, setProgress] = useState(0);
 
@@ -44,8 +44,8 @@ export default function Payment() {
     const tempName = await document.get("name");
     const tempmileage = await document.get("mileage");
 
-    const prevDonateCount = document.get("donateCount");
-    const tempdonateCount = prevDonateCount + 1;
+    const tempdepositCount = document.get("depositCount");
+    
 
     const documentBrand = await firestore
       .collection("Brand")
@@ -55,7 +55,7 @@ export default function Payment() {
 
     setName(tempName);
     setMileage(tempmileage);
-    setPlusDonateCount(tempdonateCount);
+    setPlusDepositCount(tempdepositCount + 1);
     setProgress(tempProgress + 1);
   };
 
@@ -71,6 +71,7 @@ export default function Payment() {
       firestore.collection("User").doc(email).set(
         {
           mileage: plusMileage,
+          depositCount: plusDepositCount,
         },
         { merge: true }
       );

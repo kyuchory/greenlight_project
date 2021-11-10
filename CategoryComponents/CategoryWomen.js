@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -6,10 +6,6 @@ import * as Font from "expo-font";
 Font.loadAsync({
   Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
   'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-  WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-  'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
 });
 
 

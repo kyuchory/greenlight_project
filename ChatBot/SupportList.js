@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View, Image } from "react-native";
-import {
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import { ScrollView } from "react-native-gesture-handler";
@@ -12,10 +9,6 @@ import * as Font from "expo-font";
 Font.loadAsync({
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
   "Vitro_pride": require("../assets/fonts/Vitro_pride.ttf"),
-  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  "HSBombaram3_Regular": require("../assets/fonts/HSBombaram3_Regular.ttf"),
   SpoqaHanSansNeoBold: require("../assets/fonts/SpoqaHanSansNeo-Bold.ttf"),
   "SpoqaHanSansNeo-Bold": require("../assets/fonts/SpoqaHanSansNeo-Bold.ttf"),
 });
@@ -110,7 +103,6 @@ const styles = StyleSheet.create({
   },
   indexBox:{
     borderRightWidth:2,
-    // borderWidth: 2,
     borderRightColor:"#C9C9C9",
     justifyContent:"center",
     alignItems:"center",

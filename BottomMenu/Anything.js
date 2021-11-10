@@ -10,10 +10,6 @@ import * as Font from 'expo-font';
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
     'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-    WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-    'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
     SpoqaHanSansNeoBold : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
     'SpoqaHanSansNeo-Bold' : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
   });
@@ -30,11 +26,7 @@ export default function Anything({ navigation }) {
       const progress = document.get('progress'); //데이터베이스에서 가져온 진행도
       const document2 = await firestore.collection('Brand').doc('Friedtag').get();
       const progress2 = document2.get('progress'); //데이터베이스에서 가져온 진행도
-      // <PointConsumer>
-      // {(value) => (
-      //    value.actions.setPoint(progress)
-      // )}
-      // </PointConsumer>
+
       setPoint(progress);
       setPoint2(progress2);
     }
@@ -78,14 +70,12 @@ export default function Anything({ navigation }) {
             style={styles.brandImg}/>
             <View style={styles.nameAndBar}>
               <Text style={styles.brandName}>Friedtag</Text>
-              {/* <PointConsumer>
-                {(value) => ( */}
+
                   <View style={styles.progressBar}>
                     <ProgressBar count={point2 * 0.01} />
                     <Text style={{marginLeft:"2%", fontSize:14}}>{point2}%</Text>
                   </View>
-                {/* )}
-              </PointConsumer> */}
+
               <Text style={{marginLeft:"2%",fontFamily:"Vitro_pride", fontSize:12}}>폐섬유</Text>
             </View>
           </TouchableOpacity>
@@ -105,11 +95,8 @@ export default function Anything({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    // display: "flex",
     flex: 1,
     backgroundColor: "#fff",
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   ableBrand:{
     margin:7,
@@ -118,8 +105,6 @@ const styles = StyleSheet.create({
     color:"#5D5D5D"
   },
   brandList:{
-    // borderColor:'red',
-    // borderWidth:1,
     alignItems:"flex-start",
     paddingLeft:"5%"
 
@@ -142,8 +127,6 @@ const styles = StyleSheet.create({
     marginLeft:"2%",
   },
   nameAndBar:{
-    // borderColor:'red',
-    // borderWidth:1,
     flexDirection:"column"
   },
   brandName: {

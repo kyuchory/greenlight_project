@@ -1,26 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, Image, LogBox } from "react-native";
-import { useState, useContext, useEffect,} from 'react'
+import { useState} from 'react'
 import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
-import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 Font.loadAsync({
     Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
     'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-    WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-    'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
     BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
     'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
   });
-
-
-
-const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
-
 
 
 export default function CategoryOuter() {
@@ -194,8 +185,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width:"100%",
     height:"100%",
-    // borderColor:"blue",
-    // borderWidth:3,
   },
 
   section:{
@@ -206,22 +195,15 @@ const styles = StyleSheet.create({
     height:'30%',
     backgroundColor:'white',
     justifyContent: 'space-around',
-    // paddingLeft:"1%",
     paddingRight:"1%",
-    // borderColor:"red",
-    // borderWidth:1,
-
   },
 
   box: {
     width:'32%',
-    // height:'100%',
     flexDirection: 'column',
     alignItems:"center",
     justifyContent:"center",
     backgroundColor: 'white',
-    // borderColor:"blue",
-    // borderWidth:1,
     
   },
   
@@ -230,8 +212,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: "flex-start",
     justifyContent:"center",
-    // borderColor:"red",
-    // borderWidth:1,
 
   },
   image: {
@@ -241,21 +221,15 @@ const styles = StyleSheet.create({
   infoWrapper:{
     flex: 2,
     width:"100%", 
-    // padding:"10%",
     alignItems: "flex-start",
-    // borderColor:"pink",
-    // borderWidth:1,
     
   },
   textSmall:{
     fontSize:14,
     fontFamily: "Vitro_pride", 
-    // marginLeft:"-10%",
     },
   textBold:{
     fontSize:14,
     fontFamily: "BinggraeMelonaBold",
-    // marginLeft:"0%",
-    // paddingBottom:"2%"
   }
 });

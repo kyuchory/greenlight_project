@@ -12,7 +12,6 @@ import Pick from "../BottomMenu/Pick";
 import LogoTitle from "../Header/LogoTitle";
 import LogoTitle2 from "../Header/LogoTitle2";
 
-const visible = false;
 
 const BottomTabNavigator = createBottomTabNavigator();
 

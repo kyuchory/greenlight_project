@@ -4,8 +4,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker"; //$ expo install expo-image-picker
 import DateTimePicker from "@react-native-community/datetimepicker"; //$ expo install @react-native-community/datetimepicker
-import FabricContext, { FabricConsumer,FabricProvider} from "./ChatBot_Context";
-import { PointConsumer } from "../context/point";
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import { useNavigation } from "@react-navigation/native";
@@ -14,12 +12,6 @@ import {Slider} from "./UserGuide";
 
 import * as Font from "expo-font";
 Font.loadAsync({
-  Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
-  'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-  WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-  'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
   BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
   'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
 });
@@ -104,9 +96,6 @@ export default function ChatBot() {
     }
   };
 
-  // const onChangeText = (event) => {
-  //   setText(event.target.value);
-  // };
 
   const handleReady = () => {
     setStart(false);
@@ -176,7 +165,7 @@ export default function ChatBot() {
       aspect: [4, 3],
       quality: 1,
     });
-    // console.log(result);
+
     if (!result.cancelled) {
       setImage(result.uri);
     }
@@ -650,8 +639,7 @@ export default function ChatBot() {
                           </Text>
                         </ImageBackground>
                       </View>
-                      <FabricConsumer>
-                        {({ actions }) => (
+
                           <View style={styles.chatUser}>
                             <ImageBackground
                               source={require("../icon+image/chatImageRight.png")}
@@ -672,8 +660,7 @@ export default function ChatBot() {
                               </TouchableOpacity>
                             </ImageBackground>
                           </View>
-                        )}
-                      </FabricConsumer>
+
                     </View>
                   ) : (
                     <View></View>
@@ -705,7 +692,6 @@ export default function ChatBot() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // padding: "2%",
     backgroundColor: "white",
   },
   header:{
@@ -724,13 +710,11 @@ const styles = StyleSheet.create({
     padding: "2%",
   },
   chatManager: {
-    // backgroundColor:"yellow",
     alignItems: "center",
     marginTop: "10%",
     flexDirection: "row",
   },
   chatUser: {
-    // backgroundColor:"pink",
     justifyContent: "center",
     alignItems: "flex-end",
     marginTop: "10%",

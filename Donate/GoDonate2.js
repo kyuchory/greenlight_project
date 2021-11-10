@@ -89,11 +89,11 @@ export default function GoDonate2() {
 
   const textHandler = (event) => {
     setText(event.nativeEvent.text);
-    // console.log(text);
+
   };
   const pointHandler = (event) => {
     setTempPoint(event.nativeEvent.text);
-    console.log(tempPoint);
+    // console.log(tempPoint);
   };
 
   return (
@@ -278,8 +278,6 @@ const styles = StyleSheet.create({
     height: "8%",
     flexDirection: "row",
     alignItems: "center",
-    // borderWidth:1,
-    // borderColor:"red"
   },
 
   backIcon: {
@@ -293,13 +291,11 @@ const styles = StyleSheet.create({
     fontFamily: "BinggraeMelona-Bold",
     color: "#00FF00",
     fontSize: 25,
-    // marginLeft: "4%",
   },
   bottomPaymentBar: {
     width: Dimensions.get("window").width,
     justifyContent: "center",
     alignItems:"center",
-    // flexDirection: "row",
     height: "7%",
     backgroundColor: "#7CB199",
   },

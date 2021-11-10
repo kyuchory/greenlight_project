@@ -10,15 +10,10 @@ import {
 } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 
-const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
 
 Font.loadAsync({
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  "Vitro_pride": require("../assets/fonts/Vitro_pride.ttf"),
   BinggraeMelonaBold: require("../assets/fonts/BinggraeMelona-Bold.ttf"),
   "BinggraeMelona-Bold": require("../assets/fonts/BinggraeMelona-Bold.ttf"),
 });
@@ -223,8 +218,6 @@ const styles = StyleSheet.create({
     padding: "1%",
     width: "100%",
     justifyContent: "center",
-    // borderColor:"red",
-    // borderWidth:1
   },
 
   box1: {
@@ -256,12 +249,9 @@ const styles = StyleSheet.create({
   },
   option: {
     flex: 2,
-
     backgroundColor: "white",
-
     justifyContent: "center",
-    // borderColor:"blue",
-    // borderWidth:1,
+
   },
 
   payment: {
@@ -301,7 +291,6 @@ const styles = StyleSheet.create({
     height: 30,
   },
   share_img: {
-    // width:'100%',
   },
   textSmall: {
     fontSize: 16,

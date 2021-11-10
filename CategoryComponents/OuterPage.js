@@ -7,15 +7,10 @@ import * as Font from "expo-font";
 import {TouchableOpacity} from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 
-const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
 
 Font.loadAsync({
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
   "Vitro_pride": require("../assets/fonts/Vitro_pride.ttf"),
-  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  "HSBombaram3_Regular": require("../assets/fonts/HSBombaram3_Regular.ttf"),
   BinggraeMelonaBold: require("../assets/fonts/BinggraeMelona-Bold.ttf"),
   "BinggraeMelona-Bold": require("../assets/fonts/BinggraeMelona-Bold.ttf"),
 });

@@ -6,11 +6,7 @@ import { useNavigation } from "@react-navigation/core";
 
 Font.loadAsync({
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  "Vitro_pride": require("../assets/fonts/Vitro_pride.ttf"),
   BinggraeMelonaBold: require("../assets/fonts/BinggraeMelona-Bold.ttf"),
   "BinggraeMelona-Bold": require("../assets/fonts/BinggraeMelona-Bold.ttf"),
 });

@@ -4,21 +4,13 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import * as Font from "expo-font";
-import {
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 
-const databaseURL = "https://green-light-1030-default-rtdb.firebaseio.com";
 
 Font.loadAsync({
   Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  Vitro_pride: require("../assets/fonts/Vitro_pride.ttf"),
-  WemakepriceBold: require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  "Wemakeprice-Bold": require("../assets/fonts/Wemakeprice-Bold.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
-  HSBombaram3_Regular: require("../assets/fonts/HSBombaram3_Regular.ttf"),
+  "Vitro_pride": require("../assets/fonts/Vitro_pride.ttf"),
   BinggraeMelonaBold: require("../assets/fonts/BinggraeMelona-Bold.ttf"),
   "BinggraeMelona-Bold": require("../assets/fonts/BinggraeMelona-Bold.ttf"),
 });
@@ -106,57 +98,7 @@ export default function CategoryOuter() {
           </View>
         </View>
       </View>
-      // <View style={styles.main}>
-      //   <View style={styles.header}>
-      //     <TouchableOpacity onPress={() => navigation.goBack()}>
-      //       <Image
-      //         source={require("../icon+image/back.png")}
-      //         style={styles.backIcon}
-      //       />
-      //     </TouchableOpacity>
-      //     <Text style={styles.headerText}>{outerName}</Text>
-      //   </View>
-
-      //   <View style={styles.box1}>
-      //     <Image
-      //       source={require("../icon+image/outer_greenjacket.jpg")}
-      //       style={styles.image}
-        
-      //     />
-      //   </View>
-      //   <View style={styles.box3}>
-      //     <Text style={styles.textSmall}>{outerStore}</Text>
-      //     <Text style={styles.textBold}>{outerName}</Text>
-      //     <Text style={styles.textSmall}>{outerPrice}원</Text>
-      //   </View>
-      //   <View style={styles.box2}>
-      //     <View style={styles.option}>
-      //       <Text style={styles.textSmall}>Freesize</Text>
-      //     </View>
-
-      //     <View style={styles.payment}>
-      //       <TouchableOpacity onPress={()=>navigation.navigate("Payment2")}>
-      //       <Image
-      //         source={require("../icon+image/purchase_button.png")}
-      //         style={styles.purchase}
-      //       />
-      //       </TouchableOpacity>
-      //     </View>
-
-      //     <View style={styles.share}>
-      //       <Image
-      //         source={require("../icon+image/share.png")}
-      //         style={styles.share_img}
-      //       />
-      //     </View>
-
-      //     <View style={styles.like}>
-      //     <TouchableOpacity onPress={clickLikeFunction}>
-      //         <OriginalHeart/>
-      //       </TouchableOpacity>
-      //     </View>
-      //   </View>
-      // </View>
+ 
     );
   };
 
@@ -352,7 +294,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   share_img: {
-    // width:'100%',
+    
   },
   textSmall: {
     fontSize: 16,
