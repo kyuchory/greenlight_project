@@ -44,7 +44,7 @@ export default function ChatBot() {
   //후원내역
   const [fiber, setFiber] = useState('');
   const [clothNum, setClothNum] = useState(0);
-
+  
 
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
@@ -82,7 +82,7 @@ export default function ChatBot() {
 
   const handleSupportList = async() => {//데이터베이스에 후원내역목록 업데이트.
     firestore.collection('User').doc(email).collection('supportList')
-    .add({'fiber':fiber,'clothNum':clothNum},{ merge: true });//add를 쓰면 문서 자동값 생성되어 추가
+    .add({'fiber':fiber,'clothNum':clothNum ,"createAt": Date.now()},{ merge: true });//add를 쓰면 문서 자동값 생성되어 추가
     
     
   };

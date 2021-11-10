@@ -23,6 +23,7 @@ export default function SupportList({ navigation }) {
       .collection("User")
       .doc(email)
       .collection("supportList")
+      .orderBy("createAt","desc")
       .onSnapshot((snapshot) => {
         const list = snapshot.docs.map((doc) => ({
           id: doc.id,

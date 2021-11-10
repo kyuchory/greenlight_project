@@ -31,7 +31,6 @@ import GoDonate from "./Donate/GoDonate";
 
 import SupportList from "./ChatBot/SupportList";
 
-import FirstOuter from "./CategoryComponents/FirstOuter";
 import Payment from "./CategoryComponents/Payment";
 import PaymentCompletion from "./CategoryComponents/PaymentCompletion";
 
@@ -107,16 +106,7 @@ export default function App() {
 
                 <Stack.Screen name="SupportList" component={SupportList} />
 
-                <Stack.Screen
-                  name="FirstOuter"
-                  component={FirstOuter}
-                  options={{
-                    headerShown: true,
-                    headerTitle: (props) => (
-                      <LogoTitle3 {...props} title={"상세정보"} />
-                    ),
-                  }}
-                />
+     
                 <Stack.Screen
                   name="Payment"
                   component={Payment}
