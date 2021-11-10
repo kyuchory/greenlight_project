@@ -1,5 +1,5 @@
 import React, { useState, useContext,} from 'react'
-import { StyleSheet, Text, View, Image, Button} from "react-native";
+import { StyleSheet, Text, View, Image} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from "../contexts";
 import { firestore } from "../utils/firebase";
@@ -12,8 +12,6 @@ Font.loadAsync({
     'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
     WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
     'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-    'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
     BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
     'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
   });
@@ -288,8 +286,6 @@ const styles = StyleSheet.create({
   },
   ProfileInner:{
     flex:2,
-    // borderWidth:1,
-    // borderColor:"red",
     justifyContent:'space-around',
     height:'90%',
   },
@@ -312,8 +308,6 @@ const styles = StyleSheet.create({
   iconContents:{
     alignItems:'center',
     width:"20%",
-    // borderWidth:1,
-    // borderColor:"red",
     
   },
   iconContentsText:{
@@ -324,8 +318,6 @@ const styles = StyleSheet.create({
   iconContentsNum:{
     fontSize: 18,
     fontWeight:'400',
-    // borderWidth:1,
-    // borderColor:"blue",
   },
   numberContents:{
     alignItems:'center',

@@ -4,8 +4,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker"; //$ expo install expo-image-picker
 import DateTimePicker from "@react-native-community/datetimepicker"; //$ expo install @react-native-community/datetimepicker
-import FabricContext, { FabricConsumer} from "./ChatBot_Context";
-
 import { firestore } from "../utils/firebase";
 import { UserContext } from "../contexts";
 import { useNavigation } from "@react-navigation/native";
@@ -14,12 +12,6 @@ import {Slider} from "./UserGuide";
 
 import * as Font from "expo-font";
 Font.loadAsync({
-  Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
-  'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-  WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-  HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-  'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
   BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
   'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
 });
@@ -36,7 +28,7 @@ export default function ChatBot2() {
   const [viewCondition1, setViewCondition1] = useState(false);
   const [viewCondition2, setViewCondition2] = useState(false);
   const [viewCondition3, setViewCondition3] = useState(false);
-  const [viewCondition4, setViewCondition4] = useState(false);
+  
   const [start, setStart] = useState();
   const [material, setMaterial] = useState();
   const [said, setSaid] = useState(false);
@@ -104,9 +96,6 @@ export default function ChatBot2() {
     }
   };
 
-  // const onChangeText = (event) => {
-  //   setText(event.target.value);
-  // };
 
   const handleReady = () => {
     setStart(false);
@@ -554,8 +543,7 @@ export default function ChatBot2() {
                           </Text>
                         </ImageBackground>
                       </View>
-                      <FabricConsumer>
-                        {({ actions }) => (
+
                           <View style={styles.chatUser}>
                             <ImageBackground
                               source={require("../icon+image/chatImageRight.png")}
@@ -576,8 +564,7 @@ export default function ChatBot2() {
                               </TouchableOpacity>
                             </ImageBackground>
                           </View>
-                        )}
-                      </FabricConsumer>
+
                     </View>
                   ) : (
                     <View></View>
@@ -609,7 +596,6 @@ export default function ChatBot2() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // padding: "2%",
     backgroundColor: "white",
   },
   header:{
@@ -628,13 +614,11 @@ const styles = StyleSheet.create({
     padding: "2%",
   },
   chatManager: {
-    // backgroundColor:"yellow",
     alignItems: "center",
     marginTop: "10%",
     flexDirection: "row",
   },
   chatUser: {
-    // backgroundColor:"pink",
     justifyContent: "center",
     alignItems: "flex-end",
     marginTop: "10%",

@@ -1,21 +1,10 @@
-import React, { useState, useContext, useEffect,} from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, Image, ImageBackground,Dimensions } from "react-native";
-import { useNavigation } from '@react-navigation/native';
-import { UserContext } from "../contexts";
-import { firestore } from "../utils/firebase";
 import * as Font from 'expo-font';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 Font.loadAsync({
-    Vitro_pride: require('../assets/fonts/Vitro_pride.ttf'),
-    'Vitro_pride': require('../assets/fonts/Vitro_pride.ttf'),
-    WemakepriceBold: require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    'Wemakeprice-Bold': require('../assets/fonts/Wemakeprice-Bold.ttf'),
-    HSBombaram3_Regular: require('../assets/fonts/HSBombaram3_Regular.ttf'),
-    'HSBombaram3_Regular': require('../assets/fonts/HSBombaram3_Regular.ttf'),
-    BinggraeMelonaBold: require('../assets/fonts/BinggraeMelona-Bold.ttf'),
-    'BinggraeMelona-Bold': require('../assets/fonts/BinggraeMelona-Bold.ttf'),
     SpoqaHanSansNeoBold : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
     'SpoqaHanSansNeo-Bold' : require('../assets/fonts/SpoqaHanSansNeo-Bold.ttf'),
     esamanru_Light: require('../assets/fonts/esamanru_Light.ttf'),
@@ -82,8 +71,6 @@ Font.loadAsync({
     width:"90%",
     alignItems: "flex-start",
     justifyContent:"center",
-    // borderColor:"yellow",
-    // borderWidth:1,
     },
     backIcon:{
     width:30,
@@ -93,16 +80,12 @@ Font.loadAsync({
     flex: 10,
     width:"90%",
     height: '86%',
-    // borderColor:"white",
-    // borderWidth:1,
     },
     title:{
     flex:1,
     fontFamily:"SpoqaHanSansNeoBold",
     fontSize:24,
     color:"white",
-    // borderColor:"white",
-    // borderWidth:1,
     },
     content:{
     flex:2,
@@ -110,15 +93,10 @@ Font.loadAsync({
     fontSize:16,
     width:"100%",
     color:"white",
-    // borderColor:"white",
-    // borderWidth:1,
     },
     PicWrapper:{
     flex:5,
     alignItems:"center",
-    // justifyContent:"center",
-    // borderColor:"red",
-    // borderWidth:2,
     },
     youtubePic:{
     width: "100%",
