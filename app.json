@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "GreenLightNotComplete",
-    "slug": "greenlightnotcomplete",
+    "name": "LifeUP",
+    "slug": "LifeUP",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/LifeUplogo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/LifeUpSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,9 +17,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourcompany.yourappname",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "com.yourcompany.yourappname",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
