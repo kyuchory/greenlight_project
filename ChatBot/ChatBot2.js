@@ -83,8 +83,6 @@ export default function ChatBot2() {
   const handleSupportList = async() => {//데이터베이스에 후원내역목록 업데이트.
     firestore.collection('User').doc(email).collection('supportList')
     .add({'fiber':fiber,'clothNum':clothNum,"createAt": Date.now()},{ merge: true });//add를 쓰면 문서 자동값 생성되어 추가
-    
-    
   };
 
   const finish = () => { //후원종료 버튼 눌렀을때 기능

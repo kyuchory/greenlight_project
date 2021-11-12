@@ -136,10 +136,7 @@ export default function GoDonate2() {
           >
             배송지 정보
           </Text>
-          <Image
-            source={require("../icon+image/dankook_green.png")}
-            style={{ marginBottom: "4%" }}
-          />
+
           <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
             {name} | 010-1234-5678
           </Text>

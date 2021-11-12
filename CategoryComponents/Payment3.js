@@ -79,8 +79,12 @@ export default function Payment3() {
   };
 
   const allPointUse = () => {
-    const stringPoint = mileage.toString();
-    onChangePoint(stringPoint);
+    if(mileage>=55000){
+      onChangePoint("55000");
+    }else{
+      const stringPoint = mileage.toString();
+      onChangePoint(stringPoint);
+    }
   };
 
   const textHandler = (event) => {
@@ -133,10 +137,7 @@ export default function Payment3() {
               >
                 배송지 정보
               </Text>
-              <Image
-                source={require("../icon+image/dankook.png")}
-                style={{ marginBottom: "4%" }}
-              />
+
               <Text style={{ marginBottom: "4%", fontFamily: "Vitro_pride" }}>
                 {name} | 010-1234-5678
               </Text>
