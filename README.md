@@ -29,6 +29,50 @@
 
 
 > ### 기술 스택
+> * HTML/CSS
+> * JavaScript
+ 
+ 
+> ### 개발 환경
 > * React Native
 > * Expo
 > * Google FireBase
+
+--------------------------
+
+LifeUp 주요기능
+=================
+
+## 1. 로그인 및 회원가입
+![로그인](https://user-images.githubusercontent.com/64201163/147052589-a8016d06-fef4-462f-b2ff-947e96e7ad1d.gif)
+
+![KakaoTalk_20211222_164130370](https://user-images.githubusercontent.com/64201163/147054411-31ac2ca6-1e85-4418-bc37-de895d252349.png)
+
+
+## 2. 브랜드 후원 & 수거 시스템
+
+![후원](https://user-images.githubusercontent.com/64201163/147051352-4fcb421f-be42-4462-9676-611998161a69.gif)
+
+![KakaoTalk_20211222_163857398](https://user-images.githubusercontent.com/64201163/147054127-bf6ddd1c-c357-4414-aa74-f30617742e01.png)
+
+## 3. 찜하기
+![찜하기](https://user-images.githubusercontent.com/64201163/147052305-6c26a48e-b2f2-4b2c-8568-5d674a28c1c0.gif)
+
+
+## 4. 브랜드 쇼핑
+![쇼핑](https://user-images.githubusercontent.com/64201163/147052426-87fd9463-bbd0-47e0-8758-c1a2e83255ee.gif)
+
+
+------------------
+
+LifeUp 주요 화면
+=============
+## 1. 홈화면
+
+<img src="https://user-images.githubusercontent.com/64201163/147050066-b2186584-6eba-4d69-a614-311e46841903.png" width="400" height="800"/>
+
+## 2. 챗봇 Flow
+
+![image](https://user-images.githubusercontent.com/64201163/147054986-808cd7ab-ec75-4aa9-96ce-f7931f12205f.png)
+
+
